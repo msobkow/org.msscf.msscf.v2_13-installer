@@ -1,0 +1,29 @@
+Copyright (c) 2016-2026 Mark Stephen Sobkow
+
+MSS Code Factory 2.13 Installer
+
+These files are part of MSS Code Factory 2.13. The files extracted from the
+model archives are under the licenses specified within the individual model
+files, not GPLv3 like the tool itself.  The knowledge base archives are also under
+GPLv3.
+
+MSS Code Factory 2.13 is available under dual commercial license from
+Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+Version 3 or later with classpath and static linking exceptions.
+
+MSS Code Factory 2.13 is free software: you can redistribute it and/or
+modify it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MSS Code Factory 2.13 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MSS Code Factory 2.13.  If not, see <https://www.gnu.org/licenses/>.
+
+If you wish to modify and use this code without publishing your changes,
+or integrate it with proprietary code, please contact Mark Stephen Sobkow
+for a commercial license at mark.sobkow@gmail.com
