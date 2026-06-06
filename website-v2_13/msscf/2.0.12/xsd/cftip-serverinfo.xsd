@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://mcf.markhome.server/msscf/2.0.12/xsd/cftip-serverinfo.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://mcf.markhome.server/msscf/2.0.12/xsd/cftip-serverinfo.xsd" version="2.10">
+
+<xsd:annotation>
+	<xsd:documentation xml:lang="en">
+		MSS Code Factory Transport-Independant Privacy (TIP) Server Information Response
+	</xsd:documentation>
+</xsd:annotation>
+
+<xsd:simpleType name="ClusterURLType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="192"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="ClusterDescrType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="128"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SchemaNameType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="32"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SchemaDescrType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="1023"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="PublicKeyType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="8000"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="AltSchemaElt" mixed="true">
+	<xsd:attribute name="SchemaName" type="SchemaNameType" />
+	<xsd:attribute name="SchemaDescr" type="SchemaDescrType" />
+</xsd:complexType>
+
+<xsd:complexType name="CFTipServerInfoType" mixed="true">
+	<xsd:sequence>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="AltSchema" type="AltSchemaElt" />
+		</xsd:choice>
+	</xsd:sequence>
+	<xsd:attribute name="ClusterURL" type="ClusterURLType" />
+	<xsd:attribute name="ClusterDescr" type="ClusterDescrType" />
+	<xsd:attribute name="SchemaName" type="SchemaNameType" />
+	<xsd:attribute name="SchemaDescr" type="SchemaDescrType" />
+	<xsd:attribute name="ServerLoginKey" type="PublicKeyType" />
+</xsd:complexType>
+
+<xsd:element name="CFTipServerInfo" type="CFTipServerInfoType" />
+
+</xsd:schema>

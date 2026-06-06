@@ -1,0 +1,7 @@
+#MSSBamCF Preferences for msobk
+#Wed Jul 31 13:13:13 CST 2019
+msscf.rootgendir=C\:\\Users\\username\\msscf
+msscf.cartridgedir=C\:\\Users\:\\username\\msscf\\msscf_2_11\\java\\cartridge-2.11
+msscf.cartridgedir1=C\:\\Users\\username\\msscf\\msscf_2_10\\java\\cartridge-2.10
+msscf.modeldir=C\:\\Users\\username\\msscf\\msscf_2_11\\java\\model-2.11
+msscf.modeldir1=C\:\\Users\\username\\msscf\\msscf_2_10\\java\\model-2.10

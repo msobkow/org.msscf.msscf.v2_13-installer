@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://mcf.markhome.server/msscf/2.0.12/xsd/cfgenkb-2.12-ruleset.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mcf.markhome.server/msscf/2.0.12/xsd/cfgenkb-2.12-ruleset.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.12">
+
+<xsd:annotation>
+	<xsd:documentation xml:lang="en">
+		MSS Code Factory 2.12 Knowledge Base Rule Set
+		Available under GNU General Public License, Version 3 or later.
+	</xsd:documentation>
+</xsd:annotation>
+
+
+<!--
+ *
+ *	The Class Definitions are actually implicit in XML, but
+ *	it might be convenient to have it explicitly definable.
+ *
+ -->
+
+<xsd:simpleType name="DefClassIdType">
+	<xsd:restriction base="xsd:short"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="DefClassNameType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="32"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="DefClassType">
+	<xsd:sequence>
+	</xsd:sequence>
+	<xsd:attribute name="Id" type="DefClassIdType" use="required"/>
+	<xsd:attribute name="Name" type="DefClassNameType" use="required" />
+</xsd:complexType>
+
+
+<!--
+ *	The Tools supported by the code factory.
+ -->
+
+<xsd:simpleType name="KbToolType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="8"/>
+		<xsd:whiteSpace value="collapse"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!--
+ *	The ToolSet names may not exceed 254 characters.
+ -->
+
+<xsd:simpleType name="ToolSetNameType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="254"/>
+		<xsd:whiteSpace value="collapse"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!--
+ *	The Generation Class Names for Expansion Items
+ *
+ *	This list will grow as the model and engine are continually
+ *	enriched.
+ *
+ *	The "*" means "any".
+ -->
+
+<xsd:simpleType name="GenClassType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="0"/>
+		<xsd:maxLength value="32"/>
+		<xsd:whiteSpace value="collapse"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!--
+ *
+ *	Generation Items are the base for all code generator
+ *	expansions.
+ *
+ *-->
+
+<xsd:simpleType name="GenItemIdType">
+	<xsd:restriction base="xsd:int">
+		<xsd:minInclusive value="0"/>
+		<xsd:maxInclusive value="2147483647"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="GenItemNameType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="127"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="GenItemType">
+	<xsd:attribute name="Id" type="GenItemIdType" use="optional"/>
+	<xsd:attribute name="Name" type="GenItemNameType" use="required" />
+	<xsd:attribute name="ToolSet" type="ToolSetNameType" use="optional"/>
+	<xsd:attribute name="ScopeDef" type="GenClassType" use="optional"/>
+	<xsd:attribute name="GenDef" type="GenClassType" use="required"/>
+</xsd:complexType>
+
+
+<!--
+ *
+ *	Binding items only exist internally to the executable.
+ *
+ *	They are the built-in intrinsics for the code generator
+ *	to expose model attribute values for code production.
+ *
+ *-->
+
+<xsd:complexType name="GenBindType">
+	<xsd:complexContent>
+		<xsd:extension base="GenItemType">
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!--
+ *
+ *	Iterators only exist internally to the executable.
+ *
+ *	They are built-in operators for traversing model definition sequences.
+ *
+ *-->
+
+<xsd:complexType name="GenIteratorType">
+	<xsd:complexContent>
+		<xsd:extension base="GenItemType">
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!--
+ *
+ *	References only exist internally to the executable.
+ *
+ *	They are built-in operators for dereferencing model definition links.
+ *
+ *-->
+
+<xsd:complexType name="GenReferenceType">
+	<xsd:complexContent>
+		<xsd:extension base="GenItemType">
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+
+<!--
+ *
+ *	The expansion Rule is by far and away the most common expansion type.
+ *
+ *	The complete set of rule cartridges loaded for a generation job
+ *	comprise the code generation knowledge base, or GenKb.
+ *
+ *	Any tool which can accept free-form plain text (currently ASCII) input
+ *	files can be supported.  Products which rely on specific indentation
+ *	rules or fixed-position column data (e.g. Fortran, some COBOL dialects)
+ *	are not supported.
+ *
+ *-->
+
+<xsd:simpleType name="GenRuleBodyType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="0"/>
+		<xsd:maxLength value="2000"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="GenRuleType" mixed="true">
+	<xsd:complexContent>
+		<xsd:extension base="GenItemType">
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+
+<!-- 
+ *
+ *	Truncation expansion rules limit the size of their generated values.
+ *
+ -->
+
+<xsd:complexType name="GenTruncType">
+	<xsd:complexContent>
+		<xsd:extension base="GenRuleType">
+			<xsd:attribute name="TruncateAt" type="xsd:int" use="required" />
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+ 
+<!--
+ *
+ *	File expansion rules produce the specified file of the application.
+ *
+ *	The names are themselves expansion rule bodies, allowing great
+ *	flexibility in the directory structure and naming conventions
+ *	followed by generated files.
+ *
+ *	The ExpansionBody of the rule is expanded to create the file contents.
+ *
+ *-->
+
+<xsd:simpleType name="GenFilePartType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="0"/>
+		<xsd:maxLength value="1023"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="GenFileType">
+	<xsd:complexContent>
+		<xsd:extension base="GenRuleType">
+			<xsd:attribute name="SourceBundle" type="GenFilePartType" use="required" />
+			<xsd:attribute name="GenerateOnce" type="GenFilePartType" use="required" />
+			<xsd:attribute name="ModuleName" type="GenFilePartType" use="required" />
+			<xsd:attribute name="BasePackageName" type="GenFilePartType" use="required" />
+			<xsd:attribute name="SubPackageName" type="GenFilePartType" use="required" />
+			<xsd:attribute name="ExpansionClassName" type="GenFilePartType" use="required" />
+			<xsd:attribute name="ExpansionKeyName" type="GenFilePartType" use="required" />
+			<xsd:attribute name="ExpansionFileName" type="GenFilePartType" use="required" />
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+
+<!--
+ *
+ *	A Rule Cartridge is a bundle of GenRule and GenFile specifications
+ *	which transform application models into source code.
+ *
+ *	Typically there are one or more cartridges for each KbToolSetType.
+ *
+ *	The complete set of cartridges loaded for a generation job comprise
+ *	the Generation Knowledge Base used by the generation engine to
+ *	transform an application model into source code.
+ *
+ *	Cartridges may only contain GenRule and GenFile specifications.  The
+ *	other generation items are only documented for completeness and
+ *	possible future expansion.
+ *
+ *-->
+
+<xsd:simpleType name="RuleSetNameType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="127"/>	<!-- was 64 -->
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RuleSetRevisionType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="255"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RuleSetDescrType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="2000"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="RuleSetType">
+	<xsd:sequence>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="GenRule" type="GenRuleType"/>
+			<xsd:element name="GenTrunc" type="GenTruncType"/>
+			<xsd:element name="GenFile" type="GenFileType"/>
+		</xsd:choice>
+	</xsd:sequence>
+	<xsd:attribute name="ToolSet" type="ToolSetNameType" use="required"/>
+	<xsd:attribute name="Name" type="RuleSetNameType" use="required"/>
+	<xsd:attribute name="Revision" type="RuleSetRevisionType" use="optional"/>
+	<xsd:attribute name="Descr" type="RuleSetDescrType" use="required"/>
+</xsd:complexType>
+
+
+<!--
+ *
+ *	An XML file conforming to this XML Schema Definition defines a
+ *	rule cartridge which may be loaded by the generation engine.
+ *
+ *-->
+
+<xsd:element name="RuleSet" type="RuleSetType"/>
+
+</xsd:schema>

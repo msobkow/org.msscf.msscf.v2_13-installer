@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: CFBam Editor Hierarchy Forms</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="modelling-a-new-project.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="schema-forms.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2><A id="top">CFBam Editor Hierarchy Forms</A></H2></CENTER>
+<p>
+<p class=menu0><A href="#HierarchyForm">Hierarchy Form</A>
+	<p class=menu1><A href="#AddTLD">Add TLD</A>
+	<p class=menu1><A href="#AddTopDomain">Add Top Domain</A>
+	<p class=menu1><A href="#AddLicense">Add License</A>
+	<p class=menu1><A href="#AddTopProject">Add Top Project</A>
+	<p class=menu1><A href="#AddSubProject">Add Sub Project</A>
+	<p class=menu1><A href="#AddMajorVersion">Add Major Version</A>
+	<p class=menu1><A href="#AddMinorVersion">Add Minor Version</A>
+	<p class=menu1><A href="#AddSchema">Add Schema</A>
+	<p class=menu1><A href="#ValidateModel">Validate Model</A>
+<p>
+<H3><A id="HierarchyForm">Hierarchy Form</A></H3>
+<p>
+The network hierarchy form is the first one you see when you launch the
+CFBam Editor.  From here, you can add internet object nodes, licenses,
+and schema definitions (you should only have one of those per model.)
+<p>
+With a schema selected, you can also validate the schema's design, and
+save the schema to a file.  When you save a schema, a default file name
+is produced and the save dialog starts in the first directory on your
+model path from the $HOME/.msscfrc file.
+<p>
+Which objects you can add to a given node varies based on the type of
+node currenty selected.  The nesting levels are limited -- you can define
+a TLD, a Top Domain, a Domain, a Top Project, a Sub Project, and then your
+Major Version and Minor Version nodes.  That is usually quite sufficient
+for locating source code ownership within a company domain, so no further
+levels are allowed.
+<p>
+<img align=hcenter src="screenshot/HierarchyForm.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddTLD">Add TLD</A></H4>
+<p>
+A TLD node is an internet top level domain -- usually .com, .net, .org,
+.mil, or a two-character country domain.
+<p>
+<img align=hcenter src="screenshot/AddTLD.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddTopDomain">Add Top Domain</A></H4>
+<p>
+A Top Domain the name of the domain that was registered with a
+domain name registration service provider.  You can provide
+a description for the domain for the sake of documentation, but
+it is not used by the rule base during processing.
+<p>
+<img align=hcenter src="screenshot/AddTopDomain.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddLicense">Add License</A></H4>
+<p>
+Licenses are typically set up for a given company, or are
+from some internet publication like Apache.org's Apache V2 license
+or GNU.org's GPLv3.  When you add a License, it is the Embedded Text
+that is important -- this text gets incorporated in the headers of
+the files produced by the manufacturing process.
+<p>
+Because those headers include XML and HTML documents, you must not
+include any unescaped markup characters in the embedded text, or you'll
+have trouble with invalid documents.
+<p>
+<img align=hcenter src="screenshot/AddLicense.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddTopProject">Add Top Project</A></H4>
+<p>
+You must always define a Top Project for a business application
+model.  This name is used to build the name of your project's
+source tree.  As with most names in a business application model,
+the Name has to be camelcase.  That is, it has to start with an
+uppercase character and include one or more lowercase characters
+in the remaining part of the string.
+<p>
+<img align=hcenter src="screenshot/AddTopProject.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddSubProject">Add Sub Project</A></H4>
+<p>
+You can define Sub Projects as well.  These are used to allow
+you to have several schemas modelled under a single project tree,
+each of which will have its own independent persistent storage
+server provisioned.  Note that there would be no transaction
+coordination between those stores if you were to access more
+than one from a given application; each store is completely
+independent of the others.
+<p>
+<img align=hcenter src="screenshot/AddSubProject.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddMajorVersion">Add Major Version</A></H4>
+<p>
+I have never modelled a project without specifying both the
+Major and Minor Version numbers, with both of those being
+integers.  I strongly recommend that you do so as well, and
+that you not specify "0" as a version.  You are free to try
+manufacturing a project that does not specify major and minor
+version numbes, but I have no idea how the factory will react
+to a specification that lacks them.
+<p>
+<img align=hcenter src="screenshot/AddMajorVersion.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddMinorVersion">Add Minor Version</A></H4>
+<p>
+<img align=hcenter src="screenshot/AddMinorVersion.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="AddSchema">Add Schema</A></H4>
+<p>
+There should be one and only one schema defined for a given
+model file.  While the rule base does allow for there to be
+more than one schema defined by a business application model
+file, the CFBam Editor does not.
+<p>
+The database name for a schema should not be more than 8 characters,
+as some databases do not allow schema file names longer than that.
+However, because nothing requires that you deploy your application
+on all of the supported server technologies, you are not forced to
+limit yourself to 8 characters.  Just be aware that it can cause
+problems should you decide to use alternative database technologies
+in the future.
+<p>
+<img align=hcenter src="screenshot/AddSchemaDef.png"/>
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="ValidateModel">Validate Model</A></H4>
+<p>
+Validating a model helps to ensure that your model will result
+in valid code when you manufacture it.  However, due to the complexity
+of the rule base, validation does not guarantee success.  It just
+catches the most common mistakes and oversights that people make
+when modelling an application schema.
+<p>
+<img align=hcenter src="screenshot/ValidateModel.png"/>
+<p>
+<A href="#top">Back to top</A>
+
+</BODY>
+</HTML>

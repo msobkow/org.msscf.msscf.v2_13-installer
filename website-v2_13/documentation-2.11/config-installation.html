@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Configuring an Installation</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="on-fractal-programming.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="prepare-manufacturingdir.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Configuring the Installation</H2></CENTER>
+
+<CENTER><H3>Windows 10 Setup</H3></CENTER>
+<p>
+Windows 10 Home or Pro both require a certain degree of customization
+to provide a useful workstation.  There are several tools I download
+and configure, but I'm not going to provide the instructions for how to
+configure those tools, only the order in which you should install and
+configure them.  They have quite adequate documentation available on
+the internet for the configuration of each tool.
+<p>
+<CENTER><H4>Windows 10 Core Tools</H4></CENTER>
+<p>
+<dl>
+<dt>Chrome Web Browser</dt>
+    <dd><A Target="_blank" HRef="https://www.google.com/chrome/">https://www.google.com/chrome/</A> Install to default location</dd>
+<dt>Thunderbird EMail</dt>
+	<dd><A Target="_blank" HRef="https://www.mozilla.org/en-US/thunderbird/">https://www.mozilla.org/en-US/thunderbird/</A> Install to default location</dd>
+<dt>GIMP - GNU Image Manipulation Program</dt>
+	<dd><A Target="_blank" HRef="https://www.gimp.org/">https://www.gimp.org/</A> Install to default location</dd>
+<dt>PuTTY</dt>
+	<dd><A Target="_blank" HRef="https://www.putty.org/">https://www.putty.org/</A> Install to default location, then use puttygen to produce your SSH keys</dd>
+<dt>Gpg4Win</dt>
+	<dd><A Target="_blank" HRef="https://www.gpg4win.org/">https://www.gpg4win.org/</A> Install to default location, then use Kleopatra to generate and default to your GPG signing key</dd>
+<dt>FileZilla</dt>
+	<dd><A Target="_blank" HRef="https://filezilla-project.org/">https://filezilla-project.org/</A> Install to default location</dd>
+<dt>OpenJDK 13 64-bit Windows</dt>
+	<dd><A Target="_blank" HRef="https://jdk.java.net/13/">https://jdk.java.net/13/</A>. You can use OpenJDK 13 if you don't intend to run JavaFX applications or clients, or want to install the optional openjfx.io add-on for Windows.  You have GPL freedoms with classpath exceptions to run this JDK with any workload it can handle, under any license the product you are running chooses to specify.  Download the .zip and extract it to C:/Progra~1/jdk.java.net/13, then set the environment variable for _JDK_HOME to the extracted directory.  Set JDK_HOME and JAVA_HOME to %_JDK_HOME%, and add %_JDK_HOME%\bin to your PATH.</dd>
+<dt>OpenJFX 13 64-bit Windows</dt>
+	<dd><A Target="_blank" HRef="https://openjfx.io/">https://openjfx.io/</A>. OpenJFX provides a open source licensed version of JavaFX for JDK 13.  You have GPL freedoms with classpath exceptions to run this version of JavaFX with any workload it can handle, under any license the product you are running chooses to specify.  Download the .zip and extract it to C:/Progra~1/openjfx.io, then set the environment variable for PATH_TO_FX to the extracted directory (javafx-sdk-13.) You then need to specify %PATH_TO_FX% in your module paths invocations of javac.exe and java.exe.</dd>
+<dt>Apache Ant</dt>
+	<dd><A Target="_blank" HRef="https://ant.apache.org/">https://ant.apache.org/</A> Install to ~/msscf/bin/apache-ant-1.10.3</dd>
+<dt>Princeton University WordNet 3.0 with 3.1 dictionaries</dt>
+	<dd><A Target="_blank" HRef="http://wordnet.princeton.edu/">http://wordnet.princeton.edu</A> Install to d:\msscf\bin\WordNet-3.0, then extract 3.1 dict entries over 3.0 installation</dd>
+<dt>MSys2</dt>
+	<dd><A Target="_blank" HRef="http://www.msys2.org/">http://www.msys2.org/</A> Mine is under ~/bin/msys2</dd>
+<dt>Eclipse JEE 2019-09 R</dt>
+	<dd><A Target="_blank" HRef="http://www.eclipse.org/downloads/packages/">http://www.eclipse.org/downloads/packages</A> Install to ~/bin/eclipse-jee-2019-r</dd>
+</dl>
+<p>
+<CENTER><H4>Microsoft Public Development Tools targetting 64-bit Windows 10</H4></CENTER>
+<p>
+You'll want to install the Microsoft development tools "Visual Studio Community 2019",
+"Visual Studio Code", ".NET Framework", "Build Tools for Visual Studio 2019", and
+"Microsoft Visual C++ Redistributable for Visual Studio 2019", all for x64, as x86 is
+not supported, from <A Target="_blank" HRef="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2019">https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2019</A>
+<p>
+<CENTER><H4>Windows 10 System Environment Variables</H4></CENTER>
+<p>
+Next we need to deal with the system environment variables that
+need to be set on Windows.  Note that I assume one installation
+per machine; these can not be set as User variables:
+<p>
+<dl>
+<dt>__MSSCFINSTDIR</dt><dd>'C:\PROGRA~1\msscf'</dd>
+<dt>_ANT_HOME</dt><dd>C:\Users\YourUserNameHere\msscf\bin\apache-ant-1.10.5'</dd>
+<dt>_JAVA_HOME</dt><dd>C:\PROGRA~1\OPENJD~1.NET\jdk-13</dd>
+<dt>_JDK_HOME</dt><dd>C:\PROGRA~1\OPENJD~1.NET\jdk-13</dd>
+<dt>_JFX_HOME</dt><dd>C:\PROGRA~1\OPENJD~1.NET\javafx-sdk-13</dd>
+<dt>_MSSCFHOME</dt><dd>C:\Users\YourUserNameHere\msscf</dd>
+<dt>ANT_HOME</dt><dd>%_ANT_HOME%</dd>
+<dt>CATALINA_HOME</dt><dd>'C:\Users\YourUserNameHere\msscf\bin\apache-tomcat-9.0.10'</dd>
+<dt>JAVA_HOME</dt><dd>%_JAVA_HOME%</dd>
+<dt>JDK_HOME</dt><dd>%_JDK_HOME%</dd>
+<dt>JFX_HOME</dt><dd>%_JFX_HOME%</dd>
+<dt>LIBPATH</dt><dd>%__MSSCFINSTDIR%\bin;%__MSSCFINSTDIR%\dll;%__MSSCFINSTDIR%\lib</dd>
+<dt>LOG4J2_CONF</dt><dd>C:\Users\YourUserName\log4j2.properties</dd>
+<dt>MSSCFHOME</dt><dd>%_MSSCFHOME%dd>
+<dt>PATH</dt><dd>C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Progra~2\Vim\vim80;C:\Progra~2\NVIDIA~1\PhysX\Common;C:\Progra~1\NVIDIA~1\NVIDIA~2;C:\Progra~2\Steam;%_JDK_HOME%\bin;%_JFX_HOME%\bin;%_ANTHOME%\bin;%HOME%\bin\msys64\mingw64\bin;%HOME%\bin\msys64\mingw32\bin;C:\Progra~1\CMake\bin;C:\Progra~1\PuTTY\;C:\Progra~1\NVIDIA Corporation\NVIDIA NvDLISR;C:\Progra~1\dotnet\;C:\Progra~1\Microsoft SQL Server\130\Tools\Binn\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;%__MSSCFINSTDIR%\bin;%__MSSCFINSTDIR%\dll;%__MSSCFINSTDIR%\lib;C:\Progra~2\Microsoft SQL Server\140\Tools\Binn\;C:\Progra~1\Microsoft SQL Server\140\Tools\Binn\;C:\Progra~2\Microsoft SQL Server\140\DTS\Binn\;C:\Progra~1\Microsoft SQL Server\140\DTS\Binn\;C:\Progra~1\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Progra~2\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Progra~2\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;</dd>
+<dt>PATH_TO_FX</dt><dd>'C:\Progra~1\openjdk.java.net\javafx-sdk-13[.0[.fix]]\lib'</dd>
+<dt>VIM</dt><dd>C:\Progra~2\Vim\vim81\vim.exe</dd>
+<dt>VIMRC</dt><dd>%HOME%\.vimrc</dd>
+<dt>VIM_HOME</dt><dd>C:\Progra~2\Vim\vim81</dd>
+</dl>
+<p>
+<CENTER><H4>Windows 10 WSL Ubuntu Setup</H4></CENTER>
+<p>
+Windows Services for Linux with Ubuntu 18.04 LTS is a very handy add-on
+to the Windows environment stack, allowing me to continue to use my
+Git Package, Archive, and Build scripts for the pieces that fall under
+the Linux domain for my project.  Open JDK 13 is currently used for both
+WSL and Windows native environments.
+<p>
+Only the WSL version of git is used to maintain the code.  The Windows
+version of git was inadequate, save for the implementation provided by
+MSys2/MinGW64.
+<p>
+I have a collection of environment scripts in the
+<A Target="_blank" HRef="home-template">home-template</A> subdirectory
+of the documentation archive for MSS Code Factory 2.11, which you can
+download and extract easily.
+<p>
+There are initialization files for the WSL, Windows 10, and MSys2/MinGW
+environments there. Don't forget to replace the "dot-" part of the
+file names with ".".  You'll find the patterns "Your Name" and
+"your@email.address" throughout the files; edit them appropriately.
+You'll also need to provide your SSL and GPG key ids.
+<p>
+Now you'll want to install the MSS Code Factory source tree to your
+MSSCFHOME directory:
+<p>
+<blockquote>
+<tt>
+cd $MSSCFHOME</br>
+git clone https://github.com/msobkow/msscf_2_11</br>
+</tt>
+</blockquote>
+Copy and rename the shell template files from
+msscf_2_11/java/documentation-2.11/home-template/wsl-ubuntu-env
+to your home directory in your WSL session.  Note that dot-vim is a directory of files,
+not just one file.  You'll want to remove the .htaccess after you make your recursive
+copy of the directory.
+<p>
+Edit the files. You'll find the pattern strings "Your Name" and
+"your@email.address" littering the template files.  Edit them
+accordingly.  You'll also need to edit the SSL and GPG key ids
+according to your keys.
+<p>
+Close your WSL Ubuntu session windows, close your applications, and restart Windows
+to propagate all of the environment variable and path settings we've made
+to your system environment.  Trying to use any of the command scripts without a valid
+system environment is dangerous, as undefined variables can result in missing
+directory information.
+<p>
+Once you're logged back in and have started another WSL Ubuntu session, you should
+be able to finish checking out the source tree:
+<blockquote>
+<tt>
+cd $MSSCFHOME</br>
+$HOME/bin/CloneAll.bash
+</tt>
+</blockquote>
+<p>
+This may take a fair bit of time to execute, even a few hours, depending on how
+fast your download link is.
+<p>
+<CENTER><H3>Ubuntu/Debian amd64 Linux</H3></CENTER>
+<p>
+Download a copy of MSS Code Factory 2 from the SourceForge download servers,
+and extract it.  I recommend the following:
+<p class=indent1><tt>
+cd $HOME</br>
+mkdir msscf</br>
+cd msscf</br>
+mkdir runtime-2.11</br>
+cd runtime-2.11</br>
+unzip msscf_2_11-&lt;version&gt;-installer.zip</tt>
+<p>
+I'm going to assume you've extracted it this way as we work through the next
+steps.
+<p>
+Make sure your JDK_HOME and JAVA_HOME variables point to a valid JDK 13 installation;
+I use OpenJDK 13 under Debian Linux, with the optional OpenJFX package installed.
+<p>
+Add the extracted tool's bin directory to your PATH in your $HOME/.profile, and then
+source your .profile or log out and back in again.
+<p class=indent1><tt>
+export PATH="${HOME}/msscf/runtime-2.11/bin:${PATH}"</tt>
+<p>
+Download a .msscfrc template file from the MSS Code Factory 2.11 documentation website,
+and modify it accoring to your platform's configuration.  It should look something like this:
+<p class=indent1><tt>
+msscf.cartridgedir=/home/msobkow/msscf/msscf_2_11/java/cartridge-2.11</br>
+msscf.modeldir=/home/msobkow/msscf/my-domain-IsAlive-1-1/model-2.11</br>
+msscf.modeldir1=/home/msobkow/msscf/msscf_2_11/java/model-2.11</br>
+msscf.rootgendir=/home/msobkow/msscf</tt>
+<p>
+You can specify additional model and cartridge paths as "cartridgedir1" or "modeldir1",
+and they will be searched in the order specified.  You'll probably want to create a
+separate model directory for your projects, and make it the first model directory searched,
+with the runtime-2.11/model-2.11 directory being the modeldir1 entry that is searched
+second (that way when you're working with the editor it will save your models to your
+model directory by default instead of the directories of the tool itself.)
+<p>
+Congratulations!  Your installation is ready to use.
+<p>
+<CENTER><H4>WSL Ubuntu 18.04 LTS Core Tools</H4></CENTER>
+<p>
+<dl>
+<dt>OpenJDK 13 64-bit linux</dt>
+	<dd><A Target="_blank" HRef="https://jdk.java.net/13/">https://jdk.java.net/13/</A>. You can use OpenJDK 13 if you don't intend to run JavaFX applications or clients, or want to install the optional openjfx.io add-on for Windows.  You have GPL freedoms with classpath exceptions to run this JDK with any workload it can handle, under any license the product you are running chooses to specify.  Download the .zip and extract it to C:/Progra~1/jdk.java.net/13, then set the environment variable for _JDK_HOME to the extracted directory.  Set JDK_HOME and JAVA_HOME to %_JDK_HOME%, and add %_JDK_HOME%\bin to your PATH.</dd>
+<dt>OpenJFX 13 64-bit linux</dt>
+	<dd><A Target="_blank" HRef="https://openjfx.io/">https://openjfx.io/</A>. OpenJFX provides a open source licensed version of JavaFX for JDK 13.  You have GPL freedoms with classpath exceptions to run this version of JavaFX with any workload it can handle, under any license the product you are running chooses to specify.  Download the .zip and extract it to C:/Progra~1/openjfx.io, then set the environment variable for PATH_TO_FX to the extracted directory (javafx-sdk-13.) You then need to specify %PATH_TO_FX% in your module paths invocations of javac.exe and java.exe.</dd>
+<dt>Princeton University WordNet 3.0 with 3.1 dictionaries</dt>
+	<dd><A Target="_blank" HRef="http://wordnet.princeton.edu/">http://wordnet.princeton.edu</A> Install to ~/bin/WordNet-3.0, then extract 3.1 dict entries over 3.0 installation</dd>
+<dt>Eclipse JEE 2019-09 R</dt>
+	<dd><A Target="_blank" HRef="http://www.eclipse.org/downloads/packages/">http://www.eclipse.org/downloads/packages</A> Install to ~/bin/eclipse-jee-2019-r</dd>
+<dt>Eclipse CPP 2019-09 R</dt>
+	<dd><A Target="_blank" HRef="http://www.eclipse.org/downloads/packages/">http://www.eclipse.org/downloads/packages</A> Install to ~/bin/eclipse-cpp-2019-r</dd>
+<p>
+</BODY>
+</HTML>

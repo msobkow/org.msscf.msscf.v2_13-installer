@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Installing a Manufactured Project</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="building-a-project.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="manufactured-design.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Installing a Manufactured Project</H2></CENTER>
+<p>
+<H4>Installing a Windows 10 with WSL Ubuntu development environment</H4>
+<p>
+I may no longer have a Linux system, but Windows Services for Linux with
+Ubuntu 18.04 LTS is quite adequate for most of my needs, though debugging C++17
+means resorting to good old command line gdb unless I want the overhead of
+a full X server/client on my system.
+<p>
+All platforms use OpenJDK 13 with OpenJFX 13 at this time (thought that is,
+admittedly, limited to Windows 10 Home amd 64 and WSL Ubuntu 18.04 LTS.
+<p>
+<H4>Installing Manufactured Database Schemas</H4>
+<p>
+All of the platforms can run the Java client applications through
+a "bash" shell, so I've only tested the unsuffixed/Windows scripts
+and the .bash Linux scripts in the various 2.12 projects delivered
+by MSS Code Factory 2.
+<p>
+You'll also need to install the OpenJDK 13 and OpenJFX 13, or a commercial
+equivalent, and make sure it is your default JDK.
+<p>
+In the case of the 2.12 installation packages, you just need to extract
+the zip file, and add its <tt>java/bin</tt> directory to your PATH.  For
+Microsoft SQL Server you need to install the JDBC drivers to the appropriate
+<tt>java/bin</tt> directory.  Some projects might not properly package the
+PostgreSQL drivers, so add those if need be as well.
+<p>
+<H4>DB/2 LUW</H4>
+<p>
+<H5>Debian Linux</H5>
+<p>
+After installing the DB/2 LUW database software, which creates a database
+administrator account (I'll call it db2admin for the sake of argument) and
+a default instance for the administrator data, you'll need to do an
+<tt>su -l db2admin</tt>.  If you've previously installed the database
+instance, drop the old database, and create a new instance, <tt>db2inst2</tt>
+for argument's sake:
+<blockquote>
+<tt>db2 drop database db2inst2</tt><br/>
+<tt>db2 create database db2inst2 using codeset utf8 territory us pagesize 32 k</tt>
+</blockquote>
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/db2luw</tt> directory.  Remove any
+existing *.log files.
+<p>
+Connect to the database instance you just created, as in:
+<blockquote>
+<tt>db2 connect to db2inst2 user db2admin using $password$</tt>
+</blockquote>
+<p>
+Create the msidata1 tablespace:
+<blockquote>
+<tt>db2 create tablespace msidata1 pagesize 32 k</tt>
+</blockquote>
+<p>
+Now source the <tt>crdb_$dbname$.bash</tt> script.  You'll
+see a series of messages stream by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>. ./crdb_$dbname$.bash</tt>
+</blockquote>
+<p>
+Disconnect from the database:
+<blockquote>
+<tt>db2 connect reset</tt>
+</blockquote>
+<p>
+A log file of the database install process is produced
+to <tt>db2output.log</tt>, or you can scroll back through
+the window to look for errors (which is what I prefer to
+do as it's much less to review than the whole log file is.)
+<p>
+Install the IBM-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H5>Windows 10</H5>
+<p>
+After installing the DB/2 LUW database software, which creates a database
+administrator account (normally db2admin) and a default instance for the
+administrator data, you'll need to do an <tt>su -l db2admin</tt> and
+create an instance, say <tt>db2inst2</tt>:
+<blockquote>
+<tt>db2 create database db2inst2 using codeset utf8 territory us pagesize 32 k</tt>
+</blockquote>
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/db2luw</tt> directory.  Remove any
+existing *.log files.
+<p>
+Connect to the database instance you just created, as in:
+<blockquote>
+<tt>db2 connect to db2inst2 user db2admin using $password$</tt>
+</blockquote>
+<p>
+Now create an "msidata1" tablespace, optionally providing
+arguments as defined by the IBM documentation:
+<blockquote>
+<tt>db2 create tablespace msidata1 pagesize 32 k</tt>
+</blockquote>
+<p>
+Now call the <tt>crdb_$dbname$.bat</tt> script.  You'll
+see a series of messages stream by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>call crdb_$dbname$.bat</tt>
+</blockquote>
+<p>
+Disconnect from the database:
+<blockquote>
+<tt>db2 connect reset</tt>
+</blockquote>
+<p>
+A log file of the database install process is produced
+to <tt>db2output.log</tt>, or you can scroll back through
+the window to look for errors (which is what I prefer to
+do as it's much less to review than the whole log file is.)
+<p>
+Install the IBM-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H4>Microsoft SQL Server</H4>
+<p>
+<H5>Debian Linux</H5>
+<p>
+Although there is no support for Debian Linux to run a
+Microsoft SQL Server, you can install client access
+software provided by Microsoft.  Once you have installed
+the database instance on the server and extracted the
+Microsoft SQL Server JDBC drivers to the appropriate
+subdirectory of your project's <tt>java/bin</tt> directory, you
+should be able to run the manufactured Java applications
+from the command line by adding the project's <tt>java/bin</tt>
+directory to your PATH after performing a successful <tt>ant</tt>
+build.
+<p>
+<H5>Windows 10</H5>
+<p>
+Open a DOS window.  Go to your project's <tt>dbcreate/%projectname%/mssql</tt>
+directory.  Delete any existing *.log files.  Invoke crdb_%dbname%.bat with the
+arguments for the name of the system running SQL Server with instance identifier,
+the database administrator's user name (normally "sa"), and the password for the
+database administrator account:
+<blockquote>
+<tt>crdb_%dbname%.bat hostname sa %password%</tt><br>
+<br>
+or<br>
+<br>
+<tt>crdb_%dbname%.bat localhost\MSSQLServer sa %password%</tt>
+</blockquote>
+<p>
+The script will take a significant amount of time to run, and will produce
+a <tt>crdb_%dbname%.log</tt> file of the results of the database creation.
+If you search the log file for "Server", you should be able to verify that
+the script ran successfully.
+<p>
+You will need to install the Microsoft-provided JDBC <tt>.jar</tt> files to
+the appropriate subdirectory of your project's <tt>java/bin</tt> directory
+before you can build the manufactured code and run it.  Creation of the
+appropriate project's <tt>.bat</tt> files for running the Java applications
+is left an exercise for the development team.  There are many examples in the
+manufactured CF* 2.12 projects delivered alongside the MSS Code Factory 2.11
+downloads from SourceForge.net.
+<p>
+<H4>MySQL</H4>
+<p>
+<H5>Debian Linux</H5>
+<p>
+After installing the MySQL database software, make sure you
+can connect as the administrator (normally "root") to the
+database server via TCP (127.0.0.1 if you're a developer.)
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/mysql</tt> directory.  Remove any
+existing *.log files.
+<p>
+Run the <tt>crdb_$dbname$.bash</tt> script.  You'll
+see a few summary messages go by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>./crdb_$dbname$.bash -U root -P $password$</tt>
+</blockquote>
+<p>
+A log file of the database install process is produced
+to <tt>crdb_$dbname$-YYYYMMDD_HHhMM.log</tt>.  You can verify
+that the installation ran cleanly by looking for the string
+"ERROR", and deciding if they matter or not.
+<p>
+Install the MySQL-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H5>Windows 10</H5>
+<p>
+After installing the MySQL database software, make sure you
+can connect as the administrator (normally "root") to the
+database server via TCP (127.0.0.1 if you're a developer.)
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/mysql</tt> directory.  Remove any
+existing *.log files.
+<p>
+Run the <tt>crdb_$dbname$.bat</tt> script.  You'll
+see a few summary messages go by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>./crdb_$dbname$.bat root $password$</tt>
+</blockquote>
+<p>
+A log file of the database install process is produced
+to <tt>crdb_$dbname$.log</tt>.  You can verify
+that the installation ran cleanly by looking for the string
+"ERROR", and deciding if they matter or not.
+<p>
+Install the MySQL-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H4>Oracle</H4>
+<p>
+It is possible, but very painful to install an Oracle XE server
+on a Debian "Jessie" Linux amd64 box, but I got it to work.  To be
+honest, I can't remember all of the steps involved and I don't know
+which ones actually were important, so I'm not going to even try
+to document the process.  But it can be done -- take heart!
+<p>
+<H5>Dual Platform: Linux and Windows/Cygwin64</H5>
+<p>
+After installing the Oracle database software, make sure you
+can connect as the administrator (normally "system") to the
+database server via TCP (127.0.0.1 if you're a developer.)
+<p>
+If you have previously installed an instance of the database,
+remove it by doing a "<tt>drop user $dbname$ cascade;</tt>" while
+you're logged in through a SQL*Plus command line.
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/oracle</tt> directory.  Remove any
+existing *.log files.
+<p>
+Run the <tt>crdb_$dbname$.bash</tt> script.  You'll
+see a few summary messages go by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>./crdb_$dbname$.bash -H 127.0.0.1 -U system -P $password$ -D /oracle/accessible/tablespace/directory</tt>
+</blockquote>
+<p>
+You only need to create the tablespaces once, so omit the -D
+and directory specification if you have already done so by a
+previous install of the database schema.  You can also optionally
+specify the Oracle server port via "<tt>-p $port$</tt>" as well.
+There is also a "<tt>-S $servicename$</tt>" option, but I don't think
+I've ever had to use either option.
+<p>
+A log file of the database install process is produced
+to <tt>crdb_$dbname$-YYYYMMDD_HHhMM.log</tt>.  You can verify
+that the installation ran cleanly by looking for the string
+"ERROR", and deciding if they matter or not.
+<p>
+Install the Oracle-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H4>PostgreSQL</H4>
+<p>
+<H5>Debian Linux</H5>
+<p>
+After installing the PostgreSQL database software, make sure you
+can connect as the administrator (normally "postgres") to the
+database server via TCP (127.0.0.1 if you're a developer.)
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/pgsql</tt> directory.  Remove any
+existing *.log files.
+<p>
+Run the <tt>crdb_$dbname$.bash</tt> script.  You'll
+see a few summary messages go by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>./crdb_$dbname$.bash -H 127.0.0.1 -U postgres -P $password$ -D /postgres/accessible/tablespace/directory</tt>
+</blockquote>
+<p>
+You only need to create the tablespaces once, so omit the -D
+and directory specification if you have already done so by a
+previous install of the database schema.  You can also optionally
+specify the PostgreSQL server port via "<tt>-p $port$</tt>" as well.
+<p>
+A log file of the database install process is produced
+to <tt>crdb_$dbname$-YYYYMMDD_HHhMM.log</tt>.  You can verify
+that the installation ran cleanly by looking for the string
+"ERROR", and deciding if they matter or not.
+<p>
+Install the PostgreSQL-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H5>Windows 10</H5>
+<p>
+After installing the PostgreSQL database software, make sure you
+can connect as the administrator (normally "postgres") to the
+database server via TCP (127.0.0.1 if you're a developer) from
+the DOS command line.
+<p>
+Exit from the administrator account, and go to your project's
+<tt>dbcreate/$projectname$/pgsql</tt> directory.  Remove any
+existing *.log files.
+<p>
+Run the <tt>crdb_$dbname$.bat</tt> script.  You'll
+see a few summary messages go by as the database is
+created and its initial security data populated.
+<blockquote>
+<tt>crdb_$dbname$.bat 127.0.0.1 postgres $password$ C:\postgres\accessible\tablespace\directory</tt>
+</blockquote>
+<p>
+You only need to create the tablespaces once, so omit the
+directory specification if you have already done so by a
+previous install of the database schema.  The scripts do not
+allow for specifying a port under Windows.
+<p>
+A log file of the database install process is produced
+to <tt>crdb_$dbname$.log</tt>.  You can verify
+that the installation ran cleanly by looking for the string
+"ERROR", and deciding if they matter or not.
+<p>
+Install the PostgreSQL-supplied JDBC <tt>.jar</tt> files in your
+project's <tt>java/bin</tt> directory and build the source.
+Add the directory to your PATH variable.  Create appropriate
+.bash scripts for running the manufactured projects applications.
+There are many examples in the 2.12 projects shipped by
+MSS Code Factory 2.
+<p>
+<H3>Deploying and initializing your project</H3>
+<p>
+There are sample Tomcat 8 server.xml configuration files for the http XMsg
+server and the https SM server in the 2.12 java directories.
+<p>
+The SM (Security Manager) war is deployed with HTTPS enabled, while the XMsgSrv war is
+deployed over HTTP and implements its own encryption schema using AES256.
+<p>
+You'll need to use the Java keytool to create RSA 2048 bit key pairs for the XMsg server
+and for your client device.
+<p class=indent1><tt>
+keytool -genkeypair -keystore $keystoreFileName -storepass pw -keyalg RSA -keysize 2048 -alias $deviceName -validity 2000 -storetype jceks
+</tt>
+<p>
+You need to change all the references for CFDbTest212 to the name and version of your project,
+and it is particularly important to update the database PoolClass variable to specify the
+class name of the database connection pool for your project and the database you are using
+to run your server (the sample configurations are for Tomcat 8 with PostgreSQL.)
+<p>
+In order for users to be able to register new accounts via the Security Manager pages,
+the Java mail configurations have to be specified and valid.  A confirmation email gets
+sent out when the user registers a new account, and unless they continue the registration
+process using the link provided by that email, they will not be allowed to log in to the
+system.
+<p>
+Launch the security manager web server and use a browser to navigate to the default index.html page for
+the services.  You'll be redirected to initialize the server's password and cluster information,
+then redirected to the login web form.  Note that I do not think you can run the HTTPS and HTTP
+servers at the same time in one web container instance, because the Security Manager and XMsgSrv
+would each try to initialize the global database connection pool and probably cause problems for
+each other as a result.
+<p>
+Now launch your Custom JavaFX HTTP GUI client.  It will initialize it's configuration file, which you can
+then edit to point to your preferred JCEKS key store, and specify the name of the device/key alias
+of an RSA 2048 key pair.  Once you've done so, relaunch the client application.
+<p>
+You'll be prompted by the client application for your keystore and key passwords, after which a window
+is displayed with the device name and export key text.  Leave that window alone for the moment.
+<p>
+Log in to the Security Manager web interface as "system" using the password you configured, and
+add a device.  Copy-paste the device name from the client application to the appropriate form field,
+and then copy-paste the key text to the appropriate form field.  When you submit the device public key
+information, the server will verify that it can use the key for authentication, and save it as the
+default for the system account.  Note that you can have as many device keys configured as you like.
+<p>
+Now you can launch the XMsgSrv war in it's web server.
+<p>
+Once the XMsgSrv war is started, you can log in to the client.  If you launched the server in debug
+mode through Eclipse, a browser will have been started and redirected from index.html to the server's
+providing URL.  Copy-paste that URL to the Server URL field of the login form.
+<p>
+The cluster has to be either "default" or "system".  If it's "system", then the tenant also has to be
+"system".  If it's "default", you'd normally be able to use any tenant name you've created under the
+default cluster.
+<p>
+You should get a connected dialog box, and then be able to navigate around the Swing GUI.
+<p>
+Don't forget to log out when you're done.
+<p>
+</BODY>
+</HTML>

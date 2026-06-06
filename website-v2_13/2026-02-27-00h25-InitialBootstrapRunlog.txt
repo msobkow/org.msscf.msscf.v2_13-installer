@@ -1,0 +1,1839 @@
+Runtime class codes are 15728640..15728660 (20 tables in total)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.0)
+
+2026-02-27T00:24:57.695-06:00  INFO 46128 --- [           main] i.g.m.v.cfsec.cfsecjpatest.CFSecJpaTest  : Starting CFSecJpaTest v3.1 using Java 17.0.17 with PID 46128 (/opt/mcf/v3_1/java/bin-v3_1/io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar started by msobkow in /opt/mcf/v3_1/java/bin-v3_1)
+2026-02-27T00:24:57.697-06:00  INFO 46128 --- [           main] i.g.m.v.cfsec.cfsecjpatest.CFSecJpaTest  : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T00:24:57.975-06:00  INFO 46128 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T00:24:58.060-06:00  INFO 46128 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 21 JPA repository interfaces.
+2026-02-27T00:24:58.311-06:00  INFO 46128 --- [           main] com.zaxxer.hikari.HikariDataSource       : CFSec31HikariCP - Starting...
+2026-02-27T00:24:58.518-06:00  INFO 46128 --- [           main] com.zaxxer.hikari.pool.HikariPool        : CFSec31HikariCP - Added connection org.postgresql.jdbc.PgConnection@6ccac6f4
+2026-02-27T00:24:58.520-06:00  INFO 46128 --- [           main] com.zaxxer.hikari.HikariDataSource       : CFSec31HikariCP - Start completed.
+Creating cfsec31EntityManagerFactory with properties:
+  hibernate.format_sql = true
+  hibernate.hbm2ddl.auto = create
+  hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+  jakarta.persistence.unitName = cfsec31PU
+  hibernate.connection_pool_size = 10
+  jakarta.persistence.schema-generation.drop-source = metadata
+  hibernate.default_schema = cfsec31
+  jakarta.persistence.jdbc.url = jdbc:postgresql://192.168.7.128:5432/cfsecdb
+  jakarta.persistence.jdbc.user = postgres
+  hibernate.show_sql = true
+  jakarta.persistence.create-database-schemas = true
+  jakarta.persistence.jdbc.password = mypassword
+  jakarta.persistence.schema-generation.create-source = metadata
+2026-02-27T00:24:58.584-06:00  INFO 46128 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: cfsec31PU]
+2026-02-27T00:24:58.630-06:00  INFO 46128 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2026-02-27T00:24:58.951-06:00  INFO 46128 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T00:24:58.964-06:00  WARN 46128 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001002: Using built-in connection pool (not intended for production use)
+2026-02-27T00:24:59.027-06:00  WARN 46128 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T00:24:59.037-06:00  INFO 46128 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://192.168.7.128:5432/cfsecdb]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.3
+	Default catalog/schema: cfsecdb/public
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: none
+	Pool: DriverManagerConnectionProviderImpl
+	Minimum pool size: 1
+	Maximum pool size: 20
+2026-02-27T00:24:59.992-06:00  INFO 46128 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    set client_min_messages = WARNING
+Hibernate: 
+    alter table if exists CFSec31.HostNode 
+       drop constraint if exists FKd87jvalwwt34wrhcs6oy8jbta
+Hibernate: 
+    alter table if exists CFSec31.HostSvc 
+       drop constraint if exists FKroyeqgo4jbe7lxvwyk35iq4bx
+Hibernate: 
+    alter table if exists CFSec31.HostSvc 
+       drop constraint if exists FKhlut9kk9udahhqctwyfq0muxh
+Hibernate: 
+    alter table if exists CFSec31.iso_cntryccy 
+       drop constraint if exists FKanhr8hi033ah9egoxbayqw0vc
+Hibernate: 
+    alter table if exists CFSec31.iso_cntryccy 
+       drop constraint if exists FKnd65gm3kv5bp39kdif7rwd4nr
+Hibernate: 
+    alter table if exists CFSec31.iso_cntrylng 
+       drop constraint if exists FKo7c2lar60h1nle1eqi28f32jh
+Hibernate: 
+    alter table if exists CFSec31.iso_cntrylng 
+       drop constraint if exists FK2ydfm8sdc62249x2ryjyos39q
+Hibernate: 
+    alter table if exists CFSec31.SecDev 
+       drop constraint if exists FK7xb0dijra5tnrh2t55ip0vsk
+Hibernate: 
+    alter table if exists CFSec31.SecGrp 
+       drop constraint if exists FKmmi3i8wa0qk4ty387ikmn37cq
+Hibernate: 
+    alter table if exists CFSec31.SecInc 
+       drop constraint if exists FKr1o1trj5r6xrwfrp5f122uslw
+Hibernate: 
+    alter table if exists CFSec31.SecInc 
+       drop constraint if exists FKilncquiss3d60h2qe3s3q1kum
+Hibernate: 
+    alter table if exists CFSec31.SecMemb 
+       drop constraint if exists FK3ed0pu6hq6clemf3o5aeah8p1
+Hibernate: 
+    alter table if exists CFSec31.SecMemb 
+       drop constraint if exists FK4pf34yhrvtja7vdf5lvlc10bq
+Hibernate: 
+    alter table if exists CFSec31.SecUser 
+       drop constraint if exists FKmoxduej4cf7tmx3id8v483vq5
+Hibernate: 
+    alter table if exists CFSec31.sysclus 
+       drop constraint if exists FKib1kwlegdhjfqdty9abbg8q40
+Hibernate: 
+    alter table if exists CFSec31.tenant 
+       drop constraint if exists FK1s5hcs1w9scfvl32wirjys123
+Hibernate: 
+    alter table if exists CFSec31.TSecGrp 
+       drop constraint if exists FKo7vi6xgev05t1q91e8mfboogy
+Hibernate: 
+    alter table if exists CFSec31.TSecInc 
+       drop constraint if exists FKkejxgkqjhc5xrq6exfyjenjmw
+Hibernate: 
+    alter table if exists CFSec31.TSecInc 
+       drop constraint if exists FKf2dt3qortm6qe71b7btg5aih9
+Hibernate: 
+    alter table if exists CFSec31.TSecMemb 
+       drop constraint if exists FKjf76qnwjdgufwnec0dndg8qoo
+Hibernate: 
+    alter table if exists CFSec31.TSecMemb 
+       drop constraint if exists FKm1jff2vjp457crdncesuy035d
+Hibernate: 
+    drop table if exists CFSec31.clus cascade
+Hibernate: 
+    drop table if exists CFSec31.clus_h cascade
+Hibernate: 
+    drop table if exists CFSec31.HostNode cascade
+Hibernate: 
+    drop table if exists CFSec31.HostNode_h cascade
+Hibernate: 
+    drop table if exists CFSec31.HostSvc cascade
+Hibernate: 
+    drop table if exists CFSec31.HostSvc_h cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_ccy cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_ccy_h cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_cntry cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_cntry_h cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_cntryccy cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_cntryccy_h cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_cntrylng cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_cntrylng_h cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_lang cascade
+Hibernate: 
+    drop table if exists CFSec31.iso_lang_h cascade
+Hibernate: 
+    drop table if exists CFSec31.ISOTz cascade
+Hibernate: 
+    drop table if exists CFSec31.ISOTz_h cascade
+Hibernate: 
+    drop table if exists CFSec31.SecDev cascade
+Hibernate: 
+    drop table if exists CFSec31.SecDev_h cascade
+Hibernate: 
+    drop table if exists CFSec31.SecGrp cascade
+Hibernate: 
+    drop table if exists CFSec31.SecGrp_h cascade
+Hibernate: 
+    drop table if exists CFSec31.SecInc cascade
+Hibernate: 
+    drop table if exists CFSec31.SecInc_h cascade
+Hibernate: 
+    drop table if exists CFSec31.SecMemb cascade
+Hibernate: 
+    drop table if exists CFSec31.SecMemb_h cascade
+Hibernate: 
+    drop table if exists CFSec31.SecSess cascade
+Hibernate: 
+    drop table if exists CFSec31.SecUser cascade
+Hibernate: 
+    drop table if exists CFSec31.SecUser_h cascade
+Hibernate: 
+    drop table if exists CFSec31.SvcType cascade
+Hibernate: 
+    drop table if exists CFSec31.SvcType_h cascade
+Hibernate: 
+    drop table if exists CFSec31.sysclus cascade
+Hibernate: 
+    drop table if exists CFSec31.tenant cascade
+Hibernate: 
+    drop table if exists CFSec31.tenant_h cascade
+Hibernate: 
+    drop table if exists CFSec31.TSecGrp cascade
+Hibernate: 
+    drop table if exists CFSec31.TSecGrp_h cascade
+Hibernate: 
+    drop table if exists CFSec31.TSecInc cascade
+Hibernate: 
+    drop table if exists CFSec31.TSecInc_h cascade
+Hibernate: 
+    drop table if exists CFSec31.TSecMemb cascade
+Hibernate: 
+    drop table if exists CFSec31.TSecMemb_h cascade
+Hibernate: 
+    drop sequence if exists CFSec31.ISOCcyIdGenSeq
+Hibernate: 
+    drop sequence if exists CFSec31.ISOCtryIdGenSeq
+Hibernate: 
+    drop sequence if exists CFSec31.ISOLangIdGenSeq
+Hibernate: 
+    drop sequence if exists CFSec31.ISOTZoneIdGenSeq
+Hibernate: 
+    drop schema CFSec31
+2026-02-27T00:25:00.019-06:00  WARN 46128 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    drop schema CFSec31" via JDBC [ERROR: schema "cfsec31" does not exist]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    drop schema CFSec31" via JDBC [ERROR: schema "cfsec31" does not exist]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:93) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:222) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:208) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropSchemasAndCatalogs(SchemaDropperImpl.java:440) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:228) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:185) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:155) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:115) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:225) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:139) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:350) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:436) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1459) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:433) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:416) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:409) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:966) ~[spring-context-7.0.1.jar!/:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620) ~[spring-context-7.0.1.jar!/:7.0.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at io.github.msobkow.v3_1.cfsec.cfsecjpatest.CFSecJpaTest.main(CFSecJpaTest.java:211) ~[!/:3.1]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+Caused by: org.postgresql.util.PSQLException: ERROR: schema "cfsec31" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2736) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:357) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:342) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:313) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	... 42 common frames omitted
+
+Hibernate: 
+    drop schema cfsec31
+2026-02-27T00:25:00.021-06:00  WARN 46128 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    drop schema cfsec31" via JDBC [ERROR: schema "cfsec31" does not exist]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    drop schema cfsec31" via JDBC [ERROR: schema "cfsec31" does not exist]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:93) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:222) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:208) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropSchemasAndCatalogs(SchemaDropperImpl.java:440) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:228) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:185) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:155) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:115) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:225) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:139) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:350) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:436) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1459) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:433) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:416) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:409) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:966) ~[spring-context-7.0.1.jar!/:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620) ~[spring-context-7.0.1.jar!/:7.0.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at io.github.msobkow.v3_1.cfsec.cfsecjpatest.CFSecJpaTest.main(CFSecJpaTest.java:211) ~[!/:3.1]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+Caused by: org.postgresql.util.PSQLException: ERROR: schema "cfsec31" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2736) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:357) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:342) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:313) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	... 42 common frames omitted
+
+Hibernate: 
+    create schema CFSec31
+Hibernate: 
+    create schema cfsec31
+2026-02-27T00:25:00.024-06:00  WARN 46128 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    create schema cfsec31" via JDBC [ERROR: schema "cfsec31" already exists]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    create schema cfsec31" via JDBC [ERROR: schema "cfsec31" already exists]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:93) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:222) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:208) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createSchemasAndCatalogs(SchemaCreatorImpl.java:547) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:222) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:160) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:130) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:106) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:237) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:139) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:350) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:436) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1459) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:433) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:416) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:409) ~[spring-orm-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar!/:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:966) ~[spring-context-7.0.1.jar!/:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620) ~[spring-context-7.0.1.jar!/:7.0.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar!/:4.0.0]
+	at io.github.msobkow.v3_1.cfsec.cfsecjpatest.CFSecJpaTest.main(CFSecJpaTest.java:211) ~[!/:3.1]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[io.github.msobkow.v3_1.cfsec.cfsecjpatest-3.1-spring-boot.jar:3.1]
+Caused by: org.postgresql.util.PSQLException: ERROR: schema "cfsec31" already exists
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2736) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:357) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:342) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:313) ~[postgresql-42.7.8.jar!/:42.7.8]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79) ~[hibernate-core-7.1.8.Final.jar!/:7.1.8.Final]
+	... 42 common frames omitted
+
+Hibernate: 
+    create sequence CFSec31.ISOCcyIdGenSeq minvalue 0 start with 0 increment by 1
+Hibernate: 
+    create sequence CFSec31.ISOCtryIdGenSeq minvalue 0 start with 0 increment by 1
+Hibernate: 
+    create sequence CFSec31.ISOLangIdGenSeq minvalue 0 start with 0 increment by 1
+Hibernate: 
+    create sequence CFSec31.ISOTZoneIdGenSeq minvalue 0 start with 0 increment by 1
+Hibernate: 
+    create table CFSec31.clus (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        Id bytea not null,
+        UpdatedByUserId bytea not null,
+        Description varchar(128) not null,
+        FullDomName varchar(192) not null,
+        constraint ClusterIdIdx primary key (Id),
+        constraint ClusterUDomNameIdx unique (FullDomName),
+        constraint ClusterUDescrNameIdx unique (Description)
+    )
+Hibernate: 
+    create table CFSec31.clus_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        Id bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        Description varchar(128) not null,
+        FullDomName varchar(192) not null,
+        constraint ClusterIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, Id),
+        constraint ClusterUDomNameIdx_h unique (FullDomName),
+        constraint ClusterUDescrNameIdx_h unique (Description)
+    )
+Hibernate: 
+    create table CFSec31.HostNode (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        HostNodeId bytea not null,
+        UpdatedByUserId bytea not null,
+        HostName varchar(192) not null,
+        Description varchar(255) not null,
+        constraint HostNodeIdIdx primary key (HostNodeId),
+        constraint HostNodeUDescrIdx unique (ClusterId, Description),
+        constraint HostNodeUHostNameIdx unique (ClusterId, HostName)
+    )
+Hibernate: 
+    create table CFSec31.HostNode_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        HostNodeId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        HostName varchar(192) not null,
+        Description varchar(255) not null,
+        constraint HostNodeIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, HostNodeId),
+        constraint HostNodeUDescrIdx_h unique (ClusterId, Description),
+        constraint HostNodeUHostNameIdx_h unique (ClusterId, HostName)
+    )
+Hibernate: 
+    create table CFSec31.HostSvc (
+        HostPort smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        HostNodeId bytea,
+        ServiceId bytea not null,
+        ServiceTypeId bytea,
+        UpdatedByUserId bytea not null,
+        constraint ServiceIdIdx primary key (ServiceId),
+        constraint ServiceUTypeIdx unique (ClusterId, HostNodeId, ServiceTypeId),
+        constraint ServiceUHostPort unique (ClusterId, HostNodeId, HostPort)
+    )
+Hibernate: 
+    create table CFSec31.HostSvc_h (
+        HostPort smallint not null,
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        HostNodeId bytea not null,
+        ServiceId bytea not null,
+        ServiceTypeId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint ServiceIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ServiceId),
+        constraint ServiceUTypeIdx_h unique (ClusterId, HostNodeId, ServiceTypeId),
+        constraint ServiceUHostPort_h unique (ClusterId, HostNodeId, HostPort)
+    )
+Hibernate: 
+    create table CFSec31.iso_ccy (
+        ISOCcyId smallint not null,
+        iso_code varchar(3) not null,
+        precis smallint not null,
+        requiredRevision integer not null,
+        unit_symbol varchar(4),
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        ccy_name varchar(64) not null,
+        constraint ISOCcyIdIdx primary key (ISOCcyId),
+        constraint ISOCcyCodeIdx unique (iso_code),
+        constraint ISOCcyNameIdx unique (ccy_name)
+    )
+Hibernate: 
+    create table CFSec31.iso_ccy_h (
+        ISOCcyId smallint not null,
+        auditAction smallint not null,
+        iso_code varchar(3) not null,
+        precis smallint not null,
+        requiredRevision integer not null,
+        unit_symbol varchar(4),
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        ccy_name varchar(64) not null,
+        constraint ISOCcyIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ISOCcyId),
+        constraint ISOCcyCodeIdx_h unique (iso_code),
+        constraint ISOCcyNameIdx_h unique (ccy_name)
+    )
+Hibernate: 
+    create table CFSec31.iso_cntry (
+        ISOCtryId smallint not null,
+        iso_code varchar(2) not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        country_name varchar(64) not null,
+        constraint ISOCtryIdIdx primary key (ISOCtryId),
+        constraint ISOCtryCodeIdx unique (iso_code),
+        constraint ISOCtryNameIdx unique (country_name)
+    )
+Hibernate: 
+    create table CFSec31.iso_cntry_h (
+        ISOCtryId smallint not null,
+        auditAction smallint not null,
+        iso_code varchar(2) not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        country_name varchar(64) not null,
+        constraint ISOCtryIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ISOCtryId),
+        constraint ISOCtryCodeIdx_h unique (iso_code),
+        constraint ISOCtryNameIdx_h unique (country_name)
+    )
+Hibernate: 
+    create table CFSec31.iso_cntryccy (
+        ISOCcyId smallint not null,
+        ISOCtryId smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        constraint ISOCtryCcyIdIdx primary key (ISOCtryId, ISOCcyId)
+    )
+Hibernate: 
+    create table CFSec31.iso_cntryccy_h (
+        ISOCcyId smallint not null,
+        ISOCtryId smallint not null,
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint ISOCtryCcyIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ISOCtryId, ISOCcyId)
+    )
+Hibernate: 
+    create table CFSec31.iso_cntrylng (
+        ISOCtryId smallint not null,
+        ISOLangId smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        constraint ISOCtryLangIdIdx primary key (ISOCtryId, ISOLangId)
+    )
+Hibernate: 
+    create table CFSec31.iso_cntrylng_h (
+        ISOCtryId smallint not null,
+        ISOLangId smallint not null,
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint ISOCtryLangIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ISOCtryId, ISOLangId)
+    )
+Hibernate: 
+    create table CFSec31.iso_lang (
+        ISOLangId smallint not null,
+        iso_code2 varchar(2),
+        iso_code3 varchar(3) not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        eng_name varchar(64) not null,
+        constraint ISOLangIdIdx primary key (ISOLangId),
+        constraint ISOLang6392Idx unique (iso_code3)
+    )
+Hibernate: 
+    create table CFSec31.iso_lang_h (
+        ISOLangId smallint not null,
+        auditAction smallint not null,
+        iso_code2 varchar(2),
+        iso_code3 varchar(3) not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        eng_name varchar(64) not null,
+        constraint ISOLangIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ISOLangId),
+        constraint ISOLang6392Idx_h unique (iso_code3)
+    )
+Hibernate: 
+    create table CFSec31.ISOTz (
+        ISOTZoneId smallint not null,
+        TZHourOffset smallint not null,
+        TZMinOffset smallint not null,
+        Visible boolean not null,
+        requiredRevision integer not null,
+        Iso8601 varchar(6) not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        TZName varchar(64) not null,
+        Description varchar(128) not null,
+        constraint ISOTZoneIdIdx primary key (ISOTZoneId),
+        constraint ISOTZoneUTZNameIdx unique (TZName)
+    )
+Hibernate: 
+    create table CFSec31.ISOTz_h (
+        ISOTZoneId smallint not null,
+        TZHourOffset smallint not null,
+        TZMinOffset smallint not null,
+        Visible boolean not null,
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        Iso8601 varchar(6) not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        TZName varchar(64) not null,
+        Description varchar(128) not null,
+        constraint ISOTZoneIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ISOTZoneId),
+        constraint ISOTZoneUTZNameIdx_h unique (TZName)
+    )
+Hibernate: 
+    create table CFSec31.SecDev (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        SecUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        DevName varchar(127) not null,
+        constraint SecDeviceNameIdx primary key (SecUserId, DevName)
+    )
+Hibernate: 
+    create table CFSec31.SecDev_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        SecUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        DevName varchar(127) not null,
+        constraint SecDeviceIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, SecUserId, DevName),
+        constraint SecDeviceNameIdx_h unique (SecUserId, DevName)
+    )
+Hibernate: 
+    create table CFSec31.SecGrp (
+        IsVisible boolean not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        SecGroupId bytea not null,
+        UpdatedByUserId bytea not null,
+        safe_name varchar(64) not null,
+        constraint SecGroupIdIdx primary key (SecGroupId),
+        constraint SecGroupUNameIdx unique (ClusterId, safe_name)
+    )
+Hibernate: 
+    create table CFSec31.SecGrp_h (
+        IsVisible boolean not null,
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        SecGroupId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        safe_name varchar(64) not null,
+        constraint SecGroupIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, SecGroupId),
+        constraint SecGroupUNameIdx_h unique (ClusterId, safe_name)
+    )
+Hibernate: 
+    create table CFSec31.SecInc (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        ClusId bytea not null,
+        CreatedByUserId bytea not null,
+        IncGrpId bytea not null,
+        SecGrpId bytea not null,
+        SecGrpIncId bytea not null,
+        UpdatedByUserId bytea not null,
+        constraint SecGrpIncIdIdx primary key (SecGrpIncId),
+        constraint SecGrpIncUIncludeIdx unique (ClusId, SecGrpId, IncGrpId)
+    )
+Hibernate: 
+    create table CFSec31.SecInc_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        ClusId bytea not null,
+        CreatedByUserId bytea not null,
+        IncGrpId bytea not null,
+        SecGrpId bytea not null,
+        SecGrpIncId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint SecGrpIncIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, SecGrpIncId),
+        constraint SecGrpIncUIncludeIdx_h unique (ClusId, SecGrpId, IncGrpId)
+    )
+Hibernate: 
+    create table CFSec31.SecMemb (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        SecGroupId bytea not null,
+        SecGrpMembId bytea not null,
+        SecUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        constraint SecGrpMembIdIdx primary key (SecGrpMembId),
+        constraint SecGrpMembUUserIdx unique (ClusterId, SecGroupId, SecUserId)
+    )
+Hibernate: 
+    create table CFSec31.SecMemb_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        SecGroupId bytea not null,
+        SecGrpMembId bytea not null,
+        SecUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint SecGrpMembIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, SecGrpMembId),
+        constraint SecGrpMembUUserIdx_h unique (ClusterId, SecGroupId, SecUserId)
+    )
+Hibernate: 
+    create table CFSec31.SecSess (
+        requiredRevision integer not null,
+        finish_ts timestamp(6),
+        start_ts timestamp(6) not null,
+        SecProxyId bytea,
+        SecSessionId bytea not null,
+        SecUserId bytea not null,
+        SecDevName varchar(127),
+        constraint SecSessionIdIdx primary key (SecSessionId),
+        constraint SessionStartIdx unique (SecUserId, start_ts)
+    )
+Hibernate: 
+    create table CFSec31.SecUser (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        em_confuuid6 bytea,
+        pwdrstuuid6 bytea,
+        CreatedByUserId bytea not null,
+        DefDevUserId bytea,
+        SecUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        login_id varchar(32) not null,
+        DefDevName varchar(127),
+        pwd_hash varchar(256) not null,
+        email_addr varchar(512) not null,
+        constraint SecUserIdIdx primary key (SecUserId),
+        constraint SecUserLoginIdx unique (login_id)
+    )
+Hibernate: 
+    create table CFSec31.SecUser_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        em_confuuid6 bytea,
+        pwdrstuuid6 bytea,
+        CreatedByUserId bytea not null,
+        DefDevUserId bytea,
+        SecUserId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        login_id varchar(32) not null,
+        DefDevName varchar(127),
+        pwd_hash varchar(256) not null,
+        email_addr varchar(512) not null,
+        constraint SecUserIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, SecUserId),
+        constraint SecUserLoginIdx_h unique (login_id)
+    )
+Hibernate: 
+    create table CFSec31.SvcType (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        ServiceTypeId bytea not null,
+        UpdatedByUserId bytea not null,
+        Description varchar(50) not null,
+        constraint ServiceTypeIdIdx primary key (ServiceTypeId),
+        constraint ServiceTypeUDescrIdx unique (Description)
+    )
+Hibernate: 
+    create table CFSec31.SvcType_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        ServiceTypeId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        Description varchar(50) not null,
+        constraint ServiceTypeIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, ServiceTypeId),
+        constraint ServiceTypeUDescrIdx_h unique (Description)
+    )
+Hibernate: 
+    create table CFSec31.sysclus (
+        requiredRevision integer not null,
+        sgltn_id integer not null,
+        sys_clus_id bytea not null,
+        constraint SysClusterIdIdx primary key (sgltn_id)
+    )
+Hibernate: 
+    create table CFSec31.tenant (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        Id bytea not null,
+        UpdatedByUserId bytea not null,
+        TenantName varchar(192) not null,
+        constraint TenantIdIdx primary key (Id),
+        constraint TenantUNameIdx unique (ClusterId, TenantName)
+    )
+Hibernate: 
+    create table CFSec31.tenant_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        ClusterId bytea not null,
+        CreatedByUserId bytea not null,
+        Id bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        TenantName varchar(192) not null,
+        constraint TenantIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, Id),
+        constraint TenantUNameIdx_h unique (ClusterId, TenantName)
+    )
+Hibernate: 
+    create table CFSec31.TSecGrp (
+        IsVisible boolean not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        TSecGroupId bytea not null,
+        TenantId bytea not null,
+        UpdatedByUserId bytea not null,
+        safe_name varchar(64) not null,
+        constraint TSecGroupIdIdx primary key (TSecGroupId),
+        constraint TSecGroupUNameIdx unique (TenantId, safe_name)
+    )
+Hibernate: 
+    create table CFSec31.TSecGrp_h (
+        IsVisible boolean not null,
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        TSecGroupId bytea not null,
+        TenantId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        safe_name varchar(64) not null,
+        constraint TSecGroupIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, TSecGroupId),
+        constraint TSecGroupUNameIdx_h unique (TenantId, safe_name)
+    )
+Hibernate: 
+    create table CFSec31.TSecInc (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        IncGrpId bytea not null,
+        TSecGrpId bytea not null,
+        TSecGrpIncId bytea not null,
+        TenantId bytea not null,
+        UpdatedByUserId bytea not null,
+        constraint TSecGrpIncIdIdx primary key (TSecGrpIncId),
+        constraint TSecGrpIncUIncludeIdx unique (TenantId, TSecGrpId, IncGrpId)
+    )
+Hibernate: 
+    create table CFSec31.TSecInc_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        IncGrpId bytea not null,
+        TSecGrpId bytea not null,
+        TSecGrpIncId bytea not null,
+        TenantId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint TSecGrpIncIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, TSecGrpIncId),
+        constraint TSecGrpIncUIncludeIdx_h unique (TenantId, TSecGrpId, IncGrpId)
+    )
+Hibernate: 
+    create table CFSec31.TSecMemb (
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        SecUserId bytea not null,
+        TSecGroupId bytea not null,
+        TSecGrpMembId bytea not null,
+        TenantId bytea not null,
+        UpdatedByUserId bytea not null,
+        constraint TSecGrpMembIdIdx primary key (TSecGrpMembId),
+        constraint TSecGrpMembUUserIdx unique (TenantId, TSecGroupId, SecUserId)
+    )
+Hibernate: 
+    create table CFSec31.TSecMemb_h (
+        auditAction smallint not null,
+        requiredRevision integer not null,
+        CreatedAt timestamp(6) not null,
+        UpdatedAt timestamp(6) not null,
+        auditStamp timestamp(6) not null,
+        CreatedByUserId bytea not null,
+        SecUserId bytea not null,
+        TSecGroupId bytea not null,
+        TSecGrpMembId bytea not null,
+        TenantId bytea not null,
+        UpdatedByUserId bytea not null,
+        auditClusterId bytea not null,
+        auditSessionId bytea not null,
+        constraint TSecGrpMembIdIdx_h primary key (auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, TSecGrpMembId),
+        constraint TSecGrpMembUUserIdx_h unique (TenantId, TSecGroupId, SecUserId)
+    )
+Hibernate: 
+    create index HostNodeClusterIdx 
+       on CFSec31.HostNode (ClusterId)
+Hibernate: 
+    create index HostNodeClusterIdx_h 
+       on CFSec31.HostNode_h (ClusterId)
+Hibernate: 
+    create index ServiceClusterIdx 
+       on CFSec31.HostSvc (ClusterId)
+Hibernate: 
+    create index ServiceHostNodeIdx 
+       on CFSec31.HostSvc (HostNodeId)
+Hibernate: 
+    create index ServiceTypeIdx 
+       on CFSec31.HostSvc (ServiceTypeId)
+Hibernate: 
+    create index ServiceClusterIdx_h 
+       on CFSec31.HostSvc_h (ClusterId)
+Hibernate: 
+    create index ServiceHostNodeIdx_h 
+       on CFSec31.HostSvc_h (HostNodeId)
+Hibernate: 
+    create index ServiceTypeIdx_h 
+       on CFSec31.HostSvc_h (ServiceTypeId)
+Hibernate: 
+    create index ISOCtryCcyCtryIdx 
+       on CFSec31.iso_cntryccy (ISOCtryId)
+Hibernate: 
+    create index ISOCtryCcyCcyIdx 
+       on CFSec31.iso_cntryccy (ISOCcyId)
+Hibernate: 
+    create index ISOCtryCcyCtryIdx_h 
+       on CFSec31.iso_cntryccy_h (ISOCtryId)
+Hibernate: 
+    create index ISOCtryCcyCcyIdx_h 
+       on CFSec31.iso_cntryccy_h (ISOCcyId)
+Hibernate: 
+    create index ISOCtryLangCtryIdx 
+       on CFSec31.iso_cntrylng (ISOCtryId)
+Hibernate: 
+    create index ISOCtryLangLangIdx 
+       on CFSec31.iso_cntrylng (ISOLangId)
+Hibernate: 
+    create index ISOCtryLangCtryIdx_h 
+       on CFSec31.iso_cntrylng_h (ISOCtryId)
+Hibernate: 
+    create index ISOCtryLangLangIdx_h 
+       on CFSec31.iso_cntrylng_h (ISOLangId)
+Hibernate: 
+    create index ISOLang6391Idx 
+       on CFSec31.iso_lang (iso_code2)
+Hibernate: 
+    create index ISOLang6391Idx_h 
+       on CFSec31.iso_lang_h (iso_code2)
+Hibernate: 
+    create index ISOTZoneOffsetIdx 
+       on CFSec31.ISOTz (TZHourOffset, TZMinOffset)
+Hibernate: 
+    create index ISOTZoneIso8601Idx 
+       on CFSec31.ISOTz (Iso8601)
+Hibernate: 
+    create index ISOTZoneOffsetIdx_h 
+       on CFSec31.ISOTz_h (TZHourOffset, TZMinOffset)
+Hibernate: 
+    create index ISOTZoneIso8601Idx_h 
+       on CFSec31.ISOTz_h (Iso8601)
+Hibernate: 
+    create index SecDeviceUserIdx 
+       on CFSec31.SecDev (SecUserId)
+Hibernate: 
+    create index SecDeviceUserIdx_h 
+       on CFSec31.SecDev_h (SecUserId)
+Hibernate: 
+    create index SecGroupClusterIdx 
+       on CFSec31.SecGrp (ClusterId)
+Hibernate: 
+    create index SecGroupClusterVisIdx 
+       on CFSec31.SecGrp (ClusterId, IsVisible)
+Hibernate: 
+    create index SecGroupClusterIdx_h 
+       on CFSec31.SecGrp_h (ClusterId)
+Hibernate: 
+    create index SecGroupClusterVisIdx_h 
+       on CFSec31.SecGrp_h (ClusterId, IsVisible)
+Hibernate: 
+    create index SecGrpIncClusterIdx 
+       on CFSec31.SecInc (ClusId)
+Hibernate: 
+    create index SecGrpIncGroupIdx 
+       on CFSec31.SecInc (SecGrpId)
+Hibernate: 
+    create index SecGrpIncIncludeIdx 
+       on CFSec31.SecInc (IncGrpId)
+Hibernate: 
+    create index SecGrpIncClusterIdx_h 
+       on CFSec31.SecInc_h (ClusId)
+Hibernate: 
+    create index SecGrpIncGroupIdx_h 
+       on CFSec31.SecInc_h (SecGrpId)
+Hibernate: 
+    create index SecGrpIncIncludeIdx_h 
+       on CFSec31.SecInc_h (IncGrpId)
+Hibernate: 
+    create index SecGrpMembClusterIdx 
+       on CFSec31.SecMemb (ClusterId)
+Hibernate: 
+    create index SecGrpMembGroupIdx 
+       on CFSec31.SecMemb (SecGroupId)
+Hibernate: 
+    create index SecGrpMembUserIdx 
+       on CFSec31.SecMemb (SecUserId)
+Hibernate: 
+    create index SecGrpMembClusterIdx_h 
+       on CFSec31.SecMemb_h (ClusterId)
+Hibernate: 
+    create index SecGrpMembGroupIdx_h 
+       on CFSec31.SecMemb_h (SecGroupId)
+Hibernate: 
+    create index SecGrpMembUserIdx_h 
+       on CFSec31.SecMemb_h (SecUserId)
+Hibernate: 
+    create index SessionSecUserIdx 
+       on CFSec31.SecSess (SecUserId)
+Hibernate: 
+    create index SessionSecDevIdx 
+       on CFSec31.SecSess (SecUserId, SecDevName)
+Hibernate: 
+    create index SessionFinishIdx 
+       on CFSec31.SecSess (SecUserId, finish_ts)
+Hibernate: 
+    create index SessionSecProxyIdx 
+       on CFSec31.SecSess (SecProxyId)
+Hibernate: 
+    create index SecUserUEMailConfirmIdx 
+       on CFSec31.SecUser (em_confuuid6)
+Hibernate: 
+    create index SecUserPasswordResetIdx 
+       on CFSec31.SecUser (pwdrstuuid6)
+Hibernate: 
+    create index SecUserDefDevIdx 
+       on CFSec31.SecUser (DefDevUserId, DefDevName)
+Hibernate: 
+    create index SecUserUEMailConfirmIdx_h 
+       on CFSec31.SecUser_h (em_confuuid6)
+Hibernate: 
+    create index SecUserPasswordResetIdx_h 
+       on CFSec31.SecUser_h (pwdrstuuid6)
+Hibernate: 
+    create index SecUserDefDevIdx_h 
+       on CFSec31.SecUser_h (DefDevUserId, DefDevName)
+Hibernate: 
+    create index SysClusterClusterIdx 
+       on CFSec31.sysclus (sys_clus_id)
+Hibernate: 
+    create index TenantClusterIdx 
+       on CFSec31.tenant (ClusterId)
+Hibernate: 
+    create index TenantClusterIdx_h 
+       on CFSec31.tenant_h (ClusterId)
+Hibernate: 
+    create index TSecGroupTenantIdx 
+       on CFSec31.TSecGrp (TenantId)
+Hibernate: 
+    create index TSecGroupTenantVisIdx 
+       on CFSec31.TSecGrp (TenantId, IsVisible)
+Hibernate: 
+    create index TSecGroupTenantIdx_h 
+       on CFSec31.TSecGrp_h (TenantId)
+Hibernate: 
+    create index TSecGroupTenantVisIdx_h 
+       on CFSec31.TSecGrp_h (TenantId, IsVisible)
+Hibernate: 
+    create index TSecGrpIncTenantIdx 
+       on CFSec31.TSecInc (TenantId)
+Hibernate: 
+    create index TSecGrpIncGroupIdx 
+       on CFSec31.TSecInc (TSecGrpId)
+Hibernate: 
+    create index TSecGrpIncIncludeIdx 
+       on CFSec31.TSecInc (IncGrpId)
+Hibernate: 
+    create index TSecGrpIncTenantIdx_h 
+       on CFSec31.TSecInc_h (TenantId)
+Hibernate: 
+    create index TSecGrpIncGroupIdx_h 
+       on CFSec31.TSecInc_h (TSecGrpId)
+Hibernate: 
+    create index TSecGrpIncIncludeIdx_h 
+       on CFSec31.TSecInc_h (IncGrpId)
+Hibernate: 
+    create index TSecGrpMembTenantIdx 
+       on CFSec31.TSecMemb (TenantId)
+Hibernate: 
+    create index TSecGrpMembGroupIdx 
+       on CFSec31.TSecMemb (TSecGroupId)
+Hibernate: 
+    create index TSecGrpMembUserIdx 
+       on CFSec31.TSecMemb (SecUserId)
+Hibernate: 
+    create index TSecGrpMembTenantIdx_h 
+       on CFSec31.TSecMemb_h (TenantId)
+Hibernate: 
+    create index TSecGrpMembGroupIdx_h 
+       on CFSec31.TSecMemb_h (TSecGroupId)
+Hibernate: 
+    create index TSecGrpMembUserIdx_h 
+       on CFSec31.TSecMemb_h (SecUserId)
+Hibernate: 
+    alter table if exists CFSec31.HostNode 
+       add constraint FKd87jvalwwt34wrhcs6oy8jbta 
+       foreign key (ClusterId) 
+       references CFSec31.clus
+Hibernate: 
+    alter table if exists CFSec31.HostSvc 
+       add constraint FKroyeqgo4jbe7lxvwyk35iq4bx 
+       foreign key (HostNodeId) 
+       references CFSec31.HostNode
+Hibernate: 
+    alter table if exists CFSec31.HostSvc 
+       add constraint FKhlut9kk9udahhqctwyfq0muxh 
+       foreign key (ServiceTypeId) 
+       references CFSec31.SvcType
+Hibernate: 
+    alter table if exists CFSec31.iso_cntryccy 
+       add constraint FKanhr8hi033ah9egoxbayqw0vc 
+       foreign key (ISOCtryId) 
+       references CFSec31.iso_cntry
+Hibernate: 
+    alter table if exists CFSec31.iso_cntryccy 
+       add constraint FKnd65gm3kv5bp39kdif7rwd4nr 
+       foreign key (ISOCcyId) 
+       references CFSec31.iso_ccy
+Hibernate: 
+    alter table if exists CFSec31.iso_cntrylng 
+       add constraint FKo7c2lar60h1nle1eqi28f32jh 
+       foreign key (ISOLangId) 
+       references CFSec31.iso_lang
+Hibernate: 
+    alter table if exists CFSec31.iso_cntrylng 
+       add constraint FK2ydfm8sdc62249x2ryjyos39q 
+       foreign key (ISOCtryId) 
+       references CFSec31.iso_cntry
+Hibernate: 
+    alter table if exists CFSec31.SecDev 
+       add constraint FK7xb0dijra5tnrh2t55ip0vsk 
+       foreign key (SecUserId) 
+       references CFSec31.SecUser
+Hibernate: 
+    alter table if exists CFSec31.SecGrp 
+       add constraint FKmmi3i8wa0qk4ty387ikmn37cq 
+       foreign key (ClusterId) 
+       references CFSec31.clus
+Hibernate: 
+    alter table if exists CFSec31.SecInc 
+       add constraint FKr1o1trj5r6xrwfrp5f122uslw 
+       foreign key (SecGrpId) 
+       references CFSec31.SecGrp
+Hibernate: 
+    alter table if exists CFSec31.SecInc 
+       add constraint FKilncquiss3d60h2qe3s3q1kum 
+       foreign key (IncGrpId) 
+       references CFSec31.SecGrp
+Hibernate: 
+    alter table if exists CFSec31.SecMemb 
+       add constraint FK3ed0pu6hq6clemf3o5aeah8p1 
+       foreign key (SecGroupId) 
+       references CFSec31.SecGrp
+Hibernate: 
+    alter table if exists CFSec31.SecMemb 
+       add constraint FK4pf34yhrvtja7vdf5lvlc10bq 
+       foreign key (SecUserId) 
+       references CFSec31.SecUser
+Hibernate: 
+    alter table if exists CFSec31.SecUser 
+       add constraint FKmoxduej4cf7tmx3id8v483vq5 
+       foreign key (DefDevUserId, DefDevName) 
+       references CFSec31.SecDev
+Hibernate: 
+    alter table if exists CFSec31.sysclus 
+       add constraint FKib1kwlegdhjfqdty9abbg8q40 
+       foreign key (sys_clus_id) 
+       references CFSec31.clus
+Hibernate: 
+    alter table if exists CFSec31.tenant 
+       add constraint FK1s5hcs1w9scfvl32wirjys123 
+       foreign key (ClusterId) 
+       references CFSec31.clus
+Hibernate: 
+    alter table if exists CFSec31.TSecGrp 
+       add constraint FKo7vi6xgev05t1q91e8mfboogy 
+       foreign key (TenantId) 
+       references CFSec31.tenant
+Hibernate: 
+    alter table if exists CFSec31.TSecInc 
+       add constraint FKkejxgkqjhc5xrq6exfyjenjmw 
+       foreign key (TSecGrpId) 
+       references CFSec31.TSecGrp
+Hibernate: 
+    alter table if exists CFSec31.TSecInc 
+       add constraint FKf2dt3qortm6qe71b7btg5aih9 
+       foreign key (IncGrpId) 
+       references CFSec31.TSecGrp
+Hibernate: 
+    alter table if exists CFSec31.TSecMemb 
+       add constraint FKjf76qnwjdgufwnec0dndg8qoo 
+       foreign key (TSecGroupId) 
+       references CFSec31.TSecGrp
+Hibernate: 
+    alter table if exists CFSec31.TSecMemb 
+       add constraint FKm1jff2vjp457crdncesuy035d 
+       foreign key (SecUserId) 
+       references CFSec31.SecUser
+2026-02-27T00:25:00.173-06:00  INFO 46128 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'cfsec31PU'
+2026-02-27T00:25:00.237-06:00  INFO 46128 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T00:25:01.190-06:00  INFO 46128 --- [           main] i.g.m.v.cfsec.cfsecjpatest.CFSecJpaTest  : Started CFSecJpaTest in 3.748 seconds (process running for 4.103)
+CFSecJpaTest StartupListener tests beginning...
+Hibernate: 
+    select
+        cjsc1_0.sgltn_id,
+        cjsc1_0.sys_clus_id,
+        cjsc1_0.requiredRevision 
+    from
+        CFSec31.sysclus cjsc1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        CFSec31.clus cjc1_0 
+    where
+        cjc1_0.Id=?
+Hibernate: 
+    select
+        cjc1_0.Id,
+        cjc1_0.CreatedAt,
+        cjc1_0.CreatedByUserId,
+        cjc1_0.Description,
+        cjc1_0.FullDomName,
+        cjc1_0.requiredRevision,
+        cjc1_0.UpdatedAt,
+        cjc1_0.UpdatedByUserId 
+    from
+        CFSec31.clus cjc1_0 
+    where
+        cjc1_0.Id=?
+Hibernate: 
+    insert 
+    into
+        CFSec31.clus
+        (CreatedAt, CreatedByUserId, Description, FullDomName, requiredRevision, UpdatedAt, UpdatedByUserId, Id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        count(*) 
+    from
+        CFSec31.SecUser cjsu1_0 
+    where
+        cjsu1_0.SecUserId=?
+Hibernate: 
+    select
+        cjsu1_0.SecUserId,
+        cjsu1_0.CreatedAt,
+        cjsu1_0.CreatedByUserId,
+        cjsu1_0.em_confuuid6,
+        cjsu1_0.DefDevUserId,
+        cjsu1_0.DefDevName,
+        cjsu1_0.pwdrstuuid6,
+        cjsu1_0.email_addr,
+        cjsu1_0.login_id,
+        cjsu1_0.pwd_hash,
+        cjsu1_0.requiredRevision,
+        cjsu1_0.UpdatedAt,
+        cjsu1_0.UpdatedByUserId 
+    from
+        CFSec31.SecUser cjsu1_0 
+    where
+        cjsu1_0.SecUserId=?
+Hibernate: 
+    insert 
+    into
+        CFSec31.SecUser
+        (CreatedAt, CreatedByUserId, em_confuuid6, DefDevUserId, DefDevName, pwdrstuuid6, email_addr, login_id, pwd_hash, requiredRevision, UpdatedAt, UpdatedByUserId, SecUserId) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        cjc1_0.Id,
+        cjc1_0.CreatedAt,
+        cjc1_0.CreatedByUserId,
+        cjc1_0.Description,
+        cjc1_0.FullDomName,
+        cjc1_0.requiredRevision,
+        cjc1_0.UpdatedAt,
+        cjc1_0.UpdatedByUserId 
+    from
+        CFSec31.clus cjc1_0 
+    where
+        cjc1_0.Id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        CFSec31.tenant cjt1_0 
+    where
+        cjt1_0.Id=?
+Hibernate: 
+    select
+        cjt1_0.Id,
+        cjt1_0.CreatedAt,
+        cjt1_0.CreatedByUserId,
+        cjt1_0.ClusterId,
+        cjt1_0.requiredRevision,
+        cjt1_0.TenantName,
+        cjt1_0.UpdatedAt,
+        cjt1_0.UpdatedByUserId 
+    from
+        CFSec31.tenant cjt1_0 
+    where
+        cjt1_0.Id=?
+Hibernate: 
+    insert 
+    into
+        CFSec31.tenant
+        (CreatedAt, CreatedByUserId, ClusterId, requiredRevision, TenantName, UpdatedAt, UpdatedByUserId, Id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        count(*) 
+    from
+        CFSec31.SecSess cjss1_0 
+    where
+        cjss1_0.SecSessionId=?
+Hibernate: 
+    select
+        cjss1_0.SecSessionId,
+        cjss1_0.finish_ts,
+        cjss1_0.SecDevName,
+        cjss1_0.SecProxyId,
+        cjss1_0.requiredRevision,
+        cjss1_0.SecUserId,
+        cjss1_0.start_ts 
+    from
+        CFSec31.SecSess cjss1_0 
+    where
+        cjss1_0.SecSessionId=?
+Hibernate: 
+    insert 
+    into
+        CFSec31.SecSess
+        (finish_ts, SecDevName, SecProxyId, requiredRevision, SecUserId, start_ts, SecSessionId) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        cjc1_0.Id,
+        cjc1_0.CreatedAt,
+        cjc1_0.CreatedByUserId,
+        cjc1_0.Description,
+        cjc1_0.FullDomName,
+        cjc1_0.requiredRevision,
+        cjc1_0.UpdatedAt,
+        cjc1_0.UpdatedByUserId 
+    from
+        CFSec31.clus cjc1_0 
+    where
+        cjc1_0.Id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        CFSec31.sysclus cjsc1_0 
+    where
+        cjsc1_0.sgltn_id=?
+Hibernate: 
+    select
+        cjsc1_0.sgltn_id,
+        cjsc1_0.sys_clus_id,
+        cjsc1_0.requiredRevision 
+    from
+        CFSec31.sysclus cjsc1_0 
+    where
+        cjsc1_0.sgltn_id=?
+Hibernate: 
+    insert 
+    into
+        CFSec31.sysclus
+        (sys_clus_id, requiredRevision, sgltn_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        cjss1_0.SecSessionId,
+        cjss1_0.finish_ts,
+        cjss1_0.SecDevName,
+        cjss1_0.SecProxyId,
+        cjss1_0.requiredRevision,
+        cjss1_0.SecUserId,
+        cjss1_0.start_ts 
+    from
+        CFSec31.SecSess cjss1_0 
+    where
+        cjss1_0.SecSessionId=?
+Hibernate: 
+    update
+        CFSec31.SecSess 
+    set
+        finish_ts=?,
+        SecDevName=?,
+        SecProxyId=?,
+        requiredRevision=?,
+        SecUserId=?,
+        start_ts=? 
+    where
+        SecSessionId=?
+Executing testCFSec.performTests()
+Hibernate: 
+    select
+        cjc1_0.Id,
+        cjc1_0.CreatedAt,
+        cjc1_0.CreatedByUserId,
+        cjc1_0.Description,
+        cjc1_0.FullDomName,
+        cjc1_0.requiredRevision,
+        cjc1_0.UpdatedAt,
+        cjc1_0.UpdatedByUserId 
+    from
+        CFSec31.clus cjc1_0
+Hibernate: 
+    select
+        cjhn1_0.HostNodeId,
+        cjhn1_0.CreatedAt,
+        cjhn1_0.CreatedByUserId,
+        cjhn1_0.ClusterId,
+        cjhn1_0.Description,
+        cjhn1_0.HostName,
+        cjhn1_0.requiredRevision,
+        cjhn1_0.UpdatedAt,
+        cjhn1_0.UpdatedByUserId 
+    from
+        CFSec31.HostNode cjhn1_0
+Hibernate: 
+    select
+        cji1_0.ISOCcyId,
+        cji1_0.CreatedAt,
+        cji1_0.CreatedByUserId,
+        cji1_0.unit_symbol,
+        cji1_0.iso_code,
+        cji1_0.ccy_name,
+        cji1_0.precis,
+        cji1_0.requiredRevision,
+        cji1_0.UpdatedAt,
+        cji1_0.UpdatedByUserId 
+    from
+        CFSec31.iso_ccy cji1_0
+Hibernate: 
+    select
+        cji1_0.ISOCtryId,
+        cji1_0.CreatedAt,
+        cji1_0.CreatedByUserId,
+        cji1_0.iso_code,
+        cji1_0.country_name,
+        cji1_0.requiredRevision,
+        cji1_0.UpdatedAt,
+        cji1_0.UpdatedByUserId 
+    from
+        CFSec31.iso_cntry cji1_0
+Hibernate: 
+    select
+        cjic1_0.ISOCtryId,
+        cjic1_0.ISOCcyId,
+        cjic1_0.CreatedAt,
+        cjic1_0.CreatedByUserId,
+        cjic1_0.requiredRevision,
+        cjic1_0.UpdatedAt,
+        cjic1_0.UpdatedByUserId 
+    from
+        CFSec31.iso_cntryccy cjic1_0
+Hibernate: 
+    select
+        cjil1_0.ISOCtryId,
+        cjil1_0.ISOLangId,
+        cjil1_0.CreatedAt,
+        cjil1_0.CreatedByUserId,
+        cjil1_0.requiredRevision,
+        cjil1_0.UpdatedAt,
+        cjil1_0.UpdatedByUserId 
+    from
+        CFSec31.iso_cntrylng cjil1_0
+Hibernate: 
+    select
+        cji1_0.ISOLangId,
+        cji1_0.CreatedAt,
+        cji1_0.CreatedByUserId,
+        cji1_0.iso_code2,
+        cji1_0.eng_name,
+        cji1_0.iso_code3,
+        cji1_0.requiredRevision,
+        cji1_0.UpdatedAt,
+        cji1_0.UpdatedByUserId 
+    from
+        CFSec31.iso_lang cji1_0
+Hibernate: 
+    select
+        cji1_0.ISOTZoneId,
+        cji1_0.CreatedAt,
+        cji1_0.CreatedByUserId,
+        cji1_0.Description,
+        cji1_0.Iso8601,
+        cji1_0.requiredRevision,
+        cji1_0.TZHourOffset,
+        cji1_0.TZMinOffset,
+        cji1_0.TZName,
+        cji1_0.Visible,
+        cji1_0.UpdatedAt,
+        cji1_0.UpdatedByUserId 
+    from
+        CFSec31.ISOTz cji1_0
+Hibernate: 
+    select
+        cjsd1_0.SecUserId,
+        cjsd1_0.DevName,
+        cjsd1_0.CreatedAt,
+        cjsd1_0.CreatedByUserId,
+        cjsd1_0.requiredRevision,
+        cjsd1_0.UpdatedAt,
+        cjsd1_0.UpdatedByUserId 
+    from
+        CFSec31.SecDev cjsd1_0
+Hibernate: 
+    select
+        cjsg1_0.SecGroupId,
+        cjsg1_0.CreatedAt,
+        cjsg1_0.CreatedByUserId,
+        cjsg1_0.ClusterId,
+        cjsg1_0.IsVisible,
+        cjsg1_0.safe_name,
+        cjsg1_0.requiredRevision,
+        cjsg1_0.UpdatedAt,
+        cjsg1_0.UpdatedByUserId 
+    from
+        CFSec31.SecGrp cjsg1_0
+Hibernate: 
+    select
+        cjsgi1_0.SecGrpIncId,
+        cjsgi1_0.CreatedAt,
+        cjsgi1_0.CreatedByUserId,
+        cjsgi1_0.ClusId,
+        cjsgi1_0.SecGrpId,
+        cjsgi1_0.IncGrpId,
+        cjsgi1_0.requiredRevision,
+        cjsgi1_0.UpdatedAt,
+        cjsgi1_0.UpdatedByUserId 
+    from
+        CFSec31.SecInc cjsgi1_0
+Hibernate: 
+    select
+        cjsgm1_0.SecGrpMembId,
+        cjsgm1_0.CreatedAt,
+        cjsgm1_0.CreatedByUserId,
+        cjsgm1_0.ClusterId,
+        cjsgm1_0.SecGroupId,
+        cjsgm1_0.SecUserId,
+        cjsgm1_0.requiredRevision,
+        cjsgm1_0.UpdatedAt,
+        cjsgm1_0.UpdatedByUserId 
+    from
+        CFSec31.SecMemb cjsgm1_0
+Hibernate: 
+    select
+        cjss1_0.SecSessionId,
+        cjss1_0.finish_ts,
+        cjss1_0.SecDevName,
+        cjss1_0.SecProxyId,
+        cjss1_0.requiredRevision,
+        cjss1_0.SecUserId,
+        cjss1_0.start_ts 
+    from
+        CFSec31.SecSess cjss1_0
+Hibernate: 
+    select
+        cjsu1_0.SecUserId,
+        cjsu1_0.CreatedAt,
+        cjsu1_0.CreatedByUserId,
+        cjsu1_0.em_confuuid6,
+        cjsu1_0.DefDevUserId,
+        cjsu1_0.DefDevName,
+        cjsu1_0.pwdrstuuid6,
+        cjsu1_0.email_addr,
+        cjsu1_0.login_id,
+        cjsu1_0.pwd_hash,
+        cjsu1_0.requiredRevision,
+        cjsu1_0.UpdatedAt,
+        cjsu1_0.UpdatedByUserId 
+    from
+        CFSec31.SecUser cjsu1_0
+Hibernate: 
+    select
+        cjs1_0.ServiceId,
+        cjs1_0.CreatedAt,
+        cjs1_0.CreatedByUserId,
+        cjs1_0.HostNodeId,
+        cjs1_0.ServiceTypeId,
+        cjs1_0.ClusterId,
+        cjs1_0.HostPort,
+        cjs1_0.requiredRevision,
+        cjs1_0.UpdatedAt,
+        cjs1_0.UpdatedByUserId 
+    from
+        CFSec31.HostSvc cjs1_0
+Hibernate: 
+    select
+        cjst1_0.ServiceTypeId,
+        cjst1_0.CreatedAt,
+        cjst1_0.CreatedByUserId,
+        cjst1_0.Description,
+        cjst1_0.requiredRevision,
+        cjst1_0.UpdatedAt,
+        cjst1_0.UpdatedByUserId 
+    from
+        CFSec31.SvcType cjst1_0
+Hibernate: 
+    select
+        cjsc1_0.sgltn_id,
+        cjsc1_0.sys_clus_id,
+        cjsc1_0.requiredRevision 
+    from
+        CFSec31.sysclus cjsc1_0
+Hibernate: 
+    select
+        cjt1_0.Id,
+        cjt1_0.CreatedAt,
+        cjt1_0.CreatedByUserId,
+        cjt1_0.ClusterId,
+        cjt1_0.requiredRevision,
+        cjt1_0.TenantName,
+        cjt1_0.UpdatedAt,
+        cjt1_0.UpdatedByUserId 
+    from
+        CFSec31.tenant cjt1_0
+Hibernate: 
+    select
+        cjtg1_0.TSecGroupId,
+        cjtg1_0.CreatedAt,
+        cjtg1_0.CreatedByUserId,
+        cjtg1_0.TenantId,
+        cjtg1_0.IsVisible,
+        cjtg1_0.safe_name,
+        cjtg1_0.requiredRevision,
+        cjtg1_0.UpdatedAt,
+        cjtg1_0.UpdatedByUserId 
+    from
+        CFSec31.TSecGrp cjtg1_0
+Hibernate: 
+    select
+        cjtgi1_0.TSecGrpIncId,
+        cjtgi1_0.CreatedAt,
+        cjtgi1_0.CreatedByUserId,
+        cjtgi1_0.TSecGrpId,
+        cjtgi1_0.IncGrpId,
+        cjtgi1_0.requiredRevision,
+        cjtgi1_0.TenantId,
+        cjtgi1_0.UpdatedAt,
+        cjtgi1_0.UpdatedByUserId 
+    from
+        CFSec31.TSecInc cjtgi1_0
+Hibernate: 
+    select
+        cjtgm1_0.TSecGrpMembId,
+        cjtgm1_0.CreatedAt,
+        cjtgm1_0.CreatedByUserId,
+        cjtgm1_0.TSecGroupId,
+        cjtgm1_0.SecUserId,
+        cjtgm1_0.requiredRevision,
+        cjtgm1_0.TenantId,
+        cjtgm1_0.UpdatedAt,
+        cjtgm1_0.UpdatedByUserId 
+    from
+        CFSec31.TSecMemb cjtgm1_0
+CFSecJpaTestTestSchema.performTests() responded: Starting CFSec tests...
+Retrieved 1 entities from CFSec.Cluster
+Retrieved 0 entities from CFSec.HostNode
+Retrieved 0 entities from CFSec.ISOCcy
+Retrieved 0 entities from CFSec.ISOCtry
+Retrieved 0 entities from CFSec.ISOCtryCcy
+Retrieved 0 entities from CFSec.ISOCtryLang
+Retrieved 0 entities from CFSec.ISOLang
+Retrieved 0 entities from CFSec.ISOTZone
+Retrieved 0 entities from CFSec.SecDevice
+Retrieved 0 entities from CFSec.SecGroup
+Retrieved 0 entities from CFSec.SecGrpInc
+Retrieved 0 entities from CFSec.SecGrpMemb
+Retrieved 1 entities from CFSec.SecSession
+Retrieved 1 entities from CFSec.SecUser
+Retrieved 0 entities from CFSec.Service
+Retrieved 0 entities from CFSec.ServiceType
+Retrieved 1 entities from CFSec.SysCluster
+Retrieved 1 entities from CFSec.Tenant
+Retrieved 0 entities from CFSec.TSecGroup
+Retrieved 0 entities from CFSec.TSecGrpInc
+Retrieved 0 entities from CFSec.TSecGrpMemb
+CFSec tests complete
+
+CFSecJpaTest StartupListener tests complete.
+2026-02-27T00:25:01.390-06:00  INFO 46128 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'cfsec31PU'
+2026-02-27T00:25:01.392-06:00  INFO 46128 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : CFSec31HikariCP - Shutdown initiated...
+2026-02-27T00:25:01.394-06:00  INFO 46128 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : CFSec31HikariCP - Shutdown completed.
+msobkow@mcf:/opt/mcf/v3_1/java/bin-v3_1$ 
+

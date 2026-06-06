@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Modelling a New Project</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="prepare-manufacturingdir.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="editor-hierarchy-forms.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Modelling a New Project</H2></CENTER>
+<p>
+Run the CFBam Editor with no model name specified.  This will let you
+create a new model.
+<p class=indent1><tt>
+CFBamEditor29.bash</tt>
+<p>
+In the hierarchy browser, create your internet hierarchy tree.  One important
+fact is that you should specify both a MajorVersion and MinorVersion node for
+your project, regardless of whether it is a TopProject or a SubProject.  SubProjects
+are optional, but as you can see, I make heavy use of that feature for MSS Code
+Factory itself.
+<p>
+After you've created the hierarchy, create a License for your project.  It should
+normally be under the domain for your company, so that multiple projects can reference
+it in the future.  After all, it is usually a company licensing the code.
+<p>
+You need to have some sort of domain for your project; there is no support for projects
+that aren't intended to be deployed on network servers.  You can't go any deeper than
+TLD.TopDomain.SubDomain with the domains, though.  That is usually sufficient to specify
+TLD.Company.Project, which is all I've ever really needed to do.
+<p>
+You can, of course, make your License specific to the project rather than shared
+throughout the company domain.
+<p>
+The Embedded Text of the License is what gets included in the header of every source
+file produced during manufacturing.  It has to be valid for all kinds of files including
+XML and HTML files, so don't include HTML markup or un-escaped restricted characters
+in the text.
+<p>
+Now you are ready to create a SchemaDef.  Select your MinorVersion node, and Add a SchemaDef.
+Configure the SchemaDef to reference the License you created, and fill out the details. I recommend
+that your DbSchemaName be in lowercase with no more than 7 characters for maximum portability.  Note
+that MinorVersion and MajorVersion nodes cannot specify "0" as their name; "1" is the minimum name
+for a version.  I have never tried using anything other than a number for a version, but you could
+try using someing like "Dev" for your MinorVersion and it should work.  I just can't imagine any
+reason for wanting to use actual <i>names</i> for versions instead of numbers.
+<p>
+Note that MSS Code Factory 2 expects all Names to be camelcase, so the shortest name you should
+use is two characters -- a leading uppercase character and a trailing lowercase character.  The first
+character of a Name must always be uppercase.
+<p>
+Save your new Schema, and you should be taken to a form that lets you edit the components of a SchemaDef.
+<p>
+Select the Schema References tab, and Add a SchemaRef.  In the resulting form is a choice box that
+is populated with the names of the models found on your model path as specified by your .msscfrc
+file from your HOME directory.
+<p>
+Select the "com-github-msobkow-CFSec-2-10-CFSec" model and import the reference.
+You must <i>always</i> reference this model first.
+<p>
+If you wish to incorporate other models, go ahead and do so now.  You <i>can</i> add forgotten
+Schema References later, but if you do so, you need to Add the new reference, save the model,
+and restart the editor to reload the model with the properly resolved schema references.  If you
+try to edit the model after adding a new SchemaRef to an existing project, you will have all kinds
+of errors and problems crop up with the editor.
+<p>
+Close out all your windows to get back to the Hierarchy browser, select your SchemaDef node, and
+click Save.  You'll be presented with a file chooser with a default name and directory.  If you
+change the directory, you'll have to make sure it is one specified in your model path from $HOME/.msscfrc,
+or neither the factory nor the editor will be able to find your new model.
+<p>
+Exit the editor.
+<p>
+If you are going to be working with this model a lot, I recommend creating scripts for running
+the editor and the factory -- you can see examples of the run scripts in the bin directory of
+the factory; you can create a similar script for running the editor as well.
+<p>
+I'm going to assume you've created scripts named "ManufactureMyProject11" and "EditMyProject11",
+where both the major and minor versions of your new project are "1".
+<p>
+Manufacture your project to make sure everything is ok:
+<p class=indent1><tt>
+ManufactureMyProject11</tt>
+<p>
+You should hear no beeps and see messages about the created files rapidly scrolling by.
+When the run is done, you should have a new project directory tree created
+in your $HOME/msscf directory, and can proceed with setting it up for a
+test build, building it, and maybe even doing a test installation.
+
+</BODY>
+</HTML>

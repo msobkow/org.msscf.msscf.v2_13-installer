@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>Mark Stephen Sobkow's Projects at github.com</TITLE>
+	<LINK rel="stylesheet" HRef="css/cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="index.html"><img align=vcenter src="resources/MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;Mark Stephen Sobkow's Projects at github.com&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left">Prev</td>
+		<td align="center"><A HRef="index.html">Home</A></td>
+		<td align="right"><A HRef="mcf.html">Next</A></td>
+		</tr>
+</table>
+<p>
+Welcome to my project history page; there really has been only one project I've worked on since the late 90's other than
+projects for employers.  I recently decided to eliminate my initials from the name, and clarify that it is a code
+<i>fractal</i> rather than a "factory."  It doesn't "manufacture" anything but source code that is ready for integration,
+given a valid model and rule base defining how to map the model to code.
+<p>
+<strong>MSS Code Factory 2.13 alpha01 is now available</strong> at <A HRef="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha01">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha01</A>. You can find installation instructions at <A HRef="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/</A> and the README.md displayed there.  There have also been releases of the 2.13 knowledge base and model set as of 2026-06-06 07:00 CST, which are included in the installer and are required alongside the executable jars to run the tool. This is the version of the tool used to produce the Mark's Code Fractal 3.1 code that is currently under development.
+<p>
+Mark's Code Fractal is a tool used to accelerate the production of the repetitive code that comprises 75-85% of the
+typical enterprise business application - the "glue" between the business logic programmer and the backing data
+servers and databases. It does so by applying a knowledge base of General Expansion Rule (GEL) files following
+specific XML document schemas and semantic constraints to a Business Application Model (BAM), which is at it's
+heart an enhanced ERD defined as an XML document following yet another schema specification.
+<p>
+The BAM defines the tables, indexes, and relationships of an ERD, including Superclass, Container/Component,
+Parent/Child, and Lookup relationships. It also provides the means of encapsulating customizations of the output
+source code, though the approach for that will change radically for Mark's Code Fractal 3.1 as opposed to
+MSS Code Factory 2.13, allowing for much more flexibility than the current hard-coded approach to such customizations.
+<p>
+I invite you to read through the prototype architecture and philosophies, and through the 2.11 documentation.
+Although seriously stale about the details, most of the key concepts and descriptions about how the CFCore engine works
+as described in the 2.11 documentation are still valid to this day.
+<p>
+I'm currently refreshing and refactoring my code base to support generic Java clients, take advantage of the latest Java
+features, provide back-end Spring web services initially using JSON to replace the old XML message protocol, and later
+replacing JSON with a byte-stream client if at all feasible. Along the way, the databases have been split up into
+isolated instances with the Obj layer providing a unified view of the component database hierarchy. That way each data
+silo can retain control over its own security concerns, subject to unified identification and authorization of users
+through the CFSec packages and services at the bottom of the stack.
+<p>
+CFSec itself may well become an OAuth2 service provider by the time I'm done, too, which I don't expect to be for quite
+some time, possibly not before 2027.  As such, this code is very much in a state of flux.
+<p>
+<CENTER><H2>Table of Contents</H2></CENTER>
+<p>
+<table cols="1" width="50%" align="center">
+	<tr><td><p class=menu0><A HRef="mcf.html">Mark's Code Fractal</A></td></tr>
+	<tr><td><p class=menu1><A HRef="mcf-prototype.html">Prototype Architecture and Philosophies</A></td></tr>
+	<tr><td><p class=menu1><A HRef="mcf-v3_1-security.html">v3_1 Security Model</A></td></tr>
+	<tr><td><p class=menu1><A HRef="mcf-lessonslearned.html">Lessons Learned</A></td></tr>
+	<tr><td><p class=menu1><A HRef="mcf-devlog.html">Development Log</A></td></tr>
+	<tr><td><p class=menu0><A HRef="about.html">About Mark Sobkow</A></td></tr>
+	<tr><td><p class=menu0><A HRef="msscf.html">MSS Code Factory - The Roots of the Fractal</A></td></tr>
+	<tr><td><p class=menu1><A HRef="documentation-2.11/index.html">Dated MSS Code Factory 2.11 Documentation</A></td></tr>
+</table>
+<p>
+</BODY>
+</HTML>

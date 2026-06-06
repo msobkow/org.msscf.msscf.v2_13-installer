@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://mcf.markhome.server/msscf/2.0.12/xsd/cfgenkb-2.12-cartridge.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mcf.markhome.server/msscf/2.0.12/xsd/cfgenkb-2.12-cartridge.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.12">
+
+<xsd:annotation>
+	<xsd:documentation xml:lang="en">
+		MSS Code Factory 2.12 Knowledge Base Rule Cartridge
+		Available under GNU General Public License, Version 3 or later.
+	</xsd:documentation>
+</xsd:annotation>
+
+<!--
+ *	Tool names may not exceed 8 characters
+ -->
+
+<xsd:simpleType name="ToolNameType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="32"/>
+		<xsd:whiteSpace value="collapse"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="ToolType">
+	<xsd:sequence>
+	</xsd:sequence>
+	<xsd:attribute name="Name" type="ToolNameType" use="required"/>
+	<!--
+	 *
+	 *	A Tool which Replaces another will fall back to the
+	 *	replaced tool's rules if a match isn't found.  This allows
+	 *	java5 rules to replace java4 rules.  The intent is to isolate
+	 *	the changes between versions of tools.
+	 *
+	 *-->
+	<xsd:attribute name="Replaces" type="ToolNameType" use="optional"/>
+</xsd:complexType>
+
+
+<!--
+ *	The ToolSet names may not exceed 254 characters.
+ -->
+
+<xsd:simpleType name="ToolSetNameType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="254"/>
+		<xsd:whiteSpace value="collapse"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!--
+ *
+ *	Each ToolSet directory has a toolset.xml manifest file.
+ *
+ *-->
+
+<xsd:complexType name="ToolSetType">
+	<xsd:sequence>
+	</xsd:sequence>
+	<xsd:attribute name="Name" type="ToolSetNameType" use="required" />
+</xsd:complexType>
+
+<!--
+ *
+ *	A Rule Cartridge is a bundle of GenRule and GenFile specifications
+ *	which transform application models into source code.
+ *
+ *	The top directory of each cartridge contains a rulecartridge.xml
+ *	manifest file which must conform to this schema.
+ *-->
+
+<xsd:simpleType name="RuleCartNameType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="64"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RuleCartRevisionType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="255"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RuleCartDescrType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="2000"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="UseCartType">
+	<xsd:attribute name="Name" type="RuleCartNameType" use="required"/>
+</xsd:complexType>
+
+<!-- 
+ *
+ *	Mixed=true is only used so that HTML comments can be embedded.
+ *
+ *-->
+<xsd:complexType name="RuleCartType" mixed="true">
+	<xsd:sequence>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="UseCartridge" type="UseCartType"/>
+			<xsd:element name="Tool" type="ToolType"/>
+			<xsd:element name="ToolSet" type="ToolSetType"/>
+		</xsd:choice>
+	</xsd:sequence>
+	<xsd:attribute name="Name" type="RuleCartNameType" use="required"/>
+	<xsd:attribute name="Revision" type="RuleCartRevisionType" use="optional"/>
+	<xsd:attribute name="Descr" type="RuleCartDescrType" use="required"/>
+</xsd:complexType>
+
+
+<!--
+ *
+ *	An XML file conforming to this XML Schema Definition defines a
+ *	rule cartridge which may be loaded by the generation engine.
+ *
+ *-->
+
+<xsd:element name="RuleCartridge" type="RuleCartType"/>
+
+</xsd:schema>

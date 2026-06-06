@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: What Is Intelligent About It?</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="philosophy.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="on-fractal-programming.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>
+MSS Code Factory 2.11: What Is Intelligent About It?
+</H2></CENTER>
+<p>
+The scope of MSS Code Factory 2.11's knowledge is determined by the keys used
+to identify and locate specific generation items (rules, file expansions, and
+such) within the knowledge base.  The key attributes are
+<ul>
+<li>the toolset (name),</li>
+<li>the scope class name,</li>
+<li>the generation item name, and</li>
+<li>the rule name.</li>
+</ul>
+<p>
+MSS Code Factory 2.11 is "intelligent" primarily in the way it generalizes
+concepts to broaden the scope of its search for applicable rules within
+the knowledge base.  The implementation of this "intelligence" is in the
+CFCore 2.12 library, accessed by specializing the MssCF layer within CFCore.
+<p>
+It is also optimized through the use of hash maps wherever possible
+to improve search probe performance.
+<p>
+The toolset name is the first attribute searched, identifying a
+potentially-empty collection of generation items whose toolset name
+is always that of this toolset.
+<p>
+Within a toolset collection, a hash map of rule names is formed, making
+it extremely efficient to quickly determine if there are any candidates
+suitable for the rule name that is being probed.
+<p>
+The hash map of rule names contains a sub-collection of generation items
+grouped by scope class name.  Within that is another hash map and sub-collection
+of gen item names.
+<p>
+This sequence of hash maps takes what could have been a very expensive key probe
+and makes the performance an impressive aspect of efficiency of
+MSS Code Factory's "thought process."
+<p>
+If a matching key isn't found when probing the current generation item name,
+the superclass definition for the generation item becomes the current generation
+item name, and the probes are repeated.
+<p>
+If no matching key can be found when probing the current scope class name,
+the superclass definition for the scope class becomes the current scope class
+name, and the probes over the set of generation item names is repeated.
+<p>
+If there still is no matching key found during this probe of the current toolset, 
+the toolset name is truncated at the last '+' character, and the system searches
+within that toolset instead, repeating the probes by scope class name and generation
+item name.
+<p>
+Finally, when there are no more toolsets to search, one final attempt is made at
+searching the any toolset, after which if no key can be found, that key is treated
+as unresolvable (which results as it appearing as $RuleName$ in the manufactured code.)
+<p>
+Through this logic, MSS Code Factory 2.11 exhibits an ability to generalize keys
+with a pattern-matching inference-engine capability, using the approach to evaluate it's
+hierarchies of both modelled and persistent data.  Although rather old-school,
+inference engines are an important part of most AI toolkits, and are well known
+for their performance aspects.
+<p>
+</BODY>
+</HTML>

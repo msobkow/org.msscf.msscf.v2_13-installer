@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Building a Manufactured Project</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="manufacturing-a-project.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="installing-a-project.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Building a Manufactured Project</H2></CENTER>
+<p>
+Take a copy of a build.xml from cfint_2_12 or cfcrm_2_12 and place it in your
+manufactured project's <tt>java</tt> directory.  Edit the build.xml to replace the
+version numbers, source directory names, and so on with the names associated
+with your project.  Note the presence of the various "cust" directories -- you'll
+use those in the future if you are customizing your user interface code for the
+project, and will have to create them and their source trees by hand.  You'll also
+need to copy and edit the module-info.java files for each of the manufactured
+modules.
+<p>
+For now remove the dependencies on the "cust" targets from the
+"alljars" and "compileall" targets of the build.xml so you don't get "missing directory" errors
+during your build.
+<p>
+You should be able to do an "ant" in your project's java directory now, and
+see it build your source tree.  Presuming your <tt>build.xml</tt> was correctly
+migrated, you should see everything compile, get packaged in jars, and 14 files
+copied to the WebContent directories of the web server projects.
+<p>
+</BODY>
+</HTML>

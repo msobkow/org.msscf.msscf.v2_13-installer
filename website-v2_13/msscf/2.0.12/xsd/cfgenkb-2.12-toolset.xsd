@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://mcf.markhome.server/msscf/2.0.12/xsd/cfgenkb-2.12-toolset.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mcf.markhome.server/msscf/2.0.12/xsd/cfgenkb-2.12-toolset.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.12">
+
+<xsd:annotation>
+	<xsd:documentation xml:lang="en">
+		MSS Code Factory 2.12 Knowledge Base ToolSet Manifest
+		Available under Apache V2 license.
+	</xsd:documentation>
+</xsd:annotation>
+
+<!--
+ *
+ *	Generation Items are the base for all code generator
+ *	expansions.
+ *
+ *-->
+
+<xsd:simpleType name="RuleSetNameType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="127"/>	<!-- was 64 -->
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="RuleSetType">
+	<xsd:attribute name="Name" type="RuleSetNameType" use="required" />
+</xsd:complexType>
+
+
+<!-- 
+ *	ToolSet
+ * -->
+
+<xsd:simpleType name="ToolSetNameType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="254"/>
+		<xsd:whiteSpace value="collapse"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="ToolSetRevisionType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="255"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="ToolSetDescrType">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="2000"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- 
+ *
+ *	Mixed=true is only used so that HTML comments can be embedded.
+ *
+ *-->
+<xsd:complexType name="ToolSetType" mixed="true">
+	<xsd:sequence>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="RuleSet" type="RuleSetType"/>
+		</xsd:choice>
+	</xsd:sequence>
+	<xsd:attribute name="Name" type="ToolSetNameType" use="required"/>
+	<xsd:attribute name="Revision" type="ToolSetRevisionType" use="optional"/>
+	<xsd:attribute name="Descr" type="ToolSetDescrType" use="required"/>
+</xsd:complexType>
+
+
+<!--
+ *
+ *	An XML file conforming to this XML Schema Definition defines a
+ *	rule cartridge which may be loaded by the generation engine.
+ *
+ *-->
+
+<xsd:element name="ToolSet" type="ToolSetType"/>
+
+</xsd:schema>

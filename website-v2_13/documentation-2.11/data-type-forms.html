@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: CFBam Editor Data Type Forms</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="schema-forms.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="table-forms.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2><A id="top">CFBam Editor Data Type Forms</A></H2></CENTER>
+<p>
+The CFBam Editor and MSS Code Factory 2 support a rich array of data types,
+including several that are not natively supported by Java or by the relational
+databases used for persistent storage implementations.
+<p>
+Be aware that some of the data types like NmToken, NmTokens, and Token do not
+actually do string pattern checking to ensure that the data entered is valid for
+the requirements of those XML data types.  They are provided more for the sake
+of letting you use the XML data types in the manufactured XSD files than for the
+sake of restricting what you can do from the application itself.
+<p>
+You could modify the JavaFX editors or the rule base to provide such checking, but
+you would be required to submit those changes to be incorporated in the MSS Code Factory 2
+code base for use by everyone, not just your project.
+<p>
+The Default, Null, and Unknown values are not used by the rule base at this time.
+They are for future reference by some C++ code I had in mind having to do with
+expert systems processing and value acquisition/inference.  You should just leave
+them undefined/empty.
+<p>
+No checking is done by the editor or validator to ensure that the MinValue and MaxValue
+are specified in a valid order.  You'll just get runtime exceptions for perpetually violating
+the integrity checks if you specify them in reverse order.  If you don't specify these
+constraints, the default constraints for the data type apply.
+<p>
+Note that type specifications are never nullable, except for BLOBs, which are always
+nullable.  You will not see a "Is Nullable" edit checkbox in the type editors as a result,
+only in the column editors.
+<p>
+<p class=menu0><A href="#GeneralTypes">Special Types</A>
+<p class=menu1><A href="#BlobForm">Blob Form</A>
+<p class=menu1><A href="#BoolForm">Bool Form</A>
+<p class=menu1><A href="#EnumForm">Enum Form</A>
+<p class=menu1><A href="#EditEnumForm">Edit Enum Form</A>
+<p class=menu1><A href="#EnumTagForm">Enum Tag Form</A>
+<p class=menu1><A href="#UuidForm">Uuid Form</A>
+<p class=menu0><A href="#NumericTypes">Numeric Types</A>
+<p class=menu1><A href="#Int16Form">Int16 Form</A>
+<p class=menu1><A href="#Int32Form">Int32 Form</A>
+<p class=menu1><A href="#Int64Form">Int64 Form</A>
+<p class=menu1><A href="#UInt16Form">UInt16 Form</A>
+<p class=menu1><A href="#UInt32Form">UInt32 Form</A>
+<p class=menu1><A href="#UInt64Form">UInt64 Form</A>
+<p class=menu1><A href="#UInt16Form">UInt16 Form</A>
+<p class=menu1><A href="#UInt32Form">UInt32 Form</A>
+<p class=menu1><A href="#UInt64Form">UInt64 Form</A>
+<p class=menu1><A href="#FloatForm">Float Form</A>
+<p class=menu1><A href="#DoubleForm">Double Form</A>
+<p class=menu1><A href="#NumberForm">Number Form</A>
+<p class=menu0><A href="#StringTypes">String and Text Types</A>
+<p class=menu1><A href="#StringForm">String Form</A>
+<p class=menu1><A href="#TextForm">Text Form</A>
+<p class=menu1><A href="#NmTokenForm">NmToken Form</A>
+<p class=menu1><A href="#NmTokensForm">NmTokens Form</A>
+<p class=menu1><A href="#TokenForm">Token Form</A>
+<p class=menu0><A href="#DateTypes">Date and Time Types</A>
+<p class=menu1><A href="#DateForm">Date Form</A>
+<p class=menu1><A href="#TimeForm">Time Form</A>
+<p class=menu1><A href="#TimestampForm">Timestamp Form</A>
+<p class=menu1><A href="#TZDateForm">TZDate Form</A>
+<p class=menu1><A href="#TZTimeForm">TZTime Form</A>
+<p class=menu1><A href="#TZTimestampForm">TZTimestamp Form</A>
+<p class=menu0><A href="#GeneratorTypes">Id Generator Types</A>
+<p class=menu1><A href="#Id16GenForm">Id 16 Gen Form</A>
+<p class=menu1><A href="#Id32GenForm">Id 32 Gen Form</A>
+<p class=menu1><A href="#Id64GenForm">Id 64 Gen Form</A>
+<p class=menu1><A href="#UuidGenForm">Uuid Gen Form</A>
+<p>
+<H3><A id="GeneralTypes">Special Types</A></H3>
+<p>
+<H4><A id="BlobForm">Blob Form</A></H4>
+<p>
+Blob data must always be defined as optional, because there are no initial values
+to incorporate in the Java code, so when the not-null checks are made during copy
+construction of an EditObj from an Obj, a mandatory Blob will result in
+exceptions being thrown by the code at runtime.
+<p>
+<img align=hcenter src="screenshot/TestAddBlobType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="BoolForm">Bool Form</A></H4>
+<p>
+The true string, false string, and null string attributes are not actually used
+by the rule base.  Originally I was thinking about allowing different tags to be
+used to indicate those values, but then I realized that XML schemas do not allow
+you to use anything but true, false, or null.  I've still left it in the models
+because someday I might use the attributes in the user interface code to hide the
+actual code values required by XML and Java.
+<p>
+<img align=hcenter src="screenshot/TestAddBoolType.png" />
+<p>
+<H4><A id="EnumForm">Enum Form</A></H4>
+<p>
+Enums can only be defined as schema data types, not as table columns.  You reference
+an EnumType using a TableCol in the Table's column list instead.  The inclusion of
+an "EnumCode" attribute in the tags is primarily for future support of languages such
+as C++, but is not relevant to Java code produced at this time.
+<p>
+Enum values are stored as integer data in the databases, using the ordinal of the Java
+enum to map to and from the database.
+<p>
+When adding an EnumType, you will want to "Save" rather than "Close" the form, so that
+you are taken to the edit form where you can add the tags for your enum.
+<p>
+<img align=hcenter src="screenshot/TestAddEnumType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="EditEnumForm">Edit Enum Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestEditEnumType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="EnumTagForm">Enum Tag Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddEnumTag.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="UuidForm">Uuid Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddUuidType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H3><A id="NumericTypes">Numeric Types</A></H3>
+<p>
+<H4><A id="Int16Form">Int16 Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddInt16Type.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="Int32Form">Int32 Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddInt32Type.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="Int64Form">Int64 Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddInt64Type.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="UInt16Form">UInt16 Form</A></H4>
+<p>
+Unsigned 16-bit integers are implemented using int values
+in Java.
+<p>
+<img align=hcenter src="screenshot/TestAddUInt16Type.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="UInt32Form">UInt32 Form</A></H4>
+<p>
+Unsigned 32-bit integers are implemented using long values
+in Java.
+<p>
+<img align=hcenter src="screenshot/TestAddUInt32Type.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="UInt64Form">UInt64 Form</A></H4>
+<p>
+Unsigned 64-bit integers are implemented in Java as BigDecimal
+data.
+<p>
+<img align=hcenter src="screenshot/TestAddUInt64Type.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="FloatForm">Float Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddFloatType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="DoubleForm">Double Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddDoubleType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="NumberForm">Number Form</A></H4>
+<p>
+The digits and precision of numbers are enforced by the JavaFX
+editors as well.  As much as is possible, the values are coerced
+in the code to ensure that the specified number of precision digits
+are always available.
+<p>
+Note that digits must be greater than precision, as digits <i>includes</i>
+the precision in its total.
+<p>
+<img align=hcenter src="screenshot/TestAddNumberType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H3><A id="StringTypes">String and Text Types</A></H3>
+<p>
+The MaxLen attribute specifies the maximum length of a string or text
+data type.  ShowLines is used to configure how high the editor is in
+the JavaFX form and in no way restricts the number of lines of actual
+text in the editor.
+<p>
+String and text fields are special in that the InitValue is interpreted
+as an empty string if the value is not nullable.  If it is nullable, an
+empty field in the editor is interpreted as a null instead.
+<p>
+All of the other fields of the editors interpret an empty field as being null.
+<p>
+<H4><A id="StringForm">String Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddStringType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TextForm">Text Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTextType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="NmTokenForm">NmToken Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddNmTokenType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="NmTokensForm">NmTokens Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddNmTokensType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TokenForm">Token Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTokenType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H3><A id="DateTypes">Date and Time Types</A></H3>
+<p>
+The non-timezone date-time types reference the server's timezone
+for their valuation, not the client's.
+<p>
+Yes, nicer editors should be provided.  No, I am not going to write
+custom field editors.
+<p>
+<H4><A id="DateForm">Date Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddDateType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TimeForm">Time Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTimeType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TimestampForm">Timestamp Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTimestampType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TZDateForm">TZDate Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTZDateType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TZTimeForm">TZTime Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTZTimeType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="TZTimestampForm">TZTimestamp Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddTZTimestampType.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H3><A id="GeneratorTypes">Id Generator Types</A></H3>
+<p>
+The numeric id generators can have a dispenser table specified,
+which is restricted to being a Cluster or Tenant table.  The UUID
+generator has no dispenser table, as its production is entirely based
+on code, not the database.
+<p>
+The "slice" is used to slice up the id generator tables in the database
+and in the code, and has to be unique amongst all of the models incorporated
+in an application, including the one you are editing.  Failure to use unique
+slices will likely result in database corruption.  This is so important that
+code to check for this rule being broken is included in the model validation.
+<p>
+Blocksize is intended for future use, where an application server could request
+a block of "n" ids to be handed out by the database server at a time, for later
+distribution to the runtime from a cache in the application server.  This hasn't
+been implemented yet, though, so you should just leave the block size as "1".
+<p>
+<H4><A id="Id16GenForm">Id 16 Gen Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddId16Gen.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="Id32GenForm">Id 32 Gen Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddId32Gen.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="Id64GenForm">Id 64 Gen Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddId64Gen.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H4><A id="UuidGenForm">Uuid Gen Form</A></H4>
+<p>
+<img align=hcenter src="screenshot/TestAddUuidGen.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+</BODY>
+</HTML>

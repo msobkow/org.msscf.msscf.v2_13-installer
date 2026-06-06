@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Generic Expansion Language</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="manufactured-code-model.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="building-msscodefactory-2-11.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Generic Expansion Language</H2></CENTER>
+<p>
+The Generic Expansion Language (GEL) is the meta-language
+grammar and built in modifiers and keywords provided by
+the MssCFGenContext GEL interpreter from the 1.9 CFCore
+implementation.  When GEL is adapted to a business application
+model by specifying ExtendCFCore="true" for a schema,
+a SchemaMssCF package is produced containing a
+SchemaMssCFEngine implementation that binds the specific
+names of the business language to the core expert systems
+engine technology provided by CFCore.
+<p>
+While the manufactured GEL implementation is not an
+artificial intelligence in and of itself, it is based
+on the same expert systems technology that allowed
+MSS Code Factory 2 to achieve a level of technology
+that could be legitimately called genetic artificial
+intelligence.  It is the sum of parts that garners
+the factory with intelligence and its ability to
+produce a customized GEL implementation which
+qualifies it as a genetic algorithm.
+<p>
+GEL is used in the $-delimited expansions specified
+for the GenRule, GenFile, and GenTrunc definitions
+contained by an application's set of knowledge
+configuration cartridges, which use the same syntax
+and file structure as the factory's own knowledge base.
+<p>
+When GEL is extended by the engine to produce a
+SchemaMssCF binding layer, it establishes the
+binding, iterator, and reference names that are
+valid within the context of the manufactured
+application.  The specific meaning of the language
+that results is derived from the business application
+model itself, providing a very naturally flowing
+syntax for navigating the model in rules defined
+to be processed by your customized SchemaMssCFEngine
+implementation.
+<p>
+This is the heart of the genetic learning that
+happens when MSS Code Factory 2 adapts itself to
+a new business model, and results in a customized
+knowledge engineering language tailored to the
+needs of your business.
+<p>
+This document defines the common components of GEL
+which apply to all business knowledge engineering
+languages that result.
+<p>
+<p>
+<H3>The syntax of a GEL statement</H3>
+<p>
+A GEL expansion statement appears anywhere in the
+body text of a GenRule, GenFile, or GenTrunc expansion
+rule and is delimited by enclosing it in $ characters.
+To embed a literal dollar sign in expansion text, use
+two dollar signs, as in "$$".
+<p>
+The ScopeDef and GenDef names you use for the expansion
+rules in your cartridges are the same names you specified
+for the tables which comprise your business model.  They are
+<i>not</i> in any way restricted to the names used by the
+MSS Code Factory 2 itself for its MSSBam models.
+<p>
+<H3>What names are bound by a GEL specialization?</H3>
+<p>
+The <tt>SchemaMssCFEngine</tt> for a schema binds the
+following names to the GEL specialization:
+<ul>
+<li>
+For each Lookup, Container, Parent, or Master relationship
+specified by a table, a reference expansion named $Suffix$
+is bound to the GEL specialization.</li>
+<li>
+For each optional Lookup, Container, Parent, or Master
+relationship specified by a table, a reference expansion
+named Has$Suffix$ is bound to the GEL specialization,
+expanding to "yes" or "no" depending on whether the
+relationship is established or null.</li>
+<li>
+For each Components, Children, or Details relationship
+an iterator expansion named $Suffix$ is bound to the
+GEL specialization.</li>
+<li>
+For each TableCol or AtomDef specified as a column of
+a Table, a binding expansion named $ColumnName$ is
+bound to the GEL specialization.</li>
+<li>
+For each optional TableCol or AtomDef specified as a column
+of a Table, a binding expansion named Has$ColumnName$ is
+bound to the GEL specialization, expanding to "yes" or "no"
+depending on whether the column has a value or is null.</li>
+</ul>
+<p>
+<H3>empty</H3>
+<p>
+The <tt>empty</tt> expansion produces an empty string.
+<p>
+<H3>iterate</H3>
+<p>
+<tt>
+$iterate RelationSuffix(<br>
+&nbsp;&nbsp;[before ExpandBefore]<br>
+&nbsp;&nbsp;[first ExpandFirst]<br>
+&nbsp;&nbsp;[each ExpandEach]<br>
+&nbsp;&nbsp;[last ExpandLast]<br>
+&nbsp;&nbsp;[after ExpandAfter]<br>
+&nbsp;&nbsp;[lone ExpandLone]<br>
+&nbsp;&nbsp;[empty ExpandEmpty] )$</tt>
+<blockquote>
+An <tt>iterate</tt> directive specifies which expansions to perform
+before/after the iteration expansion, for the first and last
+elements in the expansion set, and for each and lone elements
+of the expansion set.  Finally there is the empty expansion,
+which often expands to empty in order to prevent a warning
+being issued if an iteration expands to an empty set.
+</blockquote>
+<p>
+<H3>spread</H3>
+<p>
+<tt>
+$spread RelationSuffix(<br>
+&nbsp;&nbsp;[between ExpandBetween]<br>
+&nbsp;&nbsp;[before ExpandBefore]<br>
+&nbsp;&nbsp;[first ExpandFirst]<br>
+&nbsp;&nbsp;[each ExpandEach]<br>
+&nbsp;&nbsp;[last ExpandLast]<br>
+&nbsp;&nbsp;[after ExpandAfter]<br>
+&nbsp;&nbsp;[lone ExpandLone]<br>
+&nbsp;&nbsp;[empty ExpandEmpty] )$</tt>
+<blockquote>
+A <tt>spread</tt> directive is a special form of iterator
+that evaluates a series of iterations over the result of expanding
+the RelationSuffix to obtain the iteration list.  Given an iteration
+list of <tt>n</tt> elements, <tt>n</tt>, <tt>n-1</tt>, <tt>n-2</tt>...<tt>1</tt>
+elements are processed by each pass, skipping the tail of the previous
+iteration each time.  So far this construct is only used to
+evaluate the where clauses for comparing composite keys
+in the page data stored procedures.
+</blockquote>
+<p>
+<H3>reference</H3>
+<p>
+<tt>
+$reference RelationSuffix GELStatement$</tt>
+<blockquote>
+<p>
+The <tt>reference</tt> directive resolves the singleton
+reference named Suffix within the current context.  After
+expanding the reference, a new GenContext is pushed with
+the reference as the top GenDef, and the remaining
+GELStatement is expanded within that new context.  This
+provides a left-to-right reading of the overall
+expansion syntax.
+</blockquote>
+<p>
+<H3>switch</H3>
+<p>
+<tt>
+$switch ValMacro Key1 Macro1 Key2 Macro2 [nil NilMacro] [empty EmptyMacro] default MacroDefault$
+</tt>
+<blockquote>
+<p>
+The <tt>switch</tt> directive is followed by a sequence of
+literal matching string names and the expansions to apply
+if the ValMacro expands to the specified string name.  If
+none of the specified string names applies, the required
+default expansion is applied.
+<p>
+The special tag <tt>nil</tt> is expanded if the value of
+the ValMacro expansion is null, and the <tt>empty</tt>
+expansion applies if ValMacro expands to an empty string.
+</blockquote>
+<p>
+<H3>Stack unwinding: popto, poptop, and poponefromtop</H3>
+<p>
+<tt>$popto GenDefName GELStatement$</tt>
+<blockquote>
+<p>
+Expansion of a popto directive temporarily unwinds the
+expansion stack to the first instance of a GenDefName
+object as the GenDef of the context.  A new context is
+pushed which clones the popped context, so the actual
+context stack isn't really unwound in reality.
+</blockquote>
+<p>
+<tt>$poptop GenDefName GELStatement$</tt>
+<blockquote>
+Expansion of a poptop directive pushes a clone of the
+topmost GenDef derived from the specified GenDefName.
+</blockquote>
+<p>
+<tt>$poponefromtop GenDefName GELStatement$</tt>
+<blockquote>
+Expansion of a poponefromtop directive pushes a clone of the
+secondmost GenDef derived from the specified GenDefName.  This
+is rarely used, but critical when it's needed.
+</blockquote>
+<p>
+<H3>Case Manipulation: upper, lower, leadlower, and mixed</H3>
+<p>
+The verbs upper, lower, leadlower, and mixed are used to
+manipulate the case of the subsequent GELStatement expansion
+as specified.
+<p>
+<tt>$upper GELStatement$<tt>
+<blockquote>
+<p>
+Convert the expansion of GELStatement to uppercase.
+</blockquote>
+<p>
+<tt>$lower GELStatement$<tt>
+<blockquote>
+<p>
+Convert the expansion of GELStatement to lowercase.
+</blockquote>
+<p>
+<tt>$leadlower GELStatement$<tt>
+<blockquote>
+<p>
+Convert the first character expansion of the GELStatement expansion to lowercase.
+</blockquote>
+<p>
+<tt>$mixed GELStatement$<tt>
+<blockquote>
+<p>
+Kind of a pointless keyword, as it means to pass the expansion of the
+GELStatement without modification.  Its use is primarily as syntactic
+sugar for the pedantic knowledge engineer.
+</blockquote>
+<p>
+<H3>counter</H3>
+<p>
+<tt>$counter CounterName new$</tt>
+<p>
+<blockquote>
+Define a new counter named CounterName and initialize it to 0,
+expanding this directive to an empty string.
+</blockquote>
+<p>
+<tt>$counter CounterName increment$</tt>
+<p>
+<blockquote>
+Increment the counter, expanding this directive to an empty string.
+</blockquote>
+<p>
+<tt>$counter CounterName decrement$</tt>
+<p>
+<blockquote>
+Decrement the counter, expanding this directive to an empty string.
+</blockquote>
+<p>
+<tt>$counter CounterName value$</tt>
+<p>
+<blockquote>
+Expands to the value of the counter.
+</blockquote>
+<p>
+<H3>constrainMin and constrainMax</H3>
+<p>
+<tt>
+$constrainMax MaxValue MacroName$<br>
+$constrainMin MinValue MacroName$</tt>
+<blockquote>
+<p>
+Each expands MacroName, and converts the result to Long.
+<p>
+MaxValue and MinValue can be numeric values or MacroNames.
+If they are numeric values, they're converted to Long
+If they are macro names, the macro is expanded and the result is converted to Long.
+<p>
+Once all values are converted, inclusive comparisons are
+made, and the resulting maximum or minimum value is converted
+to a string and resturned as the result of the expansion.
+<p>
+This means you can do range constraints like:
+<p>
+<blockquote><tt>
+$constrainMin 4 MaxLen$<br>
+$constrainMax 100 MaxLen$
+</tt></blockquote>
+<p>
+You can easily nest one within the other by using an
+injected expansion name to pass the results of one
+expansion to further evaluation by the invoker.
+</blockquote>
+<p>
+<H3>prefixline</H3>
+<p>
+<tt>
+$prefixline ValueMacro BodyMacro$
+</tt>
+<blockquote>
+<p>
+The ValueMacro is expanded to get the string which is to be
+inserted as a line prefix.
+<p>
+The BodyMacro is expanded, and the beginning of every line
+in the expansion is prefixed by the expansion of ValueMacro.
+<p>
+This makes it possible to embed the license text within
+a comment block of source code.
+</blockquote>
+<p>
+<H3>Builtin Expansions</H3>
+<p>
+The following pre-defined expansions are built into the MssCFEngine:
+<p>
+<H4>GeneratorName</H4>
+<H4>GeneratorVersion</H4>
+<H4>GenDate</H4>
+<H4>GenTime</H4>
+<H4>GenTimestamp</H4>
+<H4>GenSerializableUID</H4>
+
+<H4>GenFileFullName</H4>
+<blockquote>
+<p>
+Expands to the fully pathed name of the currently open file.
+</blockquote>
+<p>
+<H4>GenFileName</H4>
+<blockquote>
+<p>
+Expands to the name of the file without any directory specs,
+including any file-type suffixes.
+</blockquote>
+<p>
+<H4>GenFileBaseName</H4>
+<blockquote>
+<p>
+Expands to the name of the file without any directory specs,
+and without the file-type suffix.
+</blockquote>
+<p>
+<H4>GenPackage</H4>
+<blockquote>
+<p>
+Expands to the name of the package being generated.
+</blockquote>
+<p>
+<H4>GenPackageDir</H4>
+<blockquote>
+<p>
+Expands to the subdirectory part of the package
+converted to a directory (with forward slashes.)  The generation
+root directory is <i>not</i> included.
+</blockquote>
+<p>
+<H4>GenPackageFullDir</H4>
+<blockquote>
+<p>
+expands to include the generation root directory as
+well as the package directory.  No processing is done on the root
+directory, so on DOS-derived file systems there may be backslashes included.
+</blockquote>
+<p>
+<H4>GeneratingClass</H4>
+<H4>GenSubPackage</H4>
+<H4>SourceBundle</H4>
+<H4>SourcePackage</H4>
+
+</BODY>
+</HTML>

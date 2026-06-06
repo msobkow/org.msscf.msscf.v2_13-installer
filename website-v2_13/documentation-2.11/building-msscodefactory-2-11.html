@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Building MSS Code Factory 2.11</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="generic-expansion-language.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right">Next</td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Building MSS Code Factory 2.11</H2></CENTER>
+<p>
+In this chapter, I'll walk you through the steps required to clone
+MSS Code Factory 2.11 from github and then build the code.  I presume
+you've already got a running basic MSS Code Factory installation, which
+implies the you have an msscf directory or symlink in your home directory.
+<p>
+For the sake of argument, we're building version 2.11.10109.
+<p>
+<blockquote><tt>
+cd msscf/</br>
+#</br>
+# Clone the web documentation tree and the 2.11 projects</br>
+#</br>
+git clone https://github.com/msobkow/htdocs</br>
+git clone https://github.com/msobkow/cflib_2_11</br>
+git clone https://github.com/msobkow/cfcore_2_11</br>
+git clone https://github.com/msobkow/cfsec_2_11</br>
+git clone https://github.com/msobkow/cfint_2_11</br>
+git clone https://github.com/msobkow/cfbam_2_11</br>
+git clone https://github.com/msobkow/msscf_2_11</br>
+#</br>
+# Determine the next release number by checking the 2.10, 2.11, and 2.12</br>
+# web documentation for the maximum release number issued so far.</br>
+#</br>
+cd htdocs/</br>
+ls</br>
+cd msobkow.github.com/</br>
+ls</br>
+vi releases-2.10.html releases-2.11.html releases-2.12.html releases-2.11.html releases-2.12.html</br>
+#</br>
+# Now make notes about the 2.11 and 2.12 releases being planned for this next chunk of work.</br>
+# In this case, we're going to be doing releases 2.11.10109 and 2.12.11110.</br>
+#</br>
+vi releases-2.11.html releases-2.12.html </br>
+#</br>
+# Edit the version numbers in the code, and do a clean build</br>
+#</br>
+cd ..</br>
+EditVersions211.bash </br>
+CleanCFAll211.bash</br>
+BuildCFAll211.bash</br>
+#</br>
+# Once the build is clean, decorate the web documentation with HTML tags</br>
+# and check it in to git.  Copy the comments to another file somewhere</br>
+# as well, so you can use them when checking in the 2.11 modifications.</br>
+#</br>
+cd htdocs/msscf.sourceforge.net/</br>
+ls</br>
+vi releases-2.11.html </br>
+vi releases-2.12.html </br>
+git add .</br>
+git commit</br>
+git tag -a 2.11.10109-init</br>
+git push ; git push --tags</br>
+#</br>
+# Now check in the 2.11 modifications</br>
+#</br>
+cd ../..</br>
+GitCFAll211.bash add .</br>
+GitCFAll211.bash commit --allow-empty</br>
+GitCFAll211.bash tag -a 2.11.10109-init</br>
+GitCFAll211.bash push ; GitCFAll211.bash push --tags</br>
+#</br>
+# If you're doing a full release and not just an initial snapshot</br>
+# as I just did, this is followed by:</br>
+#</br>
+ArchiveCFAll211.bash 10109</br>
+PackageCFAll211.bash 10109</br>
+#</br>
+# Then use your favourite file transfer tool to publish your</br>
+# 2.11 source archives and installers for download.</br>
+#</br>
+# Welcome to the power of scripting the command line... :)</br>
+</tt></blockquote>
+</BODY>
+</HTML>

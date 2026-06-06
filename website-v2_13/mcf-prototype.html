@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>Mark's Code Fractal - Prototype Architecture and Philosophies</TITLE>
+	<LINK rel="stylesheet" HRef="css/cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="index.html"><img align=vcenter src="resources/MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;Mark's Code Fractal&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="mcf.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Home</A></td>
+		<td align="right"><A HRef="mcf-v3_1-security.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Mark's Code Fractal - Prototype Architecture and Philosophies</H2></CENTER>
+<p>
+<H3>On Licensing and Philosophical Freedom vs. Financial Freedom</H3>
+<p>
+In essence I (Mark Stephen Sobkow) believe that information should be free, but power should not. Power comes with a price, and licensing fees.
+<p>
+This page serves to go over some key coding philosophies and design approaches of the prototype application code produced by the fractal process when MSS Code Factory 2.13 produces Mark's Code Fractal 3.1. I expect I'll be leveraging MSSCF 2.13 to update the MCF 3.1 code base for some time after the initial beta release of MCF 3.1 itself as issues and bugs arise with the release in the field. Obviously any application which finds any pieces or components of the code can use the GPL rule base to produce code licensed as they see fit, provided their license is compatible with the LGPLv3/Commercial code in CFLib, CFSec, and CFInt. If they need to rely on CFCore and CFBam in their project dependencies, those are under somewhat more restrictive GPLv3/Commercial licensing.
+<p>
+If you need private, in-house modifications of any of those code bases you'll need to arrange a commercial license by emailing a <A HRef="mailto:mark.sobkow@gmail.com?subject=MCF%20GPLv3/LGPLv3/Commercial%20License%20Information%20Request">Mark Stephen Sobkow - MCF GPLv3/LGPLv3/Commercial License Information Request</A> and providing your contact information for me to follow up with you.
+<p>
+As a rule, the tool dependencies of the code base are updated whenever I notice new release coming out; bug and security fixes must be rolled out ASAP in the modern world. Doing otherwise invites attack. Note that there is a newer release of Spring than used by this JDK 17 compliant code base, but that release requires JDK 25, which eliminates Google Widget Toolkit (GWT) from contention for providing a web user interface, and I'm not ready to make that decision yet, as I kind of like the GWT approach to interfaces, despite its fundamental limitation to a single-form/window per browser user experience.
+<p>
+<H3>Core LGPLv3/Commercial Hand-Written Layers</H3>
+<p>
+The core layers of the JDK 21 compliant code base are server.markhome.mcf.v3_1.cflib at the very bottom, server.markhome.mcf.v3_1.cflib.dbutil to bring in the Jakarta JPA database key types and dependencies (but not the full Spring JPA stack), and server.markhome.mcf.v3_1.cflib.javafx for core JavaFX widgets used by the fractal code for desktop user interfaces. There is also an server.markhome.mcf.v3_1.cflib.dbtest application repository that holds the initial learning/testing/how-do-I-do-this code used to figure out how to get JPA to initialize properly using multiple back-end databases in isolation instead of coordinated by a distributed transaction manager.  I find designing for embedded transactions that leave a flag/signature to indicate processing was completed and doesn't need to be repeated to be far more effective and safe for the real-world failure scenarios that come up with distributed computing. Distributed transaction managers are prone to "hung" transactions when certain nodes in the network fail, making them less than ideal even for banking situations. 'Tis better to design for failure than to try to encapsulate failure. All of the cflib packages are under an LGPLv3/Commercial dual license, so unless you disagree with running your code on <i>Linux</i> compliant licensed services, you should be comfortable with the LGPLv3 restrictions in most cases.
+<p>
+These packages are all licensed with classpath, static linking, and my own special exception applied.
+<p>
+<H3>Core GPLv3/Commercial Hand Written Layers</H3>
+<p>
+server.markhome.mcf.v3_1.cfcore and the various cfbam packages are the heart of the system. Currently most of it is placeholder code that I don't even build, save for the fractal code. I need to get the ram implementation stabilized so I can clone and modify the inteface, buff, ram, and saxloader components of the general application architecture to the largely-standalone knowledge base that is used to manufacture the bulk of CFCore. Here you'll find the functional processing engine that transforms GEL specifications into runnable, high performance "JIT" objectlets to perform the various text transformations specified by the loaded GEL rules. This code is under GPLv3/Commercial, not LGPLv3, so any code which requires cfcore that needs to be kept in-house also needs a commercial license, including the future fractal "mcf" layers produced by the fractal processing.
+<p>
+These packages are licensed with classpath, static linking, and my own special exception applied.
+<p>
+<H3>Custom ("*cust*") Hand Written Packages</H3>
+<p>
+Any packages with "cust" in the name are custom, hand-written code, and will be licensed under LGPLv3/Commercial, GPLv3/Commercial, or Apache V2 depending on which packages it depends on.  Currently they include "custfx" packages with customizations of the fundamental widgets in the fractal code, created by copy-paste-and-edit of that code base initially, but with specific tuning, tweaks, and custom code hooks that the fractal system isn't able to deal with (yet!)  In the future there will also be "custmcf" packages with customizations for the CFCore base and fractal mcf layer code to turn that largely-fractal base into a useful multi-threaded service provider.
+<p>
+<H3>Code produced by fractal processing with the modified LGPLv3 specified by CFLib, but that is a really open set of exceptions on the license, or have a commercial license</H3>
+<p>
+The following packages/layers are produced by the server.markhome.mcf-30-* rule bases:
+<ul>
+<li>The interface package for the schema, for example "server.markhome.mcf.v3_1.cfsec.cfsec" which predominantly defines the interface to the possible back-end implementations of the schema.</li>
+<li>The buff package for the schema (server.markhome.mcf.v3_1.cfsec.cfsecbuff) provides a partial implementation of the interface, defining buffers/records and keys that only depend on server.markhome.mcf.v3_1.cflib and server.markhome.mcf.v3_1.cflib.dbutil, and thereby Jakarta JPA, but not Spring. The buff package needs to be extended to provide actual storage; it just defines the buffers and keys for the schema for use in such extensions and fleshed-out implementations of the interface, with the flexibility to define non-Spring storage modules.</li>
+<li>The jpa package for the schema (server.markhome.mcf.v3_1.cfsec.cfsecjpa), which provides a Spring JPA database storage version of the interface package that gets tested with PostgreSQL main from postgresql.org for Debian 13. This is the primary storage focus for persistent data.</li>
+<li>The obj package in the interface implementations is intended to be completely back-end agnostic, working with any back end implementation that complies with the specified fractal interface. It provides edition objects, a per-obj-schema instance cache of the instances such that the reference to an object in the cache can often be compared and retained directly rather than updated later.</li>
+<li>The jpatest package for the schema (server.markhome.mcf.v3_1.cfsec.cfsecjpatest) provides a simple boot-test and example application main for a Spring Boot deploy-as-single-jar application. It lets you verify that your database cleanly instantiates, and that the essential security information for it is populated in its CFSec base layer. This LGPLv3 compatible code can be copy-paste-and-modified to any application that is compatible with the LGPLv3 as a starting point for writing your custom application mains that require direct JPA access to a persistent store, such as PostgreSQL (I don't care about other databases. If you have a problem with your database or JPA, speak to your JPA glue layer provider or your database vendor; I'm not a test-and-validation service.)</li>
+<li>The ram package for the schema (server.markhome.mcf.v3_1.cfsec.cfsecram) provides an in-memory, no-security, eventually fully multi-threaded volatile storage implementation suitable for standalone model editors and the like to leverage maximum hashtable implementation performance while working with a loaded copy of data. There is no actual security to the ram package implementation; all access is automatically granted.</li>
+<li>The ramtest package (server.markhome.mcf.v3_1.cfsec.cfsecramtest) provides a simple boot-test and bootstrap example application main for a Spring Boot deploy-as-single-jar application that does not depend on Spring JPA, but only on the buff and ram packages. This code can be copied and modified to LGPLv3-compatible code bases as a starting point for creating custom applications leveragin the fractal code base.</li>
+<li>The javafx package (server.markhome.mcf.v3_1.cfsec.cfsecjavafx) provides crude starting-essentially-functional-code for the facet editors, viewers, finders, etc. of a simple desktop user interface</li>
+</li>
+<p>
+<H3>Code produced by fractal processing which must be compliant with more restrictive GPLv3 or have a commercial license</H3>
+<p>
+<ul>
+<li>[FUTURE] The mcf package depends on cfcore, so to use this code, your license must comply with the GPLv3/Commercial license of the cfcore package underneath. If you wish to keep this code in-house, you'll need a commercial license agreement. This package mates the fractal generation project to a customized hard-coded bootstrap version of the engine technology as applied to your application's data models, allowing you to use GEL syntax and essentials with your custom data instead of a CFBam implementation behind it. This is a powerful concept, as it means you can use MCF to produce a mutated, customized version of the MCF approach to processing data that "understands" <i>your</i> data, and which can use it to manipulate and transform your data stores to general free form text files of your design and intent.</li>
+</ul>
+
+</BODY>
+</HTML>

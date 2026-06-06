@@ -1,0 +1,16 @@
+[core]
+	editor = gvim.exe
+[user]
+	name = Your Name
+	email = your@email.address
+	signingkey = XXXXXXXXXXXXXXXX
+[push]
+	default = simple
+[gpg]
+	program = c:/Program Files (x86)/GnuPG/bin/gpg.exe
+[commit]
+	pgpsign = true
+	gpgsign = true
+[credential]
+	helper = manager
+[gui]

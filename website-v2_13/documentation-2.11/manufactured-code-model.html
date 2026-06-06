@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: The Manufactured Object Model</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="manufactured-design.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="generic-expansion-language.html">Next</A></td>
+		</tr>
+</table>
+<CENTER><H2>The Manufactured Object Model</H2></CENTER>
+<p>
+Useful and functional code supporting the business application
+model is produced to support any generic business logic or
+application code.  This is the "Code Manufacturing" aspect of
+the project and why it was called a "Factory".
+<p>
+The layers and modules currently produced include:
+<ul>
+<li>[Project][Version]
+	<ul>
+		<li>[Schema] - The data object Buff, Key, and Factories for them</li>
+		<li>[Schema]Obj - The Obj and EditObj objects with their interfaces</li>
+	</ul>
+</li>
+<li>[Project]ram[Version]
+	<ul>
+		<li>[Schema]Ram - The in-memory Ram "database", heavily used by the engine</li>
+	</ul>
+</li>
+<li>[Project]db2luw[Version]
+	<ul>
+		<li>[Schema]Db2LUW - The DB/2 LUW 10.5 JDBC database IO layer</li>
+	</ul>
+</li>
+<li>[Project]mssql[Version]
+	<ul>
+		<li>[Schema]MSSql - The Microsoft SQL Server 2012 Express Advanced Edition JDBC database IO layer</li>
+	</ul>
+</li>
+<li>[Project]mysql[Version]
+	<ul>
+		<li>[Schema]MySql - The MySql 5.5 JDBC database IO layer</li>
+	</ul>
+</li>
+<li>[Project]oracle[Version]
+	<ul>
+		<li>[Schema]Oracle - The Oracle 11gR2 JDBC database IO layer</li>
+	</ul>
+</li>
+<li>[Project]pgsql[Version]
+	<ul>
+		<li>[Schema]PgSql - The PostgreSQL 9.4 JDBC database IO layer</li>
+	</ul>
+</li>
+<li>[Project]xml[Version]
+	<ul>
+		<li>[Schema]SaxLoader - The core XML SAX parser and .xsd
+			manufactured to specify the parser's input.  This base
+			is then extended by each persistence-layer-specific
+			implementation of a SAX Loader for the storage layers.</li>
+	</ul>
+</li>
+<li>[Project]xmsg[Version]
+	<ul>
+		<li>[Schema]XMsg - The core XML request and response message
+			formatters for the schema.  Both are in the one code bundle.</li>
+	</ul>
+</li>
+<li>[Project]xmsgrqst[Version]
+	<ul>
+		<li>[Schema]XMsgRqst - The XML request parser acts on the requests
+			being made of it, and then invokes the message formatters from
+			[Schema]XMsg to prepare an XML response message to the client.</li>
+	</ul>
+</li>
+<li>[Project]xmsgrspn[Version]
+	<ul>
+		<li>[Schema]XMsgRspn - The XML response parser evaluates the response
+			messages from the server sent back in response to a request, and
+			collates the response buffers into an accessible data set for
+			processing by the invoker of the response parser.  Note that the
+			necessary objects are realized during the processing of the response,
+			so there is no need to re-realize them in the invoking code.</li>
+	</ul>
+</li>
+<li>[Project]xmsgclient[Version]
+	<ul>
+		<li>[Schema]XMsgClient - The XML messaging client incorporates a
+			response parser to evaluate the results of passing requests to
+			a server via a single send/receive method that has to be overloaded
+			by a subclass of the client.  Thus the client can talk any protocol
+			you care to use, provided it can serialize and deserialize XML document
+			contents and invoke the request handler on the server end.</li>
+	</ul>
+</li>
+<li>[Project]saxramloader[Version]
+	<ul>
+		<li>[Schema]SaxRamLoader - An in-memory "persisted" version
+			of the SAX Loader.  Used primarily to exercise the parser
+			itself in preparation for "real" testing against the
+			database layers.  Not particularly useful for much else
+			at this point, but it would make for an interesting server
+			cache code base.</li>
+	</ul>
+</li>
+<li>[Project]saxdb2luwloader[Version]
+	<ul>
+		<li>[Schema]SaxDb2LUWLoader - A DB/2 LUW 10.5 persisted implementation
+			of the SAX Loader.  Used primarily to exercise the database
+			persistence layers for CFDbTest22 to ensure that all atomic
+			data types can be persisted by a given database implementation.
+			Also very useful for loading and updating shared data, importing
+			data, and otherwise shifting around update documents based on
+			the manufactured XML Schema.</li>
+	</ul>
+</li>
+<li>[Project]saxmssqlloader[Version]
+	<ul>
+		<li>[Schema]SaxMSSqlLoader - A Microsoft SQL Server 2012 Express
+			Edition persisted implementation of the SAX Loader.  Used primarily
+			to exercise the database persistence layers for CFDbTest22 to
+			ensure that all atomic data types can be persisted by a given
+			database implementation.  Also very useful for loading and updating
+			shared data, importing data, and otherwise shifting around update
+			documents based on the manufactured XML Schema.</li>
+	</ul>
+</li>
+<li>[Project]saxmysqlloader[Version]
+	<ul>
+		<li>[Schema]SaxMySqlLoader - A MySql 5.5 persisted implementation
+			of the SAX Loader.  Used primarily to exercise the database
+			persistence layers for CFDbTest22 to ensure that all atomic
+			data types can be persisted by a given database implementation.
+			Also very useful for loading and updating shared data, importing
+			data, and otherwise shifting around update documents based on
+			the manufactured XML Schema.</li>
+	</ul>
+</li>
+<li>[Project]saxoracleloader[Version]
+	<ul>
+		<li>[Schema]SaxOracleLoader - An Oracle 11gR2 persisted implementation
+			of the SAX Loader.  Used primarily to exercise the database
+			persistence layers for CFDbTest22 to ensure that all atomic
+			data types can be persisted by a given database implementation.
+			Also very useful for loading and updating shared data, importing
+			data, and otherwise shifting around update documents based on
+			the manufactured XML Schema.</li>
+	</ul>
+</li>
+<li>[Project]saxpgsqlloader[Version]
+	<ul>
+		<li>[Schema]SaxPgSqlLoader - A PostgreSQL 9.4 persisted implementation
+			of the SAX Loader.  Used primarily to exercise the database
+			persistence layers for CFDbTest22 to ensure that all atomic
+			data types can be persisted by a given database implementation.
+			Also very useful for loading and updating shared data, importing
+			data, and otherwise shifting around update documents based on
+			the manufactured XML Schema.</li>
+	</ul>
+</li>
+<li>[Project]smwar[Version]
+	<ul>
+		<li>[Schema]SMWar - The Security Manager web interface used to
+			request/register new accounts with email address verification,
+			and to upload the public keys provided by the Swing prototype
+			GUI client for device identification when logging in to the
+			XMsg server.</li>
+	</ul>
+<li>[Project]xmsgsrvwar[Version]
+	<ul>
+		<li>[Schema]XMsgSrvWar - The XMsg server which relies on CFTip privacy
+			to secure the communications between an XMsgClient and the
+			web messaging server.  CFTip <i>is</i> vulnerable to man-in-the-middle
+			attacks because it does not verify the signing chain of the public
+			key provided by the server.  Currently a privately signed key is
+			dynamically generated with each startup of the XMsg server, rather
+			than letting you specify a pre-determined key.</li>
+	</ul>
+<li>[Project]javafx[Version]
+	<ul>
+		<li>[Schema]JavaFX - The framework of JavaFX components GUI that
+			can be used to build a custom GUI.
+	</ul>
+</ul>
+<p>
+<H3>What gets manufactured for a custom expert system?</H3>
+<p>
+When you enable "ExtendCFCore" for a schema, the system produces a
+customized General Expansion Language (GEL) interpreter that is
+designed to work with the business application model data that
+you've specified.
+<p>
+This process goes far beyond a framework approach of creating a
+catalog of objects that implement framework interfaces.  Instead,
+I create interpreter bindings that link the language <i>directly</i>
+to the application data through custom code, which results in
+astonishingly tight and fast execution despite the size of the
+overall manufactured code base.  You could do the same thing with
+introspection and less code, but it would be slower.
+<ul>
+<li>[Schema]MssCF -- Contains all the bindings, iterators, and
+references for the CFCore customization, as well as an Engine
+specialization that wires the custom code to the base engine
+implementation from CFCore.  The code for this module is
+deposited in the core package module of the schema base objects,
+so that it can be used in BL implementation code.</li>
+</ul>
+<p>
+While the simple grammar of the GEL languages remains unchanged from one
+application to the next, the syntax of the language as a whole adapts
+itself using the business model's terminology to provide a richly
+expressive syntax for navigating the data of that model.
+<p>
+See the <A Target="Content"
+HRef="generic-expansion-language.html">Generic Expansion Language
+(GEL)</A> page for a better explanation of how MSS Code Factory 2
+adapts the CFCore technology to define an expert
+system capable of understanding your business application model.
+<p>
+The expert system itself is a functional signature matching language,
+which means that the current scope and generation definition in
+the context of the current expansion is considered when searching
+for an expansion name during GEL expansion.
+<p>
+The fundamental expansion performed by the GEL interpreter is based on
+the idea of inverting a LALR parser, so it produces predictable, uniform
+code.  The interpreter uses techniques common to functional languages
+in the way that it considers the scope and generation definitions of
+the current context when searching for expansion rules.
+</BODY>
+</HTML>

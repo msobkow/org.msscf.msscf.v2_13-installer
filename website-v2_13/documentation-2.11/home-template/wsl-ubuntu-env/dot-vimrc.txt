@@ -1,0 +1,6 @@
+set tabstop=4
+set nobackup
+set ruler
+map #C :'a,.w! /mnt/c/Users/yourphyshomedir/.marktemp
+map #P :.r /mnt/c/Users/yourphyshomedir/.marktemp
+map #N :1,$s/(c) 2017 Your Name/(c) 2017-2018 Your Name/:w:n

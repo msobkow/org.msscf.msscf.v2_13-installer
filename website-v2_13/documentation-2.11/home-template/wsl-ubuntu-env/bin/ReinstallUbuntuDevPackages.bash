@@ -1,0 +1,2 @@
+#!/bin/bash
+for pkg in `dpkg --get-selections | awk '{print $1}' | egrep '(apache|gpg|ssh|gcc|g\\+\\+|fortran|gnome|openjdk|jre|xerces|xscreen|libc|libx11|auto|mpfr|uuid|stdc\\+\\+|pthread|key|java|libcommons|ant|xml|avalon|excalibur|libdom4j|libj|libdisruptor|libgeronimo|liblightcouch|libmongodb|liboodstox|liblog4j|libmail|libnekohtml|libgoogle|libxom|jni|libhttp|libisorlax|libstax|libyaml|cmake|doxygen|ddd|xfce4)' | egrep -v '(dpkg|apt|mysql|mythtv)'` ; do apt-get -y install --reinstall $pkg ; done

@@ -1,0 +1,14 @@
+[core]
+	editor = vim
+[http]
+	sslKey = /mnt/d/msscodefactory/keys/your-email.address.ssh
+[user]
+	name = Your Name Here
+	email = your@email.address
+	signingKey = XXXXXXXX
+[push]
+	default = simple
+[gpg]
+	program = gpg
+[commit]
+	pgpsign = true

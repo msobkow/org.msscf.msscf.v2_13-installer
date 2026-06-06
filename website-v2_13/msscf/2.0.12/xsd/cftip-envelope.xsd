@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://mcf.markhome.server/msscf/2.0.12/xsd/cftip-envelope.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://mcf.markhome.server/msscf/2.0.12/xsd/cftip-envelope.xsd" version="2.10">
+
+<xsd:annotation>
+	<xsd:documentation xml:lang="en">
+		MSS Code Factory Transport-Independant Privacy (TIP) Envelope
+	</xsd:documentation>
+</xsd:annotation>
+
+<xsd:simpleType name="IVParamType">
+	<xsd:restriction base="xsd:base64Binary"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="PayloadType">
+	<xsd:restriction base="xsd:base64Binary"/>
+</xsd:simpleType>
+
+<xsd:complexType name="QueryServerInfoMsg" mixed="true">
+</xsd:complexType>
+
+<xsd:complexType name="AppRequestMsg" mixed="true">
+	<xsd:attribute name="MessageIV" type="IVParamType" use="required" />
+	<xsd:attribute name="Payload" type="PayloadType" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="LoginRequestMsg" mixed="true">
+	<xsd:attribute name="MessageIV" type="IVParamType" use="required" />
+	<xsd:attribute name="AES256Key" type="PayloadType" use="required" />
+	<xsd:attribute name="Payload" type="PayloadType" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="CFTIPEnvelopeType" mixed="true">
+	<xsd:sequence>
+		<xsd:choice minOccurs="1" maxOccurs="1">
+			<xsd:element name="QueryServerInfo" type="QueryServerInfoMsg" />
+			<xsd:element name="AppRequest" type="AppRequestMsg" />
+			<xsd:element name="LoginRequest" type="LoginRequestMsg" />
+		</xsd:choice>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:element name="CFTIPEnvelope" type="CFTIPEnvelopeType" />
+
+</xsd:schema>

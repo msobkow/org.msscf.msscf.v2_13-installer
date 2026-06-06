@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Manufacturing a Project</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="table-forms.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="building-a-project.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Manufacturing a Project</H2></CENTER>
+<p>
+There is a simple .bash script named CFManufactureCode211.bash that
+runs MSS Code Factory 2.11 to produce 2.12 code.
+<p>
+It takes two or three arguments, with the first two being required.
+<p>
+The first argument is the name of the model, without the trailing .xml
+file type specification.
+<p>
+The second argument is the name of the rule cartridge to use for producing
+the project's code.  There are a number of rule cartridges provided with MSS
+Code Factory.
+<p>
+The third optional argument specifies a specific toolset to produce code for,
+allowing you to focus on debugging a rule set producing code for a particular
+language and tool combination.  Most databases have their own scripting languages.
+<p>
+I recommend using one of the Manufacture*.bash scripts for the 2.12 projects as
+a template for your own manufacturing script for your project.  If nothing else,
+it will save on error-prone typing of picky computer commands.
+<p>
+Going forward, only CFSec, CFInt, and CFBam 2.12 will be manufactured with
+the com-github-msobkow-211-layered+msscf cartridge.  The remaining 2.12 projects
+will be manufactured with com-github-msobkow-211-layered, which does not produce
+MssCF libraries for Java and C++.  The overhead of building those libraries
+is far from trivial.
+<p>
+Only CFCore uses the com-github-msobkow-211-cfengine cartridge.  It produces standalone
+code for an in-memory object repository, suitable for doing things like creating
+complex data editors for XML files, GUI editors for XML files, and transposing XML
+documents, but it always produces code for the cfcore namespace when it does so, so
+only one library produced by the cfengine cartridge can be incorporated into any given
+code base.
+<p>
+If you want to provide msscf library support for your project for something like a
+reporting engine, you can do so by simply creating a custom cartridge from one of the
+existing ones that uses the others and specifying the msscf tool, toolsets, and rule
+sets similar to the way com-github-msobkow-211-layered+msscf does.
+<p>
+The currently available rule cartridges are:
+<ul>
+	<li>com-github-msobkow-211-cfengine (uses special case locally-defined rules)
+		<ul>
+			<li>any</li><li>cplus</li><li>java</li>
+		</ul>
+	</li>
+	<li>com-github-msobkow-211-layered
+		<ul>
+			<li>any</li><li>cplus+ram+loader</li><li>http</li><li>java+javafx</li><li>java+mysql</li><li>java+saxloader</li><li>java+saxloader+mysql</li><li>java+xmsg</li><li>mssql</li><li>pgsql</li><li>saxloader</li><li>cplus</li><li>cplus+saxloader</li><li>java</li><li>java+jee</li><li>java+oracle</li><li>java+saxloader+db2luw</li><li>java+saxloader+oracle</li><li>javafx</li><li>mysql</li><li>ram</li><li>xmsg</li><li>cplus+ram</li><li>db2luw</li><li>java+db2luw</li><li>java+mssql</li><li>java+pgsql</li><li>java+saxloader+mssql</li><li>java+saxloader+pgsql</li><li>jee</li><li>oracle</li><li>xsd</li>
+		</ul>
+	</li>
+	<li>com-github-msobkow-211-layered+msscf
+		<ul>
+			<li>any</li><li>cplus+ram</li><li>db2luw</li><li>java+db2luw</li><li>java+msscf</li><li>java+oracle</li><li>java+saxloader+db2luw</li><li>java+saxloader+oracle</li><li>javafx</li><li>mssql</li><li>pgsql</li><li>saxloader</li><li>cplus</li><li>cplus+ram+loader</li><li>http</li><li>java+javafx</li><li>java+mssql</li><li>java+pgsql</li><li>java+saxloader+mssql</li><li>java+saxloader+pgsql</li><li>jee</li><li>mysql</li><li>ram</li><li>xmsg</li><li>cplus+msscf</li><li>cplus+saxloader</li><li>java</li><li>java+jee</li><li>java+mysql</li><li>java+saxloader</li><li>java+saxloader+mysql</li><li>java+xmsg</li><li>msscf</li><li>oracle</li><li>xsd</li>
+		</ul>
+	</li>
+	<li>com-github-msobkow-211-target+cplus
+		<ul>
+			<li>any</li><li>cplus</li><li>cplus+ram</li><li>cplus+ram+loader</li><li>cplus+saxloader</li><li>db2luw</li><li>http</li><li>loader</li><li>mssql</li><li>mysql</li><li>oracle</li><li>pgsql</li><li>ram</li><li>saxloader</li><li>xmsg</li><li>xsd</li>
+		</ul>
+	</li>
+	<li>com-github-msobkow-211-target+db
+		<ul>
+			<li>any</li><li>db2luw</li><li>loader</li><li>mssql</li><li>mysql</li><li>oracle</li><li>pgsql</li>
+		</ul>
+	</li>
+	<li>com-github-msobkow-211-target+java
+		<ul>
+			<li>any</li><li>http</li><li>java+db2luw</li><li>java+jee</li><li>java+mysql</li><li>java+pgsql</li><li>java+saxloader+db2luw</li><li>java+saxloader+oracle</li><li>java+xmsg</li><li>jee</li><li>mysql</li><li>pgsql</li><li>xmsg</li><li>db2luw</li><li>java</li><li>java+javafx</li><li>java+mssql</li><li>java+oracle</li><li>java+saxloader</li><li>java+saxloader+mysql</li><li>java+saxloader+pgsql</li><li>javafx</li><li>loader</li><li>oracle</li><li>ram</li><li>saxloader</li><li>xsd</li>
+		</ul>
+	</li>
+</ul>
+<p>
+</BODY>
+</HTML>

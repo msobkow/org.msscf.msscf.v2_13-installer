@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 5129 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: CFBam Editor Schema Forms</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="editor-hierarchy-forms.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="data-type-forms.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2><A id="top">CFBam Editor Schema Forms</A></H2></CENTER>
+<p>
+<p class=menu0><A href="#AddSchemaDef">Add Schema</A>
+<p class=menu0><A href="#AddSchemaRef">Add Schema Ref</A>
+<p class=menu0><A href="#AddTypeMenu">Add Type Menu</A>
+<p>
+<H3><A id="AddSchemaDef">Add Schema</A></H3>
+<p>
+When you add a schema, you should specify a database name for your schema
+that is no more than eight characters for maximum portability.  I like to include
+the version numbers of my project in the schema name so that I can install
+multiple versions of the models in the same database server.  You aren't required
+to do so, however.
+<p>
+You must always specify a license for your schema -- its Embedded Text attribute
+is used to produce the headers for all of your files during the manufacturing
+process.
+<p>
+The copyright period is typically in the form YYYY or YYYY-YYYY if the project
+has existed for more than a year.
+<p>
+There is no requirement that the owner of a project be the domain under which
+it is published.  For example, the MSS Code Factory 2 projects are all owned by Mark
+Sobkow, not SourceForge.net.
+<p>
+<img align=hcenter src="screenshot/AddSchemaDef.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H3><A id="AddSchemaRef">Add Schema Ref</A></H3>
+<p>
+As soon as you are done creating and saving your schema, you need to add at
+least a reference to the 2.12 CFSec schema.  You can add additional schema
+references as well if you are incorporating other model components in your
+application.
+<p>
+Be aware that if you incorporate a model through a schema reference, your application
+and license must be compliant with the license of that incorporated schema.  Incorporating
+a schema reference is like including the code for that model; its license applies to all of
+the objects defined for it, regardless of what license you have selected for your application.
+<p>
+You do not get to ignore and relicense someone else's work according to your own wishes.
+<p>
+The only models which are delivered under the Apache V2 license for incorporation in any
+and all applications (including proprietary commercial ones) are the CFSec, CFInt,
+and CFCrm models.  All other models delivered with MSS Code Factory 2 are under a dual GPLv3/Commercial
+license, and may only be used by GPLv3-compliant applications without a commercial license.
+<p>
+<img align=hcenter src="screenshot/TestAddSchemaRef.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+<H3><A id="AddTypeMenu">Schema Add Type Menu</A></H3>
+<p>
+When you select "Add" in the schema types tab, you are presented with a complete list of all
+the types of data you can define for your schema, including the id generators.  The details
+of the various type editors are presented in the next section of this documentation.
+<p>
+<img align=hcenter src="screenshot/SchemaAddTypeMenu.png" />
+<p>
+<A href="#top">Back to top</A>
+<p>
+</BODY>
+</HTML>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="https://mcf.server.markhome/mcf/v3_1/xsd/cflibdbutil-3.1.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="https://mcf.server.markhome/mcf/v3_1/xsd/cflibdbutil-3.1.xsd" version="3.1">
+
+<xsd:annotation>
+    <xsd:documentation xml:lang="en">
+        CFLib database types
+    </xsd:documentation>
+</xsd:annotation>
+
+<!-- ************************************************************************
+ *
+ *  Schema Atomic Types
+ *
+ **************************************************************************-->
+
+<xsd:simpleType name="DbKeyHash128">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="32"/>
+		<xsd:pattern value="^([0-9a-fA-F){32}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="DbKeyHash160">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="40"/>
+		<xsd:pattern value="^([0-9a-fA-F){40}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="DbKeyHash224">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="56"/>
+		<xsd:pattern value="^([0-9a-fA-F){56}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="DbKeyHash256">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="64"/>
+		<xsd:pattern value="^([0-9a-fA-F){64}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="DbKeyHash384">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="96"/>
+		<xsd:pattern value="^([0-9a-fA-F){96}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="DbKeyHash512">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="128"/>
+		<xsd:pattern value="^([0-9a-fA-F){128}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="Uuid6">
+    <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="62"/>
+		<xsd:pattern value="^([0-9a-fA-F){12}-([0-9a-fA-F){4}-([0-9a-fA-F]){8}-([0-9a-fA-F]){8}-([0-9a-fA-F]){8}-([0-9a-fA-F]){8}-([0-9a-fA-F]){8}|"
+    </xsd:restriction>
+</xsd:simpleType>
+
+</xsd:schema>
+

@@ -1,0 +1,418 @@
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+export VI=vim
+alias vi=vim
+alias ls="ls -FC"
+
+if [ -f $HOME/.nethackrc ]; then
+	export NETHACKOPTIONS="$HOME/.nethackrc"
+fi
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+umask 044
+
+if [ "$HOSTNAME" == "" ]; then
+	export HOSTNAME=`hostname`
+fi
+
+if [ "$DISPLAY" == "" ]; then
+	export DISPLAY="$HOSTNAME:0.0"
+fi
+
+if [ "$TZ" == "" ]; then
+	export TZ="America/Regina"
+fi
+
+if [ "$BASH" == "" ]; then
+	if [ -x /bin/bash ]; then
+		export BASH="/bin/bash"
+	elif [ -x /usr/bin/bash ]; then
+		export BASH="/usr/bin/bash"
+	else
+		HAS_BASH=`which bash`
+		if [ "$HAS_BASH" != "" ]; then
+			export BASH="bash"
+		fi
+		unset HAS_BASH
+	fi
+fi
+
+# Check if cmd.com is available
+if [ "$CMD" == "" ]; then
+	CMD_AVAILABLE=`which cmd.exe`
+	if [ "$CMD_AVAILABLE" != "" ]; then
+		export CMD="cmd.exe"
+		alias cmd="$CMD"
+	fi
+	unset CMD_AVAILABLE
+fi
+	
+# Check if Windows PowerShell is available
+if [ "$POWERSHELL" == "" ]; then
+	POWERSHELL_AVAILABLE=`which powershell.exe`
+	if [ "$POWERSHELL_AVAILABLE" != "" ]; then
+		export POWERSHELL="powershell.exe"
+	fi
+	unset POWERSHELL_AVAILABLE
+fi
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+		. "$HOME/.bashrc"
+    fi
+fi
+
+# GPG needs to know what terminal to use for signing tags
+#export GPG_TTY=$(tty)
+
+# Use MinGW Git implementation (it is the same as GIT for Windows)
+export GIT="git"
+export GIT_EDITOR="vim"
+
+$GIT config --global credential.helper store
+$GIT config --global core.editor "vim"
+$GIT config --global user.name "Your Full Name"
+$GIT config --global user.email "your@email.address"
+$GIT config --global user.signingkey XXX
+$GIT config --global user.gpgsign true
+
+# If ant is installed locally, use that version
+if [ -d /c/Users/your-account-dir/msscf/bin/apache-ant-1.10.5 ]; then
+	export ANT_BINDIR=/c/Users/your-account-dir/msscf/bin/apache-ant-1.10.5/bin
+	export ANT_HOME="C:\\Users\\your-account-dir\\msscf\\bin\\apache-ant-1.10.5"
+	export ANT="ant"
+	export ANT_LIB="$ANT_HOME/lib"
+	ANT_IN_PATH=`echo $PATH | grep 'apache-ant-1.10.5/bin'`
+	if [ "$ANT_IN_PATH" == "" ]; then
+		export PATH="/c/Users/your-account-dir/msscf/bin/apache-ant-1.10.5/bin:$PATH"
+	fi
+	unset ANT_IN_PATH
+	export PATH="$ANT_BINDIR:$PATH"
+else
+	ANT_IS_LOCAL=`which ant | grep usr/bin`
+	if [ "$ANT_IS_LOCAL" != "" ]; then
+		export ANT="ant"
+		unset ANT_HOME
+		unset ANT_BINDIR
+		unset ANT_LIB
+	else
+		echo "ANT could not be found" 1>&2
+	fi
+	unset ANT_IS_LOCAL
+fi
+
+# Add OpenJFX 12 to the path before JDK so it gets searched second
+if [ -d /c/Progra~1/openjdk.java.net/javafx-sdk-12.0.1 ]; then
+	export JFX_HOME="C:\\Progra~1\\openjdk.java.net\\javafx-sdk-12.0.1"
+	export PATH_TO_FX=/c/Progra~1/openjdk.java.net/javafx-sdk-12.0.1/lib
+	JAVAFX_IN_PATH=`echo $PATH | grep 'javafx-sdk-12.0.1/lib'`
+	if [ "$JAVAFX_IN_PATH" == "" ]; then
+		export PATH="/c/Progra~1/openjdk.java.net/javafx-sdk-12.0.1/lib:$PATH"
+	fi
+	unset JAVAFX_IN_PATH
+elif [ "$JFX_HOME" != "" ]; then
+	if [ -d "$JFX_HOME" ]; then
+		if [ -d "$JFX_HOME/lib" ]; then
+			export PATH_TO_FX="$JFX_HOME/lib"
+			export PATH="$PATH_TO_FX:$PATH"
+		else
+			unset PATH_TO_FX
+			unset JFX_HOME
+			echo "JavaFX could not be found" 1>&2
+		fi
+	else
+		unset PATH_TO_FX
+		unset JFX_HOME
+		echo "JavaFX could not be found" 1>&2
+	fi
+fi
+
+# Add OpenJDK 11 to the path
+if [ -d /c/Progra~1/openjdk.java.net/jdk-12.0.1 ]; then
+	export JDK_HOME="C:\\Progra~1\\openjdk.java.net\\jdk-12.0.1"
+	export JDK_JAVA="C:\\Progra~1\\openjdk.java.net\\jdk-12.0.1"
+	export JSEP=";"
+	JDK_IN_PATH=`echo $PATH | grep 'jdk-12.0.1/bin'`
+	if [ "$JDK_IN_PATH" == "" ]; then
+		export PATH="/c/Progra~1/openjdk.java.net/jdk-12.0.1/bin:$PATH"
+	fi
+	unset JDK_IN_PATH
+	export JAVAC="javac.exe"
+	export JAVA="java.exe"
+	export JAVAEXE="java.exe"
+	export JAVACEXE="javac.exe"
+	export JAVACMD="/c/Progra~1/openjdk.java.net/jdk-12.0.1/bin/$JAVA"
+	export JAVACCMD="/c/Progra~1/openjdk.java.net/jdk-12.0.1/bin/$JAVAC"
+else
+	FOUND_JAVA=`which java | grep -v 'which: no'`
+	if [ "$FOUND_JAVA" != "" ]; then
+		if [ "$JAVA" == "" ]; then
+			export JAVA="java"
+		fi
+		if [ "$JAVA" == "java" ]; then
+			export JSEP=":"
+			if [ "$JAVAC" == "" ]; then
+				export JAVAC="javac"
+			fi
+			unset JAVAEXE
+			unset JAVACEXE
+		else
+			export JSEP=";"
+			if [ "$JAVAC" == "" ]; then
+				export JAVAC="javac.exe"
+			fi
+			if [ "$JAVAEXE" == "" ]; then
+				export JAVAEXE="java.exe"
+			fi
+			if [ "$JAVACEXE" == "" ]; then
+				export JAVACEXE="javac.exe"
+			fi
+		fi
+		export JAVACMD="$JAVA"
+		export JAVACCMD="$JAVAC"
+	else
+		unset JSEP
+		unset JDK_HOME
+		unset JAVA_HOME
+		unset JAVAC
+		unset JAVA
+		unset JAVAEXE
+		unset JAVACEXE
+		unset JAVACMD
+		unset JAVACCMD
+		echo "OpenJDK could not be found" 1>&2
+	fi
+	unset FOUND_JAVA
+fi
+
+# Make sure the Windows SSH agent is running
+if [ -f /mnt/d/msscf/keys/run-your-login-sasktel-net-putty-private-pageant.vbs ]; then
+	if [ "$POWERSHELL" != "" ]; then
+		PAGEANT_RUNNING=`tasklist.exe | grep pageant.exe`
+		if [ "$PAGEANT_RUNNING" == "" ]; then
+			$POWERSHELL "d:/msscf/keys/run-your-login-sasktel-net-putty-private-pageant.vbs"
+		fi
+		unset PAGEANT_RUNNING
+	fi
+fi
+
+# Make sure the ssh-agent is running
+if [ "$SSH_AGENT_PID" == "" ]; then
+	if [ -f $HOME/bin/ssh-agent-setpid.bash ]; then
+		. $HOME/bin/ssh-agent-setpid.bash
+	fi
+fi
+
+if [ "$SSH_AGENT_PID" != "" ]; then
+	unset SSH_AGENT_STATUS
+	SSH_AGENT_STATUS=`ps -ef | grep ssh-agent | grep -v grep`
+	if [ "$SSH_AGENT_STATUS" == "" ]; then
+		# ssh-agent -k
+		unset SSH_AGENT_PID
+		rm -f $HOME/bin/ssh-agent-setpid.bash
+		nohup ssh-agent < /dev/null &> $HOME/bin/ssh-agent-setpid.bash 2>&1 &
+		sleep 2
+		. $HOME/bin/ssh-agent-setpid.bash
+		SSH_AGENT_STATUS=`ps -ef | grep ssh-agent | grep -v grep`
+		echo "SSH_AGENT_STATUS=\"$SSH_AGENT_STATUS\""
+	else
+		echo "SSH_AGENT_STATUS=\"$SSH_AGENT_STATUS\""
+	fi
+	unset SSH_AGENT_STATUS
+else
+	rm -f $HOME/bin/ssh-agent-setpid.bash
+	nohup ssh-agent < /dev/null &> $HOME/bin/ssh-agent-setpid.bash 2>&1 &
+	sleep 2
+	. $HOME/bin/ssh-agent-setpid.bash
+fi
+echo "SSH_AGENT_PID=$SSH_AGENT_PID"
+
+# Make sure the SSH key for your@email.address is registered
+if [ -f /c/Users/your-account-dir/msscf/keys/dot-ssh/id_rsa-your@email.address.ssh.asc ]; then
+	KEY_EXISTS=`ssh-add -L | grep your@email.address`
+	# echo "KEY_EXISTS=\"$KEY_EXISTS\""
+	if [ "$KEY_EXISTS" == "" ]; then
+		ssh-add /c/Users/your-account-dir/msscf/keys/dot-ssh/id_rsa-your@email.address.ssh.asc
+	fi
+	unset KEY_EXISTS
+fi
+
+# Make sure the GPG agent is running
+GPG_AGENT_RUNNING=`ps -ef | grep gpg-agent | grep -v grep`
+if [ "$GPG_AGENT_RUNNING" == "" ]; then
+	gpg-agent --daemon
+fi
+unset GPG_AGENT_RUNNING
+
+# Check for Tomcat 9.0.10 and make sure it is on the path
+if [ "$CATALINA_HOME" == "" ]; then
+	if [ -d "/c/Users/your-account-dir/msscf/bin/apache-tomcat-9.0.10" ]; then
+		export CATALINA_HOME="C:\\Users\\your-account-dir\\msscf\\bin\\apache-tomcat-9.0.10"
+		TOMCAT_IN_PATH=`echo $PATH | grep 'apache-tomcat-9.0.10/bin'`
+		if [ "$TOMCAT_IN_PATH" == "" ]; then
+			export PATH="/c/Users/your-account-dir/msscf/bin/apache-tomcat-9.0.10/bin:$PATH"
+		fi
+		unset TOMCAT_IN_PATH
+	fi
+fi
+
+# Make sure WordNet 3.0 with 3.1 data files is configured
+if [ -f /c/Users/your-account-dir/msscf/bin/WordNet-3.0/dict/noun.exc ]; then
+	export WNHOME="C:\\Users\\your-account-dir\\msscf\\bin\\WordNet-3.0"
+	WORDNET_IN_PATH=`echo $PATH | grep 'WordNet-3.0/bin'`
+	if [ "$WORDNET_IN_PATH" == "" ]; then
+		export PATH="/c/Users/your-account-dir/msscf/bin/WordNet-3.0/bin:$PATH"
+	fi
+	unset WORDNET_IN_PATH
+fi
+
+# Configure the project paths
+
+export MSSCFDRIVE=""
+if [ -a "$HOME/msscf" ]; then
+	export MSSCFHOME="$HOME/msscf"
+fi
+
+if [ "$MSSCFHOME" != "" ]; then
+	if [ "$MSSCFBIN" == "" ]; then
+		if [ ! -d "$MSSCFHOME/bin" ]; then
+			mkdir $MSSCFHOME/bin
+		fi
+		export MSSCFBIN="$MSSCFHOME/bin"
+	fi
+	if [ "$MSSCFDOWNLOADS" == "" ]; then
+		if [ ! -d "$MSSCFHOME/downloads" ]; then
+			mkdir $MSSCFHOME/downloads
+		fi
+		export MSSCFDOWNLOADS="$MSSCFHOME/downloads"
+	fi
+
+	# Wire the core toolkit projects to be searched first
+
+	if [ "$MSSCF211HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/msscf_2_11/java/bin" ]; then
+			export MSSCF211HOME="$MSSCFHOME/msscf_2_11"
+			export PATH="$MSSCF211HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCF211HOME/java/bin:$PATH"
+	fi
+	if [ "$MSSCFLIB212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cflib_2_12/java/bin" ]; then
+			export MSSCFLIB212HOME="$MSSCFHOME/cflib_2_12"
+			export PATH="$MSSCFLIB212HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCFLIB212HOME/java/bin:$PATH"
+	fi
+	if [ "$MSSCFCORE212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfcore_2_12/java/bin" ]; then
+			export MSSCFCORE212HOME="$MSSCFHOME/cfcore_2_12"
+			export PATH="$MSSCFCORE212HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCFCORE212HOME/java/bin:$PATH"
+	fi
+	if [ "$MSSCFSEC212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfsec_2_12/java/bin" ]; then
+			export MSSCFSEC212HOME="$MSSCFHOME/cfsec_2_12"
+			export PATH="$MSSCFSEC212HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCFSEC212HOME/java/bin:$PATH"
+	fi
+	if [ "$MSSCFINT212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfint_2_12/java/bin" ]; then
+			export MSSCFINT212HOME="$MSSCFHOME/cfint_2_12"
+			export PATH="$MSSCFINT212HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCFINT212HOME/java/bin:$PATH"
+	fi
+	if [ "$MSSCFBAM212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfbam_2_12/java/bin" ]; then
+			export MSSCFBAM212HOME="$MSSCFHOME/cfbam_2_12"
+			export PATH="$MSSCFBAM212HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCFBAM212HOME/java/bin:$PATH"
+	fi
+	if [ "$MSSCF212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/msscf_2_12/java/bin" ]; then
+			export MSSCF212HOME="$MSSCFHOME/msscf_2_12"
+			export PATH="$MSSCF212HOME/java/bin:$PATH"
+		fi
+	else
+		export PATH="$MSSCF212HOME/java/bin:$PATH"
+	fi
+
+	# Wire the development projects so they end up on the end of the search path, not the beginning
+
+	if [ "$MSSCFCRM212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfcrm_2_12/java/bin" ]; then
+			export MSSCFCRM212HOME="$MSSCFHOME/cfcrm_2_12"
+			export PATH="$PATH:$MSSCFCRM212HOME/java/bin"
+		fi
+	else
+		export PATH="$PATH:$MSSCFCRM212HOME/java/bin"
+	fi
+	if [ "$MSSCFDBTST212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfdbtst_2_12/java/bin" ]; then
+			export MSSCFDBTST212HOME="$MSSCFHOME/cfdbtst_2_12"
+			export PATH="$PATH:$MSSCFDBTST212HOME/java/bin"
+		fi
+	else
+		export PATH="$PATH:$MSSCFDBTST212HOME/java/bin"
+	fi
+	if [ "$MSSCFACC212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfacc_2_12/java/bin" ]; then
+			export MSSCFACC212HOME="$MSSCFHOME/cfacc_2_12"
+			export PATH="$PATH:$MSSCFACC212HOME/java/bin"
+		fi
+	else
+		export PATH="$PATH:$MSSCFACC212HOME/java/bin"
+	fi
+	if [ "$MSSCFAST212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cfast_2_12/java/bin" ]; then
+			export MSSCFAST212HOME="$MSSCFHOME/cfast_2_12"
+			export PATH="$PATH:$MSSCFAST212HOME/java/bin"
+		fi
+	else
+		export PATH="$PATH:$MSSCFAST212HOME/java/bin"
+	fi
+	if [ "$MSSCFFRSW212HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/cffrsw_2_12/java/bin" ]; then
+			export MSSCFFRSW212HOME="$MSSCFHOME/cffrsw_2_12"
+			export PATH="$PATH:$MSSCFFRSW212HOME/java/bin"
+		fi
+	else
+		export PATH="$PATH:$MSSCFFRSW212HOME/java/bin"
+	fi
+
+	# Wire the internal projects last of all
+
+	if [ "$MSSCF210HOME" == "" ]; then
+		if [ -d "$MSSCFHOME/msscf_2_10/java/bin" ]; then
+			export MSSCF210HOME="$MSSCFHOME/msscf_2_10"
+			export PATH="$PATH:$MSSCF210HOME/java/bin"
+		fi
+	else
+		export PATH="$PATH:$MSSCF210HOME/java/bin"
+	fi
+fi
+
+# only add $HOME/bin to the PATH if it exists
+if [ -d "$HOME/bin" ]; then
+	HOME_BIN_IN_PATH=`echo $PATH | grep "$HOME/bin"`
+	if [ "$HOME_BIN_IN_PATH" == "" ]; then
+		export PATH="$HOME/bin:$PATH"
+	fi
+fi
+

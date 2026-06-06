@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>Mark's Code Fractal Lessons Learned</TITLE>
+	<LINK rel="stylesheet" HRef="css/cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="index.html"><img align=vcenter src="resources/MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;Mark's Code Fractal&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="mcf-v3_1-security.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Home</A></td>
+		<td align="right"><A HRef="mcf-devlog.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Mark's Code Fractal Lessons Learned</H2></CENTER>
+<p>
+MSS Code Factory was conceived way back in the Java JDK 1.6 era, when the initial CFCore code was written and a hand-crafted
+set of rules was used before I'd even written my first SAX XML parser. That was version 1.1; I don't do dot-0's. The technology
+was used to craft 1.2, which crafted 1.3, which begat 1.4 which begat 1.5 and finally 1.6 ended the 1.6 line with the addition
+of XML parsers and cartridge loading, model loading, and a rudimentary HTTP based request/response messaging protocol.
+<p>
+The 2.x line evolved as far as 2.13, which is the edition that creates version 3.1. Some of the ideas I'd planned for Mark's Code
+Fractal 3.1 have ended up being needed in 2.13, such as the ability to define security roles for a schema, and the addition of
+schematweak, tabletweak, and indextweak verbs with correspondingly scoped tweak definitions attached as XML components of the
+SchemaDef, Table, and Index definitions in a CFBam model.
+<p>
+2.x fleshed out a full set of JDBC-based database access methods using stored procedures for Oracle, PostgreSQL, Sybase ASE, DB/2 UDB,
+and MySQL.  However, that was not a wisely designed database model, and would have choked horribly for performance due to the use
+of security stored procedures on each database request that required multi-table joins through 8-way unions, absolutely <i>killing</i>
+any hope of high speed I/O support.
+<p>
+MCF 3.1 seeks to address that security limitation in a few ways.  For starters, the database structure used for defining database permission
+group hierarchies has been completely redone, and the concept of a security role has been added. The code itself is being modified to use
+dynamically created values for all system "constants" that get set on initial database install to pseudo-random values based on the IP address
+and time-of-first-initialization for a given cluster server, rather than the hard-coded values and well-known-"secret" values of the 2.x series.
+The logical names do not change drastically, with their still being a "system" user, cluster, and tenant, but now their id's are not predictable
+and therefore less hackable.
+<p>
+A SecurityCache that gets specialized depending on the layer of the system, with the JpaSecurityCache being the lowest level cache in the
+security schema lying over the database repository for the schema.  Future client caches will "register interest" in that JPA cache, providing
+network remote caches of the security data in it's rawest form, and hiding the details of the security schema tables from the application code.
+<p>
+The security checks will now be done in the database interface code, not in the database, so the database will only be hit with an IO for an
+authorized operation, reducing the number of IOs that a database has to process. Further security processing then filters the result sets in the
+database interface code to the set of data the user is actually authorized to see, as there are many cases where the raw database query will
+return far more data than the user is allowed to access, particularly when SecLevel is specified as ClusterGroup or TenantGroup, with the individual
+records having a "DataGroupName" attribute automatically added and maintained which is used for access filtering after processing of an authorized
+operation. (I know exactly how this is going to be supported, but the infrastructure for coding it has to exist first, and it doesn't yet as of
+2026-05-10.)
+<p>
+Another issue was the use of JDBC in the first place. While it was doable with the aid of MSS Code Factory, it was not a viable code base due to
+the sheer size of it.  Each database vendor had their own backend implementation that talked to their particular dialect of SQL stored procedures.
+At the time 2.x had database IOs added, JDBC was the primary means of talking to an SQL data store, and I ran with it to the bitter end.
+<p>
+All of that is gone, replaced by vendor-neutral JPA code, so there is now only <i>one</i> low-level database interface to worry about debugging and
+maintaining as time goes by.
+<p>
+The Buff layer is truly detached from JPA, save for some very low-level Jakarta packages that are used to define the DbKey types used by the code base.
+If your code relies entirely on Buff layers that use the future JSON-based web socket communications, they won't have to pull in any Spring JPA packages
+to be deployed.  Indeed, only the security server will have a JPA implementation for the security tables; all application code talks through the registered
+services and interfaces that get bound on system startup and initialization, so applications never talk to the security tables directly.
+<p>
+<strong>DO NOT define relationships referencing the Sec* tables of the security schema in your application code base, including SecUser.</strong>  Even the
+current models for CFInt and CFBam 3.1 might break this rule, and will have to be altered accordingly.  I'll make sure there is a UserLogin datatype defined
+by the security schema to be used for referencing users in application code. This value is the login name of the user, when you need a readable version of
+a reference to a SecUser set of data.  Normally you just use a CFLibDbKeyHash256, and make sure it is one of the ids from some data you have retrieved, or an
+id in your own authorization object (i.e. your own.) I do not intend to provide public application access to the UserId-UserLogin mapping done by the security
+caches to application code. That is too open to abuse and probing for valid login names and ids in the system by rogue model tweaks or application custom
+code packages, so it simply won't be supported.
+<p>
+I'll need to add a SecLevel User to the system, which adds a DbKeyHash256 attribute named UserOwnerId to the object, similar
+to the "DataGroupName" of the ClusterGroup and TenantGroup sec levels. By the way, there is no difference between referencing role names or group names with
+a DataGroupName; both are probed automatically by the security cache queries.  This will allow the definition of user-owned data without an explicit reference
+to the user table.
+<p>
+I also need to consider future supervisor and proxy definitions that support limited-scope access to individual users' data within a domain/department, likely
+by creating system, cluster, and tenant scoped SysUsers, ClusUsers, and TentUsers objects with members and accessors defined.  The accessors would form a hierarchy,
+but the members would not; membership in such a department or domain definition would have to be explicit.
+<p>
+Another concern that comes to mind is the JPA layered code and the way the Obj layer hangs on to the results of the database access data. I think the JPA layer is
+going to have to perform mapping to Buff instances as part of the final result set filtration that it does for security enforcement. So the JPA <i>Service</i> implementations
+work with JPA instances, but the database interface layer that does the security processing will convert the returned JPA objects to Buff objects. JPA objects
+instantiate multiple copies of data for each individual reference; there is no guarantee whatsoever that a reference to the PKey "1" in TableA will not return
+fourty or fifty different copies of the object for each of it's child objects when they dereference their parent. That's an insane amount of memory pressure just
+to avoid the overhead of converting between the two primary branches of the database interface implementations.
+<p>
+Similarly, the database interface layer is going to have to convert incoming Buff objects to JPA objects for passing to the Service layers.  This ensures that the Obj
+layer is always dealing with a Buff-based implementation that minimizes the memory footprint of the objects, especially in between processing of individual requests.
+<p>
+Last but not least, the entire Obj and Ram implementation have to be switched from using HashMap types to ConcurrentHashMaps. See the SecurityCache for an example of
+Insert/Delete only use of a ConcurrentHashMap (no deletes yet as of 2026-05-10.) Single threaded code just does not exist any more, and the use of semaphore locks instead
+of "flowing" data changes is <i>passe.</i>
+</BODY>
+</HTML>

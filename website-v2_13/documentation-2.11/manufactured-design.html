@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision: 3037 $
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Design of the Manufactured Code</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="installing-a-project.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="manufactured-code-model.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Design of the Manufactured Code</H2></CENTER>
+<p>
+It is currently December, 2019.  This project began around the fall of 1998,
+roughly when Java 1.0 was released.  Java made me believe a goal had been
+achieved: platform neutrality.  It made an idea I had on the back burner since
+University come to the forefront from "what if" to "how can I".
+<p>
+The first 9 years of MSS Code Factory development focused on getting to the 2.6
+code base, which actually could produce code reliably, essentially a period of
+pure algorithmic R&amp;D.
+<p>
+The next 9 years were spent on architectural research into what I could actually
+implement for web-targetted application services. Several different
+architectural approaches to the manufactured code were tried, and I played with
+different languages and databases as well.  But eventually it was clear to me
+that the current Java code base was stable and doing what I intended, a proper
+alpha for my long-term goals defining the essential interfaces of my system.
+<p>
+I also had exposure to different architectural approaches for systems
+design over the years of working as a consultant in the industry to some
+of the largest firms on projects that often coordinated the efforts of
+hundreds of programmers scattered around the world.  The code manufactured
+by MSS Code Factory tries to incorporate a "best of breed" approach from
+all those different approaches to building scalable atomic-interface
+transactional applications, which minimize the time a request holds locks
+of any kind on the database, and ensures that locks are not subject to the
+vaguaries of 2-phase commit protocols (which do work, sort of, except
+when they don't and require painful manual redo/unwind.  At least that
+was my experience in the financial and telecommunications industries.)
+<p>
+One of the first decisions was that using a "framework"
+methodology was too limiting, regardless of who provided or developed
+the framework in question.  For example, XDoclet2/Hibernate was a very
+powerful and well documented framework, but it limited the scope of the
+manufactured code to JEE servers <i>only</i>.  As a result, you'll only
+find the slim library of very basic common code in the Apache V2 licensed
+<tt>CFLib</tt> package.  This is the only fragment of code not
+manufactured by the system itself which has to be imported and
+linked in order for the code to run; CFCore is <i>optional</i> and
+only required if you are manufacturing a customized GEL expansion rule
+system.  It is also Apache V2 licensed code.
+<p>
+Java itself imposes some semantic standards as well, in particular the
+way getters and setters for attributes are named and typed.  As these
+standards are <i>critical</i> to Java's "introspection" code components,
+the manufactured code follows this style instead of re-inventing the wheel.
+<p>
+<H2>State of the 2.12 Java Implementation</H2>
+<p>
+The initial implementation of the manufactured code for Java has been completed,
+and required little modification since 2017, save for tweaking of
+syntax and file location to make the shift to Java 11 packaging.  That is why
+I refer to MSS Code Factory 2.11 as "Java Production."  My currently installed
+Java is OpenJDK 12.
+<p>
+<H2>State of the 2.12 Database Scripts and Stored Procedures</H2>
+<p>
+The specifications of the stored procedures which the Java JDBC code invokes
+in the database server have been stable for about four years, though they haven't
+been tested with the absolute latest and greatest versions of the databases.
+<p>
+<H2>State of the 2.12 C++ Implementation</H2>
+<p>
+Currently the C++ implementation provides the base library with the C++ equivalents
+to the base libschema shared library (Schema, [H]Buff, [H][P]Key, Table, Obj, EditObj,
+TableObj, and SchemaObj classes), the libschemasaxloader shared library ([Schema]SaxLoader,
+[Schema][Table]Handler classes), the libschemaram shared library ([Schema]RamSchema,
+[Schema]Ram[Table]Table classes), and the libschemamsscf library ([Schema]MssCFEngine,
+[Schema]MssCFGelCompiler, [Schema]MssCFBind, [Schema]MssCFReference,
+[Schema]MssCFIterate classes.)
+<p>
+I'm currently working on using those foundation objects to re-implement MSS
+Code Factory itself in C++ in order to "prove in" the basic functionality of the
+C++ code to date before people are encouraged to build on it.  The primary goal
+of the 2.11 efforts at this point are to produce valid C++ code supporting that
+effort.
+<p>
+<H2>Future Plans for 2.13 C++ Implementation</H2>
+<p>
+The long-term goal of the C++ implementation is to provide an Apache custom web server
+loadable module or library which relies on the foundation code and a reworking of the
+current connection protocols I prototyped in Java as embedded Apache multi-threaded
+server code.  I want to write Apache multi-threaded application servers that talk directly
+to the cluster's database, with an ODBC prototype for SQL Server, ideally while
+ensuring that only one request from a given client is processed at the same time,
+with a goal of preventing syn-flooding type attacks on an application server from
+rogue client code, and in order to simplify encryption of the data streams.
+<p>
+I just hope there are good examples of how to do this for the Apache server side first.  I already
+know Java supports HTTPS requests to servers; I just haven't bothered to work up the key
+validation logic because it is just a production-ready prototype.  It needs work, but I'm not
+going to make the attempt in Java because Java is too limited a language for large-scale
+systems implementations with its 32-bit array size limits..
+<p>
+I'm ready to rewrite the Java application servers in 64-bit GNU/Linux C++ 1z based on
+what I've learned since, and will learn in the course of writing the Apache C++
+server implementation.
+<p>
+The basic objects delivered as of December, 2019 are functionally equivalent in Java and C++.
+I have plans to do a C# version some day, as well.  But not until I'm done with a
+complete prototype of the Apache C++ implementation running under WSL-2 and talking to
+a SQL Server instance running native on my Windows 10 Home box.
+<p>
+When I can have a C++ client connect and process its operations via the Apache custom web
+server, then I'll retrofit the new C++ HTTPS protocol to Java.  Initially I'll stick with
+XML-based communications, but expect to switch to a low-level text-stream protocol using
+what I deam to be the best-of-breed approaches to mixing fixed-length fields with dynamically
+sized and potentially mixed data.
+<p>
+<H2>The Importance of the SchemaObj</H2>
+<p>
+The SchemaObj is the most important piece of the manufactured code,
+tying together the table objects and their implementations to the
+implementation of a data cache by the SchemaObj itself.
+<p>
+The SchemaObj objects produced incorporate
+management of the database connection used to work with the schema data.
+You can have as many SchemaObj instances as you like in a Java process;
+some programmers might even want to code one SchemaObj for <i>each</i>
+window of a client-server system as an alternative to flushing the cache,
+so that each window can only be <i>individually</i> stale, rather than
+the whole system.  Be aware that the SchemaObj approach is not ideal for
+this type of coding, as there is no support for common or shared objects
+such as lookups at this time, which means every window would be reloading
+its referenced lookups seperately, slowing down the system and increasing
+the use of memory.
+<p>
+The SchemaObj can deal with either a JEE JNDI named resource for database
+connections, allowing it to leverage the connection pooling of most
+production JEE systems, or it can use a directly specified JDBC connection
+configuration from a configuration file for client-server systems.
+<p>
+Caching data is very important for application performance.  At a minimum,
+even a web server system needs to cache the data referenced by an
+in-flight transaction.  Client-Server systems retain the data even longer,
+and only flush and reload their caches when a serious stale data condition
+is detected.
+<p>
+Whether client server or JEE transaction processing server, the approach
+of the manufactured code is the same: All data loaded into the the schema
+is retained as runtime objects, and if any of the data is being edited,
+the edit buffer objects are "tacked on" to the basic read-only objects.
+That way, when a schema cache is compacted by invoking the
+<tt>minimizeMemory()</tt> methods of the schema table objects,
+the objects which have active edit buffers are <i>not</i> flushed.
+<p>
+<H2>Stale Data and <tt>minimizeMemory()</tt></H2>
+<p>
+There is no concept of lookup data that should be retained when you invoke
+the schema-level implementation of <tt>minimizeMemory()</tt>,
+because there is no implementation of shared lookup objects or tables
+in the system.  But the programmer can overload and customize the
+implementation to support a process-level cache at least.
+<p>
+Each table implementes a seperate <tt>minimizeMemory()</tt>
+implementation.  While this may seem inconvenient to the programmer,
+it was done quite intentionally so that relatively static lookup
+data would not have to be reloaded after a cache compaction.
+<p>
+When <tt>minimizeMemory()</tt> is invoked, all objects in the table's
+cache that are not referenced by edit buffers are released.  Edit
+buffers are retained, even when building a JEE system.  Otherwise
+the application has no buffer to rely on when "undoing" an edit.
+<p>
+Edit buffers are a critical aspect of the manufactured code.  In order to
+manipulate a record or object, you <i>must</i> first do a <tt>beginEdit()</tt>
+of the object in question to refresh/reread it and to "pin" a copy of the
+current object into memory.  With 2.0, this will be enhanced slightly by
+having <tt>beginEdit()</tt> automatically invoke a <tt>"SELECT...FOR
+UPDATE"</tt> type read statement instead of the regular reads being
+used now. This will serve to "pin" the record in the database as well
+as in cache memory, though it will not be particularly useful for
+transactional processing systems that implement atomic services.  But
+for client-server coding, it is a long-standing critical aspect of being
+able to successfully build a client-server system.
+<p>
+<blockquote>
+<strong>WARNING:</strong> Invoking the <tt>commit()</tt> or <tt>rollback()</tt>
+methods of the SchemaObj will <i>not</i> automatically post the object
+edits to the database.  You <i>must</i> manufally invoke the <tt>create()</tt>,
+<tt>update()</tt>, or <tt>delete()</tt> methods of the edited objects
+in order to persist them <i>before</i> committing the transaction.
+<p>
+Furthermore, a rollback does not release or undo the edit buffers, because
+while that would be desirable for a client-server system, it goes against
+the fundamental philosophy of a JEE transactionally designed system which
+has to retain edit buffers across multiple transactions.
+</blockquote>
+<p>
+<H2>Use of class/table hierarchies</H2>
+<p>
+There are two key schools of object-relational mapping design.
+<p>
+With one model, each table in the database comprises a complete object
+in order to improve read performance by being able to retrieve an object
+with a single database probe.
+<p>
+In the alternative model, each table in the database only has the primary
+key and the new attributes of the subclass in each table, so you need to
+do joins in order to read complete objects.
+<p>
+The latter approach was chosen after working with both models several
+years ago.  The ability to read the <i>entire</i> set of objects which
+derive from a given table or class was determined to have more benefit
+to the final system's programmability than the marginal performance
+improvements of the single-object table approach.
+<p>
+More importantly, techniques were discovered and implemented for minimizing
+the database reads while still expanding sub-objects to their appropriate
+classes by using unions and joins of multiple reads to fetch the objects
+for each of the derivations found for a given table/class query.
+<p>
+<H2>Miscellaneous Details</H2>
+<p>
+Whenever and wherever possible final constants are used to help the Java
+compiler minimize memory usage.  Although most Java compilers will
+rationalize constant strings so there is only one instance of the string
+data, you cannot <i>count</i> on it doing so as a programmer.  True, this
+is a trivial amount of memory and adds little to the runtime footprint,
+but it was a consideration of the design of the manufactured code.
+<p>
+There is overhead to every object instantiated in a system, from memory
+allocation and initialization to object references in the code itself.
+Rather than take an older table-record oriented approach, 1.8/1.9
+shifted back to an object-buffer oriented approach that Mark Sobkow
+successfully experimented with about 8-10 years ago.  Use of this code
+style proved to have <i>substantial</i> performance benefits for the
+system, even if the resulting code is a little less intuitive for those
+with a table-record programming background instead of experience with
+object-relational mapping systems.
+<p>
+<H2>Fast-Fail Semantics</H2>
+<p>
+A "fast fail" architecture is one that protects itself from bad data
+by validating each field as it's applied, and verifying cross-reference
+object links as soon as possible.  Fast fail architectures throw exceptions
+like crazy whenever the user or batch job provides "bad data", but they
+do so <i>without</i> hitting the database with an insert or update that
+the application code should <i>know</i> will fail.
+<p>
+Anything you can do to avoid unnecessary database probes will improve
+the performance of the system.
+<p>
+More importantly, for a client-server architecture, fast-fail processing
+means that you don't have a transaction automatically rolled back by the
+database in the event of a minor data typo; instead the user can be given
+the chance to correct the error before the insert or update is posted.
+<p>
+Please note that fast-fail semantics do <i>not</i> avoid the need for the
+occasional custom data validation code in the Business Logic layers -- it's
+far from unusual for data validation to require considering several fields
+of data, or for a field validation to require some calculations or correlation
+to other information to be evaluated usefully.  Fast-fail semantics just
+take care of simple field and relationship validation.
+<p>
+<H2>Protection from SQL Injection Attacks</H2>
+<p>
+SQL injection attacks are common in both web and client-server applications.
+They occur when a programmer forgets to "wrap" a string in the SQL syntax
+appropriate to the database being used, allowing a malicious client to
+"inject" a fragment of SQL that will be executed by the database <i>without
+any control by the application itself.</i>
+<p>
+MSS Code Factory 2 manufactured code protects from SQL injections by validating
+and encoding all data in the syntax appropriate to the database being
+supported.  <i>It is impossible to execute an SQL injection attack against
+the manufactured code.</i>
+<p>
+With manufactured code, there is no chance one of the junior programmers
+on the team will forget to apply the lessons they've been taught
+about SQL injections in order to save time and get a deliverable out the
+door.
+<p>
+<H2>Heavy use of the "Factory" pattern</H2>
+<p>
+The "Factory" pattern allows the application programmer to "plug in" an
+alternative implementation of an object, provided that it implements the
+interface hierarchy specified by the system.  The business logic (BL) layers
+in particular rely on factories to enable the programmer to inject custom
+application code methods into the system by extending or modifying the BL
+objects with the necessary custom code, and wiring a replacement factory
+as appropriate.
+<p>
+Factories are also used for exceptions thrown by the manufactured code,
+an implementation of hard-coded NLS support that relies on language-specific
+exception factories instead of reading, parsing, and formatting exception
+messages using resource strings.  Nothing will slow a high-volume application
+down quite like a disk-based resource string probe when the system is already
+so heavily bogged down that the JVM is flushing resources it can re-read at
+a later time.
+<p>
+With a fast-fail exception architecture, it is therefore <i>critical</i> to
+avoid loading resource strings when throwing exceptions.  The performance hit
+of loading resource strings is just far too great -- any disk I/O is.
+<p>
+<H2>Multi-object Deletion Quirks</H2>
+<p>
+Although it's a bad idea for complex objects that own sub-objects,
+many business systems are comprised of relatively straight-forward
+table buffers, not object-relational hierarchies.  In order to help
+support the development of such systems, multi-record <tt>deleteBy[Key]()</tt>
+methods were added to the system.  However, when you invoke these methods,
+the SchemaObj cache is <i>not</i> cleaned up, as the manipulation is
+done entirely on the database side by stored procedures.
+<p>
+<H2>Locking/pinning data for edits</H2>
+<p>
+The <tt>lock[Table]()</tt> methods either perform a "SELECT...FOR UPDATE"
+(DB/2, Oracle, PostgreSQL, and MySQL) or update the value of an artificial
+column (SQL Server) to "pin" the record for update by client-server
+systems.  When you invoke a <tt>beginEdit()</tt> on an object, this pinning
+is done automatically to ensure that you are editing a fresh copy of the database
+information.
+<p>
+In order to support cross-transaction edits, such as with JEE applications,
+the system also implements record version stamping to detect edit collisions.
+This is a tried and true technique that has been used on 90% of the systems
+I worked on during my 30 year career.
+<p>
+The only way to guarantee transaction integrity without the headache caused
+by 2-phase commit technologies is to ensure that any operations which manipulate
+the database are atomic transactions run by the application server talking
+directly to a database connection.  In order to support complex transaction code
+written on the server using the manufactured code, the ServerMethod and related
+table components have been provided in the Business Application Models which define
+the application.
+<p>
+The text body of a ServerMethod language specification is expressed as a
+single GEL expansion, allowing the manufactured code to adapt to being produced
+for a database server that incorporates the model that defines the server method.
+All server methods operate as a single transaction which either executes to
+completion and is committed before returning results to the client,
+or is rolled back as if the client had never invoked the server method.
+<p>
+This also applies to the implementation of the manufactured create/insert,
+read, update/modify, and deletion/removal methods and their interface from the
+client to the transactional application server they are logged in to.
+<p>
+For methods which do not modify the data nor require transactional integrity
+while reading the data they are processing, you can use the custom code hooks
+to populate both client and server objects with implementations of the custom
+code.  This is highly recommended, as it avoids client-server traffic during
+processing after the client's cache is populated with data by the initial run
+for a given set of inputs.
+<p>
+<H2>Basic Security Features</H2>
+<p>
+The system relies on a set of security tables at the cluster layer and another
+set at the tenant layer to define access permissions using 8-level group and
+group membership data.  As with most of the features of the system, this is something
+that has been done on virtually every application I ever wrote.  One key difference
+is that the checks for the permissions are pushed to the back end stored procedures,
+rather than being coded in the client.
+<p>
+Specify the SecScope of your objects to control the security code generated by
+the system.  "None" will produce no security code (and thereby maximize performance.)
+"System" allows anyone to read the data, but only the "system" user to update or delete
+it.  "Cluster" uses the cluster SecGroup, SecMemb, and SecInclude objects to define the
+access priveleges for the data (Read[Table], Update[Table], and Delete[Table] are the
+expected group names.)  "Tenant" uses the TSecGroup, TSecMemb, and TSecInclude objects
+in a similar fashion to cluster-enforced security.  Be aware that if you use Cluster or
+Tenant security, the object in question *must* have a relationship to the Cluster or Tenant
+objects so that it can resolve the security data at runtime.
+<p>
+<H2>Audit Stamping</H2>
+<p>
+Enabling audit stamping produces artificial columns in the base table of an object
+hierarchy which track the user ids of who created and updated the records, and the
+timestamps of when those changes were made.  There is virtually no runtime cost to
+enabling this feature on a table or object hierarchy.
+<p>
+<H2>History Tables/Logging</H2>
+<p>
+Just enable "HasHistory" to produce [Table]_h history tables for your model.  There is
+overhead to producing the history records, but it's not as heavy an impact as the security
+checks unless you allow your history tables to grow excessively large instead of pruning
+them on some schedule.  Note that unlike the main object hierarchy, the history tables are
+structured such that the entire object for a class is stored as a single table record,
+rather than requiring a union of the inherited tables.
+</BODY>
+</HTML>

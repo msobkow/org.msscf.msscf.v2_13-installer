@@ -1,0 +1,10 @@
+Options +Indexes
+<FilesMatch "\.(html)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(txt)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(xml)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>

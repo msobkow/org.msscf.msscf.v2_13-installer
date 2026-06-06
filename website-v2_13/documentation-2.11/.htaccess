@@ -1,0 +1,60 @@
+<FilesMatch "\.(html)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/\.(html)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/\.(html)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/*/\.(html)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(css)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+<FilesMatch "./*/\.(css)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+<FilesMatch "./*/*/\.(css)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+<FilesMatch "./*/*/*/\.(css)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+<FilesMatch "\.(bash)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/\.(bash)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/\.(bash)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/*/\.(bash)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(txt)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/\.(txt)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/\.(txt)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/*/\.(txt)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(xml)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/\.(xml)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/\.(xml)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+<FilesMatch "./*/*/*/\.(xml)$">
+Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>

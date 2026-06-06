@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>MSS Code Factory 2.11: Preparing the Manufacturing Directory for Builds</TITLE>
+	<LINK rel="stylesheet" HRef="cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="../index.html"><img align=vcenter src="MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;MSS Code Factory 2.11: Mark Stephen Sobkow's Code Factory&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="config-installation.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Documentation Home</A></td>
+		<td align="right"><A HRef="building-a-project.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Preparing the Manufacturing Directory for Builds</H2></CENTER>
+<p>
+In order to build projects manufactured by MSS Code Factory 2.11, you need to have the source trees
+for the dependent 2.12 projects installed and built.  The CFSec project is <i>always</i> referenced
+by a manufactured project, as all of the database scripts and core objects rely on that code
+being present.  Either or both of CFInt (internet) and CFCrm (Customer Resource Management) are
+also common to many projects.
+<p>
+To prepare the core projects, you'll need to clone the git source trees for them:
+<p class=indent1><tt>
+cd ${mymfgdir}</br>
+git clone http://github.com/msobkow/cflib_2_12</br>
+mkdir cflib_2_11/installer</br>
+git clone http://github.com/msobkow/cfcore_2_12</br>
+mkdir cfcore_2_11/installer</br>
+git clone http://github.com/msobkow/cfsec_2_12</br>
+mkdir cfsec_2_11/installer</br>
+git clone http://github.com/msobkow/cfint_2_12</br>
+mkdir cfint_2_11/installer</br>
+git clone http://github.com/msobkow/cfcrm_2_12</br>
+mkdir cfcrm_2_11/installer</br>
+</tt>
+<p>
+If updates to those projects are released by the MSS Code Factory website, you should
+do a "git pull" on them, an "ant clean" in their Java directory, and rebuild them with "ant",
+in the order of dependency (CFSec, CFInt, and finally CFCrm.)
+<p>
+Try building the projects now to make sure your build environment is correct:
+<p class=indent1><tt>
+cd ${mymfgdir}/cfsec_2_12/java<br>
+ant
+</tt>
+<p>
+If CFSec built correctly, you are in good shape to proceed with building the rest
+of the projects using scripts instead.
+<p>
+</BODY>
+</HTML>

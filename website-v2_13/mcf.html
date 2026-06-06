@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!--
+ *	$Revision$
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-SCRIPT-TYPE" content="text/javascript">
+	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
+	<meta http-equiv="refresh" content="86400">
+	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+	<TITLE>Mark's Code Fractal</TITLE>
+	<LINK rel="stylesheet" HRef="css/cf-content.css" type="text/css">
+</HEAD>
+<BODY>
+<p>
+<CENTER><H1>
+<A Target="_blank" HRef="index.html"><img align=vcenter src="resources/MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
+&nbsp;&nbsp;&nbsp;Mark's Code Fractal&nbsp;&nbsp;&nbsp;
+</H1></CENTER>
+<p>
+<table cols="3" width="95%" align="center">
+	<tr><td align="left"><A HRef="index.html">Prev</A></td>
+		<td align="center"><A HRef="index.html">Home</A></td>
+		<td align="right"><A HRef="mcf-prototype.html">Next</A></td>
+		</tr>
+</table>
+<p>
+<CENTER><H2>Mark's Code Fractal</H2></CENTER>
+<p>
+Mark's Code Fractal is a tool used to accelerate the production of the repetitive code that comprises 75-85% of the typical enterprise business application - the "glue" between the business logic programmer and the backing data servers and databases.  It does so by applying a knowledge base of General Expansion Rule (GEL) files following specific XML document schemas and semantic constraints to a Business Application Model (BAM), which is at it's heart an enhanced ERD defined as an XML document following yet another schema specification.
+<p>
+The BAM defines the tables, indexes, and relationships of an ERD, including Superclass, Container/Component, Parent/Child, and Lookup relationships.  It also provides the means of encapsulating customizations of the output source code, though the approach for that will change radically for Mark's Code Fractal 3.1 as opposed to MSS Code Factory 2.13, allowing for much more flexibility than the current hard-coded approach to such customizations.
+<p>
+The long-term goal is to produce a service interface for an instance of MCF that is deployed on a server cluster to manage and coordinate access to the BAM specifications, allow for team editing of the specifications, and to provide a code production service based on the standard enterprise knowledge base the site has chosen to develop.
+<p>
+The current 2.13 knowledge base is only a <i>prototype</i> that is intended to be heavily customized and adapted to the unique needs of each enterprise' standards and toolkits.  As long as it takes free-form text input as a specification, you should be able to produce those specification files automatically by customizing your own version of the knowledge base.  My own personal main contribution is the knowledge base; the tool itself is only a tool - it is the <i>knowledge</i> behind the specifications that matter, and the ability to <i>customize</i> and <i>enhance</i> that knowledge and those specifications that is "worth something" to those who have coin to spend.
+<p>
+Therefore the cfcore, various *bam* packages, and knowledge base are released under a Dual GPLv3/Commercial license while the remainder of the source code is under a Dual LGPLv3/Commercial license so that the vast majority of uses for that code are completely open, and you can build applications using the foundation packages and libraries as-is without issue.
+<p>
+<H3>So what exists currently?</H3>
+<p>
+Currently the repositories provide the complete set of source code, models, and rule bases from MSS Code Factory 2.13 under the logical domain "org.msscf", which doesn't actually exist.  The copyright is not based on the domain, however, but on my name and contact information. In the bin-v2_13 repository are a number of scripts which can be used to set up a code factory environment. For example, I have my source trees for mcf and msscode under /opt/mcf and /opt/msscode respectively, with symbolic links from my home directory to those directories. I recommend creating /opt/msscode/v2_13-maven and cloning the various *2_13* repositories under there.
+<p>
+All of the server.markhome.mcf repositories are for Mark's Code Factory 3.1, which is emphatically a work in progress. Those should be cloned under /opt/mcf/v3_1/java/ (trust me on the directory hierarchy; that's how the output gets laid out by the tool.)
+<p>
+Here are a couple scripts to make things easier: <A HRef="InstallRepos213.bash">InstallRepos213.bash</A> and <A HRef="InstallRepos31.bash">InstallRepos31.bash</A>
+<p>
+Yes, it is a lot of repositories, and a lot more are coming over the next few months to deal with message communications channels, RAM storage, a document editor object, and a few other things I have in mind. One major feature, one new repo for each of the three component projects.
+<p>
+Once you've cloned the repos, you need to set up your environment. For your .profile, you need something like this:
+<pre>
+<code id="dotProfileText">
+export NETBEANS_HOME=/usr/lib/apache-netbeans/
+export ANT_HOME=/opt/apache-ant-1.10.15
+if [ -d $NETBEANS_HOME/java/maven ]; then
+	export MAVEN_HOME=$NETBEANS_HOME/java/maven
+else
+	export MAVEN_HOME=/opt/apache-maven-3.9.11
+fi
+export JFX_HOME=/usr/lib/jvm/javafx-sdk-21.0.9
+export PATH_TO_FX=$JFX_HOME/lib
+
+export NEXUS_HOME=/opt/nexus-3.89.0-09
+export JAVA_HOME=/usr/lib/jvm/jdk-21.0.10+7
+export JDK_HOME=/usr/lib/jvm/jdk-21.0.10+7
+#export JAVA_HOME=$NEXUS_HOME/jdk/temurin_21.0.9_10_linux_x86_64/jdk-21.0.9+10
+#export JDK_HOME=$NEXUS_HOME/jdk/temurin_21.0.9_10_linux_x86_64/jdk-21.0.9+10
+export JAVA="$JDK_HOME/bin/java"
+export JAVAC="$JDK_HOME/bin/javac"
+
+export MSSCF_HOME=/opt/msscode
+export MSSCFHOME=$MSSCF_HOME
+export MSSCF_WORKKB=$MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfkbase/src/main/resources
+export MCF_HOME=/opt/mcf/v3_1/java
+export JSEP=":"
+export PSEP=":"
+export DSEP="/"
+
+export PATH=/home/msobkow/bin:$MCF_HOME/bin-v3_1:$MSSCF_HOME/v3_1-maven/java/bin-v3_1:$MSSCF_HOME/v2_13-maven/bin-v2_13:$MSSCF_HOME/v2_12/bin:$JDK_HOME/bin:$JDK_HOME/lib:$NEXUS_HOME/bin:$PATH_TO_FX:$MAVEN_HOME/bin:$MAVEN_HOME/lib:$ANT_HOME/bin:$ANT_HOME/lib:$NETBEANS_HOME/bin:/usr/sbin:$PATH
+</code>
+</pre>
+<p>
+Then we have some useful .bash_aliases, though they aren't required, just handy:
+<pre>
+<code id="bashAliasesText">
+alias ls='/usr/bin/ls -AC --classify=auto --group-directories-first '
+alias ll='/usr/bin/ls -l '
+alias initgit='eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519'
+alias cdkb='cd /opt/msscode/v2_13-maven/org.msscf.msscf.v2_13.cfkbase/src/main/resources'
+alias cdmsscf='cd /opt/msscode'
+alias cdmcf='cd /opt/mcf/v3_1/java'
+alias lsd="/usr/bin/ls -A --classify=always . | grep '.*/$';/usr/bin/ls -A --classify=always . | grep '.*@$'"
+alias lsl='/usr/bin/ls -l '
+alias lsk='/usr/bin/ls -l --block-size=K '
+alias lsg='/usr/bin/ls -l --block-size=G '
+alias lsm='/usr/bin/ls -l --block-size=M '
+</code>
+</pre>
+<p>
+Then you set up a .msscfrc configuration file for version 2.13 to use, which has to be located in your home directory:
+<p>
+<pre>
+<code id="dotMsscfrcText">
+msscf.cartridgedir=/opt/msscode/v2_13-maven/org.msscf.msscf.v2_13.cfkbase/src/main/resources
+#msscf.cartridgedir1=/opt/msscode/v2_13-maven/cfkbase-v2_13/cartridge-2.13
+msscf.modeldir=/opt/msscode/v2_13-maven/cfmodel-v2_13/model-2.13
+msscf.rootgendir=/opt/mcf/v3_1
+</code>
+</pre>
+<p>
+Start a new login shell reading those environmental changes, and within it you should be able to run the utility program "BuildCFAll213.bash", which will run through all the v2.13 packages and build and install them in the correct order, eventually depositing binaries in bin-v2_13. Once you've done that, you're ready to run the tool. As a test, specify "msscf.rootgendir" to point somewhere other than overwriting the /opt/mcf source tree, and run "ManufactureCFSec31Java.bash 42" (the number you pass doesn't matter, it used to be a build number - I may resurrect that.) You should see many messages rapidly streaming by about the files being produced.
+<p>
+Depending on the speed and storage IO contention on the box you're using, this tool can produce roughly 2.5 million lines of source files in under 5 minutes of coordinated and clean-compiling JPA data IO, Spring service implementation, general buffer based IO, RAM storage of buffers, a structured SAX Parser implementation with associated .xsd files, and the usual supporting cast of pom.xml's, .gitignores, etc.
+<p>
+Now go forth and create your own models. Although you can't clone and enhance or build on the BAM model without a license or by following GPLv3 restrictions, you <i>can</i> review it for <i>examples</i> of how to model certain data structures and relationships.  If you're later feeling brave, dive into the knowledge base itself and create your own custom rules, potentially for entirely different languages and frameworks. Above all else: Enjoy the Power!
+<p>
+This project is very much in development. As such, the state of the outputs vary from day to day. But I'll try to start working on branches so that the main code base clean-compiles while I work on broken code.  The next page is the development log for the project, though it doesn't project into the future very far nor project any due dates or the like. I work on things when I feel like it and they get done when they get done. Ain't retirement grand? :)
+</BODY>
+</HTML>
