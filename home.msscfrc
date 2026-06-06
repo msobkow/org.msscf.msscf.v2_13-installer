@@ -1,0 +1,4 @@
+#Sat Jun 6 07:40:00 CST 2026
+msscf.cartridgedir=/opt/msscode/org.msscf.msscf.v2_13.cfkbase-snapshot-202606060700/src/main/resources/
+msscf.modeldir=/opt/msscode/org.msscf.msscf.v2_13.cfmodel-snapshot-202606060700/src/main/resources/model-2.13/
+msscf.rootgendir=/opt/msscode/output
