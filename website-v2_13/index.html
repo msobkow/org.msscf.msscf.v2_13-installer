@@ -26,23 +26,69 @@
 		</tr>
 </table>
 <p>
-Welcome to my project history page; there really has been only one project I've worked on since the late 90's other than
-projects for employers.  I recently decided to eliminate my initials from the name, and clarify that it is a code
-<i>fractal</i> rather than a "factory."  It doesn't "manufacture" anything but source code that is ready for integration,
-given a valid model and rule base defining how to map the model to code.
+Welcome to the Mark's Code Fractal and MSS (Mark Stephen Sobkow) Code Factory project pages.  Mark's Code Fractal is the
+successor to MSS Code Factory, a major refresh of the technology and approach used for the code base which really shares
+very little with the prior knowledge base and code structure that produced the 2.13 code architecture.
 <p>
-<strong>MSS Code Factory 2.13 alpha01 is now available</strong> at <A HRef="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha01">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha01</A>. You can find installation instructions at <A HRef="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/</A> and the README.md displayed there.  There have also been releases of the 2.13 knowledge base and model set as of 2026-06-06 07:00 CST, which are included in the installer and are required alongside the executable jars to run the tool. This is the version of the tool used to produce the Mark's Code Fractal 3.1 code that is currently under development.
+<strong>MSS Code Factory 2.13 alpha02 is now available</strong> at <A HRef="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha02">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha02</A>. You can find installation instructions at <A HRef="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/</A> and the README.md displayed there.  There have also been releases of the 2.13 knowledge base and model set as of 2026-06-06 07:00 CST, which are included in the installer and are required alongside the executable jars to run the tool. This is the version of the tool used to produce the Mark's Code Fractal 3.1 code that is currently under development.
 <p>
-Mark's Code Fractal is a tool used to accelerate the production of the repetitive code that comprises 75-85% of the
-typical enterprise business application - the "glue" between the business logic programmer and the backing data
-servers and databases. It does so by applying a knowledge base of General Expansion Rule (GEL) files following
-specific XML document schemas and semantic constraints to a Business Application Model (BAM), which is at it's
-heart an enhanced ERD defined as an XML document following yet another schema specification.
+<H2>Major Enhancements In 2.13 alpha02 and 3.1</H2>
+<p>
+Mark's Code Fractal 3.1 was to introduce the concept of "tweaks", in the form of "schematweak [TweakName]", "indextweak [TweakName]"
+and "tabletweak [TweakName]" GEL verbs that lookup tweak specifications in the CFBam model <i>dynamically</i> rather than relying
+on hard-coded expansion verbs with unique names bound to the engine at compile time as the 2.13 code base had been doing.
+All those custom verbs are going bye-bye in 3.1.
+<p>
+The idea of "tweaking" code was so convenient that it got back-ported to 2.13, and is available now in parallel with the old approach of
+hard-coded verbs.
+<p>
+A "SchemaRole" specification within a Bam's SchemaDef now provides the means of defining roles that enable
+a list of security groups and roles, and which include/are auto-enabled by another set of security groups. Roles themselves are implemented
+as system security group objects in the security schema; all security group types and role types must have a unique name in the system
+security group set of definitions in the cluster. Currently the implementation of the roles is lacking; only the specification of them has been
+coded so far. Implementing them is going to take a bit of doing, and then I've got to flesh out the forget code for the security schema base cache
+and have the appropriate pieces of the JPA code base trigger forgetting of the various groups and roles that they've been modifying in or removing
+from persistent storage.
+<p>
+<H2>Major Enhancements Planned for 3.1</H2>
+<p>
+I will be adding a "CodeVisibility" specification to a Table specification for 3.1 to be used in the knowledge base
+that produces the 3.2 code. It will have a default value of "public" and could optionally be set to "protected".  Public
+tables would be used as they are now, but protected tables would only be visible <i>within</i> a schema's implementation code, not
+accessed by any SchemaDef's that import the schema through a SchemaRef.
+<p>
+It may be necessary to extend the idea of code visibility to other aspects of the code base, such as the schema methods and the
+indexes and methods of tables, but even hiding the use of tables would require substantial modification of the knowledge base.
+There are a number of security tables that I'd really like to have protected from access by referencing schema definitions, which
+is what inspired this capability enhancement plan.
+<p>
+The concept of public and protected tables would also extend to the specification of public and protected schema specifications, with
+the protected schema interface extending the public schema interface, and the single implementations of the layers for the schema
+providing both interfaces. Then the referencing schema definitions and rules would only reference the public interface, and never
+access anything through the protected interface as a "short cut" or "performance tweak." There would also be public and protected
+schema table interfaces, with the protected methods and protected index accessors in the protected table interface, and all the others
+in the existing public interface.
+<p>
+The complexity of splitting the schema interfaces and referencing access in such a fashion is why I decided to put off this feature
+as a 3.1 implementation towards producing a 3.2 code base rather than considering adding it to my current 3.1 schedule. 3.1.42 will
+not be "Life, The Universe, and Everything" as I had planned, after all.
+<p>
+I'll add the specifications to the 3.1 BAM model for the feature soon, however.
+<p>
+<H2>Overview Of The Technology</H2>
+<p>
+Mark's Code Fractal (formerly MSS Code Factory) is a tool used to accelerate the production of the repetitive
+code that comprises 75-85% of the typical enterprise business application - the "glue" between the business logic
+programmer and the backing data servers and databases. It does so by applying a knowledge base of General Expansion Rule
+(GEL) files following specific XML document schemas and semantic constraints to a Business Application Model (BAM), which
+is an enhanced ERD constrained by a customized schema definition available here: <a href="msscf/2.0.13/xsd/mssbam-2.13.xsd">mssbam-2.13.xsd</a>,
+with 3.1 using an updated mcf/3.0.1/xsd/mssbam-3.1.xsd specification adapted to the new capabilities of the customized CFCore
+Engine eventualy implemented for the 3.1 BAM.
 <p>
 The BAM defines the tables, indexes, and relationships of an ERD, including Superclass, Container/Component,
 Parent/Child, and Lookup relationships. It also provides the means of encapsulating customizations of the output
-source code, though the approach for that will change radically for Mark's Code Fractal 3.1 as opposed to
-MSS Code Factory 2.13, allowing for much more flexibility than the current hard-coded approach to such customizations.
+source code, with the approach changing radically compared to the old 2.0.12/2.0.13 approach of hard-coded verbs
+in the custom engine. Both 2.0.13 and 3.1 implement "tweaks" (see prior section on enhancements and improvements.)
 <p>
 I invite you to read through the prototype architecture and philosophies, and through the 2.11 documentation.
 Although seriously stale about the details, most of the key concepts and descriptions about how the CFCore engine works
@@ -53,9 +99,13 @@ features, provide back-end Spring web services initially using JSON to replace t
 replacing JSON with a byte-stream client if at all feasible. Along the way, the databases have been split up into
 isolated instances with the Obj layer providing a unified view of the component database hierarchy. That way each data
 silo can retain control over its own security concerns, subject to unified identification and authorization of users
-through the CFSec packages and services at the bottom of the stack.
+through the security schema (CFSec) packages and services at the bottom of the stack.  Check the development log below
+for details about the progress on the 3.1 code base to date.  Remember that while the 3.1 code base is not complete, you
+certainly can define a custom application model, produce fractal code for it using the same rules, and have a preview of the
+3.1-compliant code for your model. Just remember to reference the CFSec security schema before anything else in your custom
+application model (BAM.)
 <p>
-CFSec itself may well become an OAuth2 service provider by the time I'm done, too, which I don't expect to be for quite
+The security schema itself may well become an OAuth2 service provider by the time I'm done, too, which I don't expect to be for quite
 some time, possibly not before 2027.  As such, this code is very much in a state of flux.
 <p>
 <CENTER><H2>Table of Contents</H2></CENTER>
