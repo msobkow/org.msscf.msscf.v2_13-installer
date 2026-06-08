@@ -7,7 +7,7 @@ fi
 export INSTDIR=`pwd`
 cd /opt/msscode
 export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha02"
-export SNAPSHOT_VERSION="snapshot-202606060700"
+export SNAPSHOT_VERSION="snapshot-202606080215"
 #	Install the new models
 tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfmodel-${SNAPSHOT_VERSION}.tar.gz
 if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfmodel ]; then
@@ -27,9 +27,7 @@ if [ -d /opt/msscode/${RELEASE_VERSION} ]; then
 fi
 mkdir /opt/msscode/${RELEASE_VERSION}
 cp -R $INSTDIR/bin-v2_13 /opt/msscode/${RELEASE_VERSION}/
-if [ -d $INSTDIR/website-v2_13 ]; then
-	cp -R $INSTDIR/website-v2_13 /opt/msscode/${RELEASE_VERSION}/
-fi
+cp -R $INSTDIR/website-v2_13 /opt/msscode/${RELEASE_VERSION}/
 if [ -L /opt/msscode/org.msscf.msscf.v2_13 ]; then
 	rm /opt/msscode/org.msscf.msscf.v2_13
 fi
