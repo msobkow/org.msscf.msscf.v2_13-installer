@@ -264,6 +264,17 @@
 	</xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="CodeVisibilityEnumType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="127"/>
+		<xsd:whiteSpace value="collapse"/>
+		<xsd:enumeration value="Public"/>
+		<xsd:enumeration value="Protected"/>
+		<xsd:enumeration value="Private"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="ScopeIdGenType">
 	<xsd:restriction base="xsd:long"/>
 </xsd:simpleType>
@@ -284,7 +295,22 @@
 	</xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="RoleScopeEnumType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="127"/>
+		<xsd:whiteSpace value="collapse"/>
+		<xsd:enumeration value="SysRole"/>
+		<xsd:enumeration value="ClusRole"/>
+		<xsd:enumeration value="TentRole"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="ValueIdGenType">
+	<xsd:restriction base="xsd:long"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleIdGenType">
 	<xsd:restriction base="xsd:long"/>
 </xsd:simpleType>
 
@@ -2110,6 +2136,11 @@
 	<xsd:restriction base="xsd:boolean"/>
 </xsd:simpleType>
 
+<xsd:simpleType name="IndexCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="IndexRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
@@ -2204,6 +2235,25 @@
 </xsd:simpleType>
 
 <xsd:simpleType name="IndexColRevisionType">
+	<xsd:restriction base="xsd:integer"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="IndexTweakTenantIdType">
+	<xsd:restriction base="TenantIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="IndexTweakIdType">
+	<xsd:restriction base="TweakIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="IndexTweakIndexIdType">
+	<xsd:restriction base="ScopeIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="IndexTweakRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
 
@@ -3089,6 +3139,11 @@
 	</xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="RelationCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="RelationRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
@@ -3184,6 +3239,56 @@
 </xsd:simpleType>
 
 <xsd:simpleType name="RelationColRevisionType">
+	<xsd:restriction base="xsd:integer"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefTenantIdType">
+	<xsd:restriction base="TenantIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefScopeIdType">
+	<xsd:restriction base="ScopeIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefIdType">
+	<xsd:restriction base="RoleIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefDefSchemaTenantIdType">
+	<xsd:restriction base="TenantIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefDefSchemaIdType">
+	<xsd:restriction base="ScopeIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefNameType">
+	<xsd:restriction base="NameTypeType">
+		<xsd:maxLength value="192"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefEnablesType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="2000000"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefIncludesType">
+	<xsd:restriction base="xsd:string">
+		<xsd:maxLength value="2000000"/>
+		<xsd:whiteSpace value="preserve"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="RoleDefRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
 
@@ -4466,6 +4571,30 @@
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
 
+<xsd:simpleType name="SchemaRoleTenantIdType">
+	<xsd:restriction base="TenantIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SchemaRoleIdType">
+	<xsd:restriction base="RoleIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SchemaRoleSchemaDefIdType">
+	<xsd:restriction base="ScopeIdGenType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SchemaRoleRoleScopeType">
+	<xsd:restriction base="RoleScopeEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SchemaRoleRevisionType">
+	<xsd:restriction base="xsd:integer"/>
+</xsd:simpleType>
+
 <xsd:simpleType name="SchemaTweakTenantIdType">
 	<xsd:restriction base="TenantIdGenType">
 	</xsd:restriction>
@@ -4852,6 +4981,11 @@
 
 <xsd:simpleType name="ServerMethodIsServerOnlyType">
 	<xsd:restriction base="xsd:boolean"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="ServerMethodCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
 </xsd:simpleType>
 
 <xsd:simpleType name="ServerMethodJMethodBodyType">
@@ -5476,6 +5610,11 @@
 
 <xsd:simpleType name="TableSecScopeType">
 	<xsd:restriction base="SecScopeEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="TableCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
 	</xsd:restriction>
 </xsd:simpleType>
 
@@ -7200,6 +7339,10 @@
 	</xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="TweakReplacesInheritedType">
+	<xsd:restriction base="xsd:boolean"/>
+</xsd:simpleType>
+
 <xsd:simpleType name="TweakTweakGelTextType">
 	<xsd:restriction base="xsd:string">
 		<xsd:maxLength value="2000000"/>
@@ -8182,6 +8325,13 @@
 	<xsd:attribute name="Id" type="IndexColIdType" use="required"/>
 </xsd:complexType>
 
+<xsd:complexType name="IndexTweakIdIdxType" mixed="true">
+	<xsd:sequence>
+	</xsd:sequence>
+	<xsd:attribute name="TenantId" type="IndexTweakTenantIdType" use="required"/>
+	<xsd:attribute name="Id" type="IndexTweakIdType" use="required"/>
+</xsd:complexType>
+
 <xsd:complexType name="Int16ColIdIdxType" mixed="true">
 	<xsd:sequence>
 	</xsd:sequence>
@@ -8391,6 +8541,13 @@
 	<xsd:attribute name="Id" type="RelationColIdType" use="required"/>
 </xsd:complexType>
 
+<xsd:complexType name="RoleDefIdIdxType" mixed="true">
+	<xsd:sequence>
+	</xsd:sequence>
+	<xsd:attribute name="TenantId" type="RoleDefTenantIdType" use="required"/>
+	<xsd:attribute name="Id" type="RoleDefIdType" use="required"/>
+</xsd:complexType>
+
 <xsd:complexType name="SchemaDefIdIdxType" mixed="true">
 	<xsd:sequence>
 	</xsd:sequence>
@@ -8403,6 +8560,13 @@
 	</xsd:sequence>
 	<xsd:attribute name="TenantId" type="SchemaRefTenantIdType" use="required"/>
 	<xsd:attribute name="Id" type="SchemaRefIdType" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="SchemaRoleIdIdxType" mixed="true">
+	<xsd:sequence>
+	</xsd:sequence>
+	<xsd:attribute name="TenantId" type="SchemaRoleTenantIdType" use="required"/>
+	<xsd:attribute name="Id" type="SchemaRoleIdType" use="required"/>
 </xsd:complexType>
 
 <xsd:complexType name="SchemaTweakIdIdxType" mixed="true">
@@ -9110,6 +9274,29 @@
 	<xsd:attribute name="ToCol" type="xsd:string" use="required"/>
 </xsd:complexType>
 
+<xsd:complexType name="RoleDefObjType" mixed="true">
+	<xsd:sequence>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+		</xsd:choice>
+	</xsd:sequence>
+	<xsd:attribute name="Name" type="RoleDefNameType" use="required"/>
+	<xsd:attribute name="Enables" type="RoleDefEnablesType" use="required"/>
+	<xsd:attribute name="Includes" type="RoleDefIncludesType" use="required"/>
+	<xsd:attribute name="DefSchema" type="xsd:string" use="optional"/>
+</xsd:complexType>
+
+<xsd:complexType name="SchemaRoleObjType" mixed="true">
+	<xsd:complexContent>
+		<xsd:extension base="RoleDefObjType">
+			<xsd:sequence>
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attribute name="RoleScope" type="SchemaRoleRoleScopeType" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
 <xsd:complexType name="ScopeObjType" mixed="true">
 	<xsd:sequence>
 		<xsd:choice minOccurs="0" maxOccurs="unbounded">
@@ -9167,6 +9354,7 @@
 					<xsd:element name="Uuid6Gen" type="Uuid6GenObjType" />
 					<xsd:element name="SchemaRef" type="SchemaRefObjType" />
 					<xsd:element name="SchemaTweak" type="SchemaTweakObjType" />
+					<xsd:element name="SchemaRole" type="SchemaRoleObjType" />
 					<xsd:element name="CafeSchemaObjImport" type="SchemaDefJSchemaObjImportType" />
 					<xsd:element name="CafeSchemaObjInterface" type="SchemaDefJSchemaObjInterfaceType" />
 					<xsd:element name="CafeSchemaObjMembers" type="SchemaDefJSchemaObjMembersType" />
@@ -9374,6 +9562,7 @@
 			<xsd:attribute name="Suffix" type="ServerMethodSuffixType" use="optional"/>
 			<xsd:attribute name="IsInstanceMethod" type="ServerMethodIsInstanceMethodType" use="required"/>
 			<xsd:attribute name="IsServerOnly" type="ServerMethodIsServerOnlyType" use="required"/>
+			<xsd:attribute name="CodeVis" type="ServerMethodCodeVisType" use="required"/>
 			<xsd:attribute name="JMethodBody" type="ServerMethodJMethodBodyType" use="required"/>
 			<xsd:attribute name="CppMethodBody" type="ServerMethodCppMethodBodyType" use="required"/>
 			<xsd:attribute name="CsMethodBody" type="ServerMethodCsMethodBodyType" use="required"/>
@@ -9660,6 +9849,7 @@
 			<xsd:attribute name="IsServerOnly" type="TableIsServerOnlyType" use="required"/>
 			<xsd:attribute name="LoaderBehaviour" type="TableLoaderBehaviourType" use="required"/>
 			<xsd:attribute name="SecScope" type="TableSecScopeType" use="required"/>
+			<xsd:attribute name="CodeVis" type="TableCodeVisType" use="required"/>
 			<xsd:attribute name="CppPgSqlTableInclude" type="TableCppPgSqlTableIncludeType" use="optional"/>
 			<xsd:attribute name="DefSchema" type="xsd:string" use="optional"/>
 			<xsd:attribute name="LookupIndex" type="xsd:string" use="optional"/>
@@ -9804,6 +9994,7 @@
 			<xsd:sequence>
 				<xsd:choice minOccurs="0" maxOccurs="unbounded">
 					<xsd:element name="IndexCol" type="IndexColObjType" />
+					<xsd:element name="IndexTweak" type="IndexTweakObjType" />
 				</xsd:choice>
 			</xsd:sequence>
 			<xsd:attribute name="Name" type="IndexNameType" use="required"/>
@@ -9815,6 +10006,7 @@
 			<xsd:attribute name="Suffix" type="IndexSuffixType" use="optional"/>
 			<xsd:attribute name="IsUnique" type="IndexIsUniqueType" use="required"/>
 			<xsd:attribute name="IsDbMapped" type="IndexIsDbMappedType" use="required"/>
+			<xsd:attribute name="CodeVis" type="IndexCodeVisType" use="required"/>
 			<xsd:attribute name="DefSchema" type="xsd:string" use="optional"/>
 		</xsd:extension>
 	</xsd:complexContent>
@@ -9905,6 +10097,7 @@
 			<xsd:attribute name="IsXsdContainer" type="RelationIsXsdContainerType" use="required"/>
 			<xsd:attribute name="IsLateResolver" type="RelationIsLateResolverType" use="required"/>
 			<xsd:attribute name="AllowAddendum" type="RelationAllowAddendumType" use="required"/>
+			<xsd:attribute name="CodeVis" type="RelationCodeVisType" use="required"/>
 			<xsd:attribute name="DefSchema" type="xsd:string" use="optional"/>
 			<xsd:attribute name="FromIndex" type="xsd:string" use="required"/>
 			<xsd:attribute name="ToTable" type="xsd:string" use="required"/>
@@ -10110,6 +10303,7 @@
 		</xsd:choice>
 	</xsd:sequence>
 	<xsd:attribute name="Name" type="TweakNameType" use="required"/>
+	<xsd:attribute name="ReplacesInherited" type="TweakReplacesInheritedType" use="required"/>
 	<xsd:attribute name="TweakGelText" type="TweakTweakGelTextType" use="required"/>
 	<xsd:attribute name="DefSchema" type="xsd:string" use="optional"/>
 </xsd:complexType>
@@ -10126,6 +10320,17 @@
 </xsd:complexType>
 
 <xsd:complexType name="SchemaTweakObjType" mixed="true">
+	<xsd:complexContent>
+		<xsd:extension base="TweakObjType">
+			<xsd:sequence>
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="IndexTweakObjType" mixed="true">
 	<xsd:complexContent>
 		<xsd:extension base="TweakObjType">
 			<xsd:sequence>

@@ -205,6 +205,17 @@
 	</xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="CodeVisibilityEnumType">
+	<xsd:restriction base="xsd:token">
+		<xsd:minLength value="1"/>
+		<xsd:maxLength value="127"/>
+		<xsd:whiteSpace value="collapse"/>
+		<xsd:enumeration value="Public"/>
+		<xsd:enumeration value="Protected"/>
+		<xsd:enumeration value="Private"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="RoleScopeEnumType">
 	<xsd:restriction base="xsd:token">
 		<xsd:minLength value="1"/>
@@ -934,6 +945,11 @@
 	<xsd:restriction base="xsd:boolean"/>
 </xsd:simpleType>
 
+<xsd:simpleType name="IndexCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="IndexRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
@@ -1626,6 +1642,11 @@
 
 <xsd:simpleType name="RelationNarrowedIdType">
 	<xsd:restriction base="ScopeIdGenType"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="RelationCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
 </xsd:simpleType>
 
 <xsd:simpleType name="RelationRevisionType">
@@ -2497,6 +2518,11 @@
 	<xsd:restriction base="xsd:boolean"/>
 </xsd:simpleType>
 
+<xsd:simpleType name="ServerProcCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="ServerProcRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
@@ -2861,6 +2887,11 @@
 
 <xsd:simpleType name="TableEditAccessFrequencyIdType">
 	<xsd:restriction base="AccessFrequencyEnumType"/>
+</xsd:simpleType>
+
+<xsd:simpleType name="TableCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
 </xsd:simpleType>
 
 <xsd:simpleType name="TableCafeObjImportType">
@@ -5747,6 +5778,7 @@
 			<xsd:attribute name="EAccSec" type="xsd:string" use="optional"/>
 			<xsd:attribute name="VAccFreq" type="xsd:string" use="optional"/>
 			<xsd:attribute name="EAccFreq" type="xsd:string" use="optional"/>
+			<xsd:attribute name="CodeVis" type="TableCodeVisType" use="optional"/>
 		</xsd:extension>
 	</xsd:complexContent>
 </xsd:complexType>
@@ -5809,6 +5841,7 @@
 			<xsd:attribute name="Suffix" type="IndexSuffixType" use="optional"/>
 			<xsd:attribute name="IsUnique" type="IndexIsUniqueType" use="required"/>
 			<xsd:attribute name="IsDbMapped" type="IndexIsDbMappedType" use="required"/>
+			<xsd:attribute name="CodeVis" type="IndexCodeVisType" use="optional"/>
 		</xsd:extension>
 	</xsd:complexContent>
 </xsd:complexType>
@@ -5857,6 +5890,7 @@
 			<xsd:attribute name="ToIndex" type="xsd:string" use="required"/>
 			<xsd:attribute name="Narrowed" type="xsd:string" use="optional"/>
 			<xsd:attribute name="PopDepChain" type="xsd:string" use="optional"/>
+			<xsd:attribute name="CodeVis" type="RelationCodeVisType" use="optional"/>
 		</xsd:extension>
 	</xsd:complexContent>
 </xsd:complexType>
@@ -5900,6 +5934,7 @@
 			<xsd:attribute name="Description" type="ServerProcDescriptionType" use="optional"/>
 			<xsd:attribute name="Suffix" type="ServerProcSuffixType" use="optional"/>
 			<xsd:attribute name="IsInstanceMethod" type="ServerProcIsInstanceMethodType" use="required"/>
+			<xsd:attribute name="CodeVis" type="ServerProcCodeVisType" use="optional"/>
 		</xsd:extension>
 	</xsd:complexContent>
 </xsd:complexType>
