@@ -6,8 +6,8 @@ if [ ! -d /opt/msscode ]; then
 fi
 export INSTDIR=`pwd`
 cd /opt/msscode
-export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha03"
-export SNAPSHOT_VERSION="snapshot-202606080215"
+export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha04"
+export SNAPSHOT_VERSION="snapshot-202606081745"
 #	Install the new models
 tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfmodel-${SNAPSHOT_VERSION}.tar.gz
 if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfmodel ]; then
