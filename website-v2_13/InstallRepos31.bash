@@ -23,7 +23,6 @@ if [ "$MCF_HOME" != "" ]; then
 		server.markhome.mcf.v3_1.cflib.dbtest \
 		server.markhome.mcf.v3_1.cflib.javafx \
 		server.markhome.mcf.v3_1.cfsec.cfsec \
-		server.markhome.mcf.v3_1.cfsec.cfsecbuff \
 		server.markhome.mcf.v3_1.cfsec.cfsecjpa \
 		server.markhome.mcf.v3_1.cfsec.cfsecsaxloader \
 		server.markhome.mcf.v3_1.cfsec.cfsecram \
@@ -34,7 +33,6 @@ if [ "$MCF_HOME" != "" ]; then
 		server.markhome.mcf.v3_1.cfsec.cfsecappsetup \
 		server.markhome.mcf.v3_1.cfsec.cfsecsaxramldr \
 		server.markhome.mcf.v3_1.cfint.cfint \
-		server.markhome.mcf.v3_1.cfint.cfintbuff \
 		server.markhome.mcf.v3_1.cfint.cfintjpa \
 		server.markhome.mcf.v3_1.cfint.cfintsaxloader \
 		server.markhome.mcf.v3_1.cfint.cfintram \
@@ -45,7 +43,6 @@ if [ "$MCF_HOME" != "" ]; then
 		server.markhome.mcf.v3_1.cfint.cfintappsetup \
 		server.markhome.mcf.v3_1.cfint.cfintsaxramldr \
 		server.markhome.mcf.v3_1.cfbam.cfbam \
-		server.markhome.mcf.v3_1.cfbam.cfbambuff \
 		server.markhome.mcf.v3_1.cfbam.cfbamjpa \
 		server.markhome.mcf.v3_1.cfbam.cfbamsaxloader \
 		server.markhome.mcf.v3_1.cfbam.cfbamram \
