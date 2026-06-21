@@ -7851,6 +7851,11 @@
 	</xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="ValueCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="ValueRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
@@ -10365,6 +10370,7 @@
 	<xsd:attribute name="IsNullable" type="ValueIsNullableType" use="required"/>
 	<xsd:attribute name="GenerateId" type="ValueGenerateIdType" use="optional"/>
 	<xsd:attribute name="ImplementsPolymorph" type="ValueImplementsPolymorphType" use="required"/>
+	<xsd:attribute name="CodeVis" type="ValueCodeVisType" use="required"/>
 	<xsd:attribute name="DefSchema" type="xsd:string" use="optional"/>
 </xsd:complexType>
 
