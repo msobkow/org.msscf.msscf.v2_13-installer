@@ -5,21 +5,9 @@ if [ ! -d /opt/msscode ]; then
 	sudo chmod 755 /opt/msscode
 fi
 export INSTDIR=`pwd`
-cd /opt/msscode
-export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha05"
-export SNAPSHOT_VERSION="snapshot-202606171400"
-#	Install the new models
-tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfmodel-${SNAPSHOT_VERSION}.tar.gz
-if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfmodel ]; then
-	rm /opt/msscode/org.msscf.msscf.v2_13.cfmodel
-fi
-ln -s ./org.msscf.msscf.v2_13.cfmodel-${SNAPSHOT_VERSION} ./org.msscf.msscf.v2_13.cfmodel
-# Install the new knowledge base
-tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfkbase-${SNAPSHOT_VERSION}.tar.gz
-if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfkbase ]; then
-	rm /opt/msscode/org.msscf.msscf.v2_13.cfkbase
-fi
-ln -s ./org.msscf.msscf.v2_13.cfkbase-${SNAPSHOT_VERSION} ./org.msscf.msscf.v2_13.cfkbase
+. $INSTDIR/initenv.sh
+. $INSTDIR/instmodels.sh
+. $INSTDIR/instkbase.sh
 # Install the bin directory
 if [ -d /opt/msscode/${RELEASE_VERSION} ]; then
 	echo "Removing old installation at /opt/msscode/${RELEASE_VERSION} ..."
