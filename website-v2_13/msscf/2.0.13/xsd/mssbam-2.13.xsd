@@ -4980,6 +4980,11 @@
 	<xsd:restriction base="ValueIdGenType"/>
 </xsd:simpleType>
 
+<xsd:simpleType name="ValueCodeVisType">
+	<xsd:restriction base="CodeVisibilityEnumType">
+	</xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="ValueRevisionType">
 	<xsd:restriction base="xsd:integer"/>
 </xsd:simpleType>
@@ -6022,6 +6027,7 @@
 	<xsd:attribute name="EAccSec" type="xsd:string" use="optional"/>
 	<xsd:attribute name="VAccFreq" type="xsd:string" use="optional"/>
 	<xsd:attribute name="EAccFreq" type="xsd:string" use="optional"/>
+	<xsd:attribute name="CodeVis" type="ValueCodeVisType" use="optional"/>
 </xsd:complexType>
 
 <xsd:complexType name="TableColObjType" mixed="true">
