@@ -6,7 +6,7 @@ if [ ! -d /opt/msscode ]; then
 fi
 export INSTDIR=`pwd`
 cd /opt/msscode
-export SNAPSHOT_VERSION="snapshot-202606171400"
+export SNAPSHOT_VERSION="snapshot-202606211150"
 # Install the new knowledge base
 tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfkbase-${SNAPSHOT_VERSION}.tar.gz
 if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfkbase ]; then

@@ -36,6 +36,13 @@ For today (2026-06-17) the focus is on tidying up and redoing pieces of the init
 <p>
 As of 2026-06-17 10:00 CST, there are 4,401,428 lines of code to 3.1.
 <dl>
+<dt>2026-06-21 12:00 CST</dt><dd>MSS Code Factory alpha06 released at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha06">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha06</a>.</dd>
+<dt>2026-06-21 09:05 CST</dt><dd>Added ValueDef.CodeVis to CFBam 2.13.</dd>
+<dt>2026-06-21 04:00 CST</dt><dd>Clean compile on the history record changes.</dd>
+<dt>2026-06-21 03:20 CST</dt><dd>Working on the factories and ensuring there are always history records, though they are not always persisted.  History records will be needed for replay-tracking in the session editors used by clients (eventually.)</dd>
+<dt>2026-06-20 22:45 CST</dt><dd>The missing subclass evaluation for the ensureRec() methods of the factories now check for the entire set of class codes deriving from the current table class.</dd>
+<dt>2026-06-20 08:30 CST</dt><dd>Refactoring of the DefaultFactory classes into proper FactoryService implementations is complete and ready to test.</dd>
+<dt>2026-06-20 06:30 CST</dt><dd>Working on refactoring the factory objects into Buff and JPA factory <i>services</i>. Introduced BuffSchemaHooks to equivocate JpaSchemaHooks.</dd>
 <dt>2026-06-17 14:00 CST</dt><dd>MSS Code Factory alpha05 released at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha05">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha05</a>.</dd>
 <dt>2026-06-17 13:40 CST</dt><dd>Moved the *buff packaging into the base interface packages. Buff instances are always going to be required, because I've decided to make all of the APIs talk Buff instances. The JPA layer will provide Buff interface methods as it does now, but also alternately-named JPA interface methods that its code can use directly with JPA instances during the processing of a transaction/service method. When returning in the JpaTable classes that do the security checks, those returned JPA instances will get converted to Buff instances for the upper application layer.  The server method bodies will assume Buff access methods in its code, as everything except the JPA layer will be using buffers.</dd>
 <dt>2026-06-17 02:00 CST</dt><dd>Added 2.13 iterator DefSchemaRootTables, TABLE_DATA array is now forms a tree of table dependencies, and does not get artificially sorted.</dd>
