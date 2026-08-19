@@ -6,5 +6,5 @@ if [ ! -d /opt/msscode ]; then
 fi
 export INSTDIR=`pwd`
 cd /opt/msscode
-export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha08"
-export SNAPSHOT_VERSION="snapshot-202608020220"
+export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha10"
+export SNAPSHOT_VERSION="snapshot-202608190345"
