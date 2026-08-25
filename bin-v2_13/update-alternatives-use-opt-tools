@@ -1,0 +1,15 @@
+update-alternatives --install /usr/bin/java java /opt/jdk-25.0.1+8/bin/java 2512
+update-alternatives --install /usr/bin/java java /opt/jdk-25.0.2+10/bin/java 2513
+update-alternatives --install /usr/bin/java java /opt/jdk-25.0.3+9/bin/java 2520
+update-alternatives --install /usr/bin/javac javac /opt/jdk-25.0.2+10/bin/javac 2513
+update-alternatives --install /usr/bin/javac javac /opt/jdk-21.0.10+7/bin/javac 2112
+update-alternatives --install /usr/bin/java java /opt/jdk-21.0.10+7/bin/java 2112
+update-alternatives --install /usr/bin/javac javac /opt/jdk-17.0.18+8/bin/javac 1713
+update-alternatives --install /usr/bin/javac javac /opt/jdk-11.0.29+7/bin/javac 1112
+update-alternatives --install /usr/bin/javac javac /opt/jdk8u472-b08/bin/javac 808
+update-alternatives --install /usr/bin/java java /opt/jdk8u472-b08/bin/java 808
+update-alternatives --install /usr/bin/java java /opt/jdk-25.0.3+9/bin/java 2514
+update-alternatives --install /usr/bin/java java /opt/jdk-25.0.3+9/bin/java 2539
+update-alternatives --install /usr/bin/javac javac /opt/jdk-25.0.3+9/bin/javac 2539
+update-alternatives --install /usr/bin/java java /opt/jdk-25.0.4+7/bin/java 2547
+update-alternatives --install /usr/bin/javac javac /opt/jdk-25.0.4+7/bin/javac 2547
