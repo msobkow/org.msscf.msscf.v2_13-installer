@@ -7,7 +7,7 @@ fi
 export INSTDIR=`pwd`
 . $INSTDIR/initenv.sh
 #	Install the new models
-tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfmodel-${SNAPSHOT_VERSION}.tar.gz
+tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfmodel-${SNAPSHOT_VERSION}.tgz
 if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfmodel ]; then
 	rm /opt/msscode/org.msscf.msscf.v2_13.cfmodel
 fi

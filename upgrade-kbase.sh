@@ -8,7 +8,7 @@ export INSTDIR=`pwd`
 cd /opt/msscode
 export SNAPSHOT_VERSION="alpha12-202610040530"
 # Install the new knowledge base
-tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfkbase-${SNAPSHOT_VERSION}.tar.gz
+tar xfz $INSTDIR/org.msscf.msscf.v2_13.cfkbase-${SNAPSHOT_VERSION}.tgz
 if [ -L /opt/msscode/org.msscf.msscf.v2_13.cfkbase ]; then
 	rm /opt/msscode/org.msscf.msscf.v2_13.cfkbase
 fi
