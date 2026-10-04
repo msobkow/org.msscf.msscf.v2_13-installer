@@ -7,4 +7,4 @@ fi
 export INSTDIR=`pwd`
 cd /opt/msscode
 export RELEASE_VERSION="org.msscf.msscf.v2_13-alpha11"
-export SNAPSHOT_VERSION="snapshot-202609112100"
+export SNAPSHOT_VERSION="snapshot-202610040530"
