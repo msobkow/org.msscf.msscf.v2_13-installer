@@ -9,24 +9,24 @@
 	<META HTTP-EQUIV="CONTENT-STYLE-TYPE" content="text/css">
 	<meta http-equiv="refresh" content="86400">
 	<meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
-	<TITLE>Mark's Code Fractal Lessons Learned</TITLE>
+	<TITLE>Yorkton Code Fractal Lessons Learned</TITLE>
 	<LINK rel="stylesheet" HRef="css/cf-content.css" type="text/css">
 </HEAD>
 <BODY>
 <p>
 <CENTER><H1>
 <A Target="_blank" HRef="index.html"><img align=vcenter src="resources/MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
-&nbsp;&nbsp;&nbsp;Mark's Code Fractal&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;Yorkton Code Fractal&nbsp;&nbsp;&nbsp;
 </H1></CENTER>
 <p>
 <table cols="3" width="95%" align="center">
-	<tr><td align="left"><A HRef="mcf-v3_1-security.html">Prev</A></td>
+	<tr><td align="left"><A HRef="ycf-v3_1-security.html">Prev</A></td>
 		<td align="center"><A HRef="index.html">Home</A></td>
-		<td align="right"><A HRef="mcf-devlog.html">Next</A></td>
+		<td align="right"><A HRef="ycf-devlog.html">Next</A></td>
 		</tr>
 </table>
 <p>
-<CENTER><H2>Mark's Code Fractal Lessons Learned</H2></CENTER>
+<CENTER><H2>Yorkton Code Fractal Lessons Learned</H2></CENTER>
 <p>
 MSS Code Factory was conceived way back in the Java JDK 1.6 era, when the initial CFCore code was written and a hand-crafted
 set of rules was used before I'd even written my first SAX XML parser. That was version 1.1; I don't do dot-0's. The technology
@@ -43,7 +43,7 @@ and MySQL.  However, that was not a wisely designed database model, and would ha
 of security stored procedures on each database request that required multi-table joins through 8-way unions, absolutely <i>killing</i>
 any hope of high speed I/O support.
 <p>
-MCF 3.1 seeks to address that security limitation in a few ways.  For starters, the database structure used for defining database permission
+YCF 3.1 seeks to address that security limitation in a few ways.  For starters, the database structure used for defining database permission
 group hierarchies has been completely redone, and the concept of a security role has been added. The code itself is being modified to use
 dynamically created values for all system "constants" that get set on initial database install to pseudo-random values based on the IP address
 and time-of-first-initialization for a given cluster server, rather than the hard-coded values and well-known-"secret" values of the 2.x series.

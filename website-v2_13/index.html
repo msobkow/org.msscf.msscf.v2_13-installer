@@ -16,69 +16,54 @@
 <p>
 <CENTER><H1>
 <A Target="_blank" HRef="index.html"><img align=vcenter src="resources/MSS-BadgeLogo-98x80.png" width="100" height="80"/></A>
-&nbsp;&nbsp;&nbsp;Mark Stephen Sobkow's Projects at github.com&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;Welcome to Yorkton Code Fractal&nbsp;&nbsp;&nbsp;
 </H1></CENTER>
 <p>
 <table cols="3" width="95%" align="center">
 	<tr><td align="left">Prev</td>
 		<td align="center"><A HRef="index.html">Home</A></td>
-		<td align="right"><A HRef="mcf.html">Next</A></td>
+		<td align="right"><A HRef="ycf.html">Next</A></td>
 		</tr>
 </table>
 <p>
-Welcome to the Mark's Code Fractal and MSS (Mark Stephen Sobkow) Code Factory project pages.  Mark's Code Fractal is the
+Welcome to the Yorkton Code Fractal and MSS (Mark Stephen Sobkow) Code Factory project pages.  Yorkton Code Fractal is the
 successor to MSS Code Factory, a major refresh of the technology and approach used for the code base which really shares
 very little with the prior knowledge base and code structure that produced the 2.13 code architecture.
 <p>
-<strong>MSS Code Factory 2.13 alpha12 is now available</strong> at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha12-202610040530">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha12-202610040530</a>. You can find installation instructions at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer">https://github.com/msobkow/org.msscf.msscf.v2_13-installer</a> and the README.md displayed there. There have also been releases of the 2.13 knowledge base and model set as of 2026-10-04 05:30 CST, tagged as snapshot-202610040530 which are included in the installer and are required alongside the executable jars to run the tool. Alpha12 shifts gears temporarily to working on TeaVM support to allow for cross-compilation to JavaScript for deployment of the web clients, which will connect directly to the back end using the same code base the back end is coded with.  I haven't finished the CodeVis changes yet, though a huge amount of that work is now complete, and I haven't forgotten about the Role implementations.
+<strong>MSS Code Factory alpha13 released</strong> at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha13-202610131900">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/alpha13-202610131900</a>. You can find installation instructions at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer">https://github.com/msobkow/org.msscf.msscf.v2_13-installer</a> and the README.md displayed there. There have also been releases of the 2.13 knowledge base and model set as of 2026-10-13 19:00 CST, tagged as snapshot-202610131900 which are included in the installer and are required alongside the executable jars to run the tool. Alpha13 shifts gears temporarily to working on TeaVM support to allow for cross-compilation to JavaScript for deployment of the web clients, which will connect directly to the back end using the same code base the back end is coded with.  I haven't finished the CodeVis changes yet, though a huge amount of that work is now complete, and I haven't forgotten about the Role implementations.
 <p>
-After I'm done the new interface and implementation/wrapper/filter layers, the focus will go back to tidying up and redoing pieces of the initial setups that CFSecJpa has been doing, such that the table data is persisted as a CFSec.TableInfo object which can be restored on subsequent reboots so that the ids used by the system remain consistent after the first startup of the application cluster.  The new "SuperTable" attribute of CFSecTableData will be used to "include" a subclass' permissions in the superclass permissions, so that if you have permission to insert object B, you also implicitly have permission to create it's superclass object A. I also need to alter the permission group setup code to provide an "addClusterPermissions(clusterId)" and an "addTenantPermissions(clusterId,tenantId)" methods that create the permission entries specific to those data scopes after instantiating the base objects to be referenced by them (Cluster/Tenant.)
-<p>
-As of 2026-08-19 03:45 CST, there were 5,293,667 lines of clean-compiling code in the ever-growing 3.1 code base.  That is 244,278 more lines than on 2026-07-09, for an average of 5,958 new lines of code per day.
-<p>
-2026-08-03 11:15 CST There are currently 5,273,643 lines of code in 3.1; an increase of 224,254 lines in only 25 days since 2026-07-09, or 8,970 lines per day added. I'm not productive <i>at all</i> with my tool.
+As of 2026-08-19 03:45 CST, there were 5,293,667 lines of clean-compiling code in the ever-growing 3.1 code base.  As of 2026-10-13 there are 10,307,767 lines of code to the 3.1 code base, but that incorporates the source code for TeaVM itself as well as some of the Apache packages. The goal is to explicitly cross compile all packages that ycf-core depends on directly or indirectly using TeaVM so that the complete code base can eventually be built by a single 'mvn install' command. That is 5,014,100 more lines than on 2026-08-19, for an average of 91,165 new lines of code per day for 55 days straight with maybe a dozen days off from coding during the whole period to tend to shopping and family affairs.  I don't expect quite this good a record-breaking code production pace to continue forever, however, and the core tool only adds about 100,000 lines to a quarter million per week of effort.  But it is very productive and effective.
 <p>
 <H2>Overview Of The Technology</H2>
 <p>
-Mark's Code Fractal (formerly MSS Code Factory) is a tool used to accelerate the production of the repetitive
-code that comprises 75-85% of the typical enterprise business application - the "glue" between the business logic
-programmer and the backing data servers and databases. It does so by applying a knowledge base of General Expansion Rule
-(GEL) files following specific XML document schemas and semantic constraints to a Business Application Model (BAM), which
-is an enhanced ERD constrained by a customized schema definition available here: <a href="msscf/2.0.13/xsd/mssbam-2.13.xsd">mssbam-2.13.xsd</a>,
-with 3.1 using an updated mcf/3.0.1/xsd/mssbam-3.1.xsd specification adapted to the new capabilities of the customized CFCore
-Engine eventualy implemented for the 3.1 BAM.
+Yorkton Code Fractal (formerly MSS Code Factory) is a tool used to accelerate the production of the repetitive code that comprises 75-85% of the typical enterprise business application - the "glue" between the business logic programmer and the backing data servers and databases. It does so by applying a knowledge base of General Expansion Rule (GEL) files following specific XML document schemas and semantic constraints to a Business Application Model (BAM), which is an enhanced ERD constrained by a customized schema definition available here: <a href="msscf/2.0.13/xsd/mssbam-2.13.xsd">mssbam-2.13.xsd</a>, with 3.1 using an updated ycf/3.0.1/xsd/mssbam-3.1.xsd specification adapted to the new capabilities of the customized CFCore Engine eventualy implemented for the 3.1 BAM.
 <p>
-The BAM defines the tables, indexes, and relationships of an ERD, including Superclass, Container/Component,
-Parent/Child, and Lookup relationships. It also provides the means of encapsulating customizations of the output
-source code, with the approach changing radically compared to the old 2.0.12/2.0.13 approach of hard-coded verbs
-in the custom engine. Both 2.0.13 and 3.1 implement "tweaks" (see prior section on enhancements and improvements.)
+The BAM defines the tables, indexes, and relationships of an ERD, including Superclass, Container/Component, Parent/Child, and Lookup relationships. It also provides the means of encapsulating customizations of the output source code, with the approach changing radically compared to the old 2.0.12/2.0.13 approach of hard-coded verbs in the custom engine. Both 2.0.13 and 3.1 implement "tweaks" (see prior section on enhancements and improvements.)
 <p>
-I invite you to read through the prototype architecture and philosophies, and through the 2.11 documentation.
-Although seriously stale about the details, most of the key concepts and descriptions about how the CFCore engine works
-as described in the 2.11 documentation are still valid to this day.
+I invite you to read through the prototype architecture and philosophies, and through the 2.11 documentation.  Although seriously stale about the details, most of the key concepts and descriptions about how the CFCore engine works as described in the 2.11 documentation are still valid to this day.
 <p>
-I'm currently refreshing and refactoring my code base to support generic Java clients, take advantage of the latest Java
-features, provide back-end Spring web services initially using JSON to replace the old XML message protocol, and later
-replacing JSON with a byte-stream client if at all feasible. Along the way, the databases have been split up into
-isolated instances with the Obj layer providing a unified view of the component database hierarchy. That way each data
-silo can retain control over its own security concerns, subject to unified identification and authorization of users
-through the security schema (CFSec) packages and services at the bottom of the stack.  Check the development log below
-for details about the progress on the 3.1 code base to date.  Remember that while the 3.1 code base is not complete, you
-certainly can define a custom application model, produce fractal code for it using the same rules, and have a preview of the
-3.1-compliant code for your model. Just remember to reference the CFSec security schema before anything else in your custom
-application model (BAM.)
+The diversion into working on TeaVM support is proving very fruitful and should yield the end results that I want, provided I invest sufficient time in ycf-core and ycf-msscf, especially in the YCFMt objects that underpin all the multithreading of the tool and applications produced by it. In the end, one should be able to connect a TeaVM-compiled JavaScript client to the back end services over both JSON and binary stream protocols, where the JSON form will be used with HTTPS GET/POST requests, and the binary stream protocol will be supported by Web Sockets. A long-in-the-tooth ASN.1 technology is being used to implement the lowest level of the binary stream protocols, and will ensure that the only thing to debug is the message <i>formats</i>, not the binary representation of the message contents.
 <p>
-The security schema itself may well become an OAuth2 service provider by the time I'm done, too, which I don't expect to be for quite
-some time, possibly not before 2027.  As such, this code is very much in a state of flux.
+JSON will rely on the existing Xml type formatting and parsing provided by IYCFXmlUtil/YCFXmlUtil. The goal of the current refresh is to ensure that there is full n-way orthogonal comparison and construction between the various atomic types in the core code base, including the new KeyHash types, and possibly the idea that keys and indexes of all times should generically be treated similar to the atomic types, and exhibit full orthogonal behaviour. The code base is well on its way to implementing full orthogonality, with comparison and assignment between index keys, buffer records, history buffers, primary keys, and history primary keys. If full orthogonality is available, then it becomes possible to more easily stitch together the resulting code with set constructs for easy filtering and processing.
+<p>
+Next up after I'm done working on the core Java and JavaScript code base with JPA support will be support for Rust, and later C-sharp and Python.  There is good support for C++ through existing Rust binding technologies, so no particular special effort will be put into supporting C or C++ - Rust binding will be counted on for those and for all other language bindings.
+<p>
+Rust will be a relatively easy language to support, as it's primitives are clear and understandable and it is at heart an object-procedural language. The binary stream protocol provides a binary Rust implementation which will be used as a template for "how to code the Rust support I need", give or take some heavy focus on porting ycf-core at the start of the effort.  Depending on how things fall out of the binary stream code, the buffer objects and index keys might change over to using the raw binary stream for data storage, and translate that stream to Java objects for manipulation. That would ensure that all objects are ready for instant transmission upon request with no further processing required to produce the desired data streams. Although this would impact the performance of individual server nodes, as they'd be responsible for the most code conversion to perform their task, but you either end up CPU bound on converting to data stream buffers every time you communicate, or you end up CPU bound on converting buffers for data _processing_ except for the core JPA service implementations that are based on raw Java types, but maximimize web throughput for the node. I've opted to optimize web throughput and rely on clustered nodes for scaling the servers.  With this approach, the heaviest CPU load is on the user's web UI running in the browser with the Java/JavaScript TeaVM support code - it not only engages in translation every time a user event is processed, it has to translate each and every field and attribute access in the code base. The web server only does translation on the buffers it is sending or receiving from the JPA layers; the communications to clients are maximally efficient and re-usable, and the web service code runs in the JPA implementation layers that rely on native Java bindings.
+<p>
+So unlike the architecture behind MSS Code Factory 2.13, the code base behind Yorkton Code Fractal 3.1 is based on actual field experience at producing optimal communications and database access implementations.  Everything else just falls out of that as near-optimal and flexible code that makes it easy to use with any web interface framework you choose to leverage that can be counted on to load a large page of JavaScript and then do all it's processing throuh DOM manipulation in the browser via JavaScript. The approach being taken to the JavaScript code means you can even mix and max frameworks for different portions of the final application code base, providing the developer with full freedom to implement their web clients using <i>any</i> web-client technology that leverages JavaScript.
+<p>
+I also have some ideas aroud data filter definition and processing in conjunction with event-based condition evaluation and propagation that could yield some interesting results for deploying the actual business logic behind a system in as reusable a fashion as possible. To be honest, I wonder if I'll ever be done with my code base, or if I'll still be working on it the day they strap me into an extra-long-sleeved jacket for permanent residence in a rubber room somewhere...
+<p>
+I'm not ambitious! :)
 <p>
 <CENTER><H2>Table of Contents</H2></CENTER>
 <p>
 <table cols="1" width="50%" align="center">
-	<tr><td><p class=menu0><A HRef="mcf.html">Mark's Code Fractal</A></td></tr>
-	<tr><td><p class=menu1><A HRef="mcf-prototype.html">Prototype Architecture and Philosophies</A></td></tr>
-	<tr><td><p class=menu1><A HRef="mcf-v3_1-security.html">v3_1 Security Model</A></td></tr>
-	<tr><td><p class=menu1><A HRef="mcf-lessonslearned.html">Lessons Learned</A></td></tr>
-	<tr><td><p class=menu1><A HRef="mcf-devlog.html">Development Log</A></td></tr>
+	<tr><td><p class=menu0><A HRef="ycf.html">Yorkton Code Fractal</A></td></tr>
+	<tr><td><p class=menu1><A HRef="ycf-prototype.html">Prototype Architecture and Philosophies</A></td></tr>
+	<tr><td><p class=menu1><A HRef="ycf-v3_1-security.html">v3_1 Security Model</A></td></tr>
+	<tr><td><p class=menu1><A HRef="ycf-lessonslearned.html">Lessons Learned</A></td></tr>
+	<tr><td><p class=menu1><A HRef="ycf-devlog.html">Development Log</A></td></tr>
 	<tr><td><p class=menu0><A HRef="about.html">About Mark Sobkow</A></td></tr>
 	<tr><td><p class=menu0><A HRef="msscf.html">MSS Code Factory - The Roots of the Fractal</A></td></tr>
 	<tr><td><p class=menu1><A HRef="documentation-2.11/index.html">Dated MSS Code Factory 2.11 Documentation</A></td></tr>
