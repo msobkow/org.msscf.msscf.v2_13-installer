@@ -16,13 +16,11 @@ if [ "$MCF_HOME" != "" ]; then
 	pushd $MCF_HOME
 	for arepo in \
 		bin-v3_1 \
-		server.markhome.mcf \
-		server.markhome.mcf.v3_1 \
-		server.markhome.mcf.v3_1.cflib \
-		server.markhome.mcf.v3_1.cfsec \
-		server.markhome.mcf.v3_1.cfint \
-		server.markhome.mcf.v3_1.cfbam \
-		server.markhome.mcf.v3_1.cfexec
+		server.markhome.ycf \
+		server.markhome.ycf.v3_1 \
+		server.markhome.ycf.v3_1.secure \
+		server.markhome.ycf.v3_1.intnet \
+		server.markhome.ycf.v3_1.busmodel
 	do
 		if [ ! -d $arepo ]; then
 			git clone git@github.com:msobkow/${arepo}.git
