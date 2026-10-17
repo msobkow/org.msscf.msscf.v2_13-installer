@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$MCF_HOME" == "" ]; then
+if [ "$YCF_HOME" == "" ]; then
 	if [ ! -d /opt/mcf ]; then
 		sudo mkdir /opt/mcf
 		sudo chown $USER:$USER /opt/mcf
@@ -10,10 +10,10 @@ if [ "$MCF_HOME" == "" ]; then
 	if [ ! -d /opt/mcf/v3_1/java ]; then
 		mkdir /opt/mcf/v3_1/java
 	fi
-	export MCF_HOME=/opt/mcf/v3_1/java
+	export YCF_HOME=/opt/mcf/v3_1/java
 fi
-if [ "$MCF_HOME" != "" ]; then
-	pushd $MCF_HOME
+if [ "$YCF_HOME" != "" ]; then
+	pushd $YCF_HOME
 	for arepo in \
 		bin-v3_1 \
 		server.markhome.ycf \
